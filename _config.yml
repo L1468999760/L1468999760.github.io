@@ -37,13 +37,13 @@ timezone: Asia/Shanghai
 
 # Defaults for posts
 defaults:
-    scope: 
-      path: ""
-      type: "posts"
-    values:
-      layout: "post"
-      author: "LiJinning" # 你的名字
-      header-img: "img/1.jfif" # We don't want posts without a header image, that whould mean white on white
+  scope: 
+    path: ""
+    type: "posts"
+  values:
+    layout: "post"
+    author: "LiJinning" # 你的名字
+    header-img: "img/1.jfif" # We don't want posts without a header image, that whould mean white on white
 
 # Comments 
 comments :
