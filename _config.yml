@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Site settings
 title: 如遇古剑 # 你的博客名字，可以定义修订
 header-img: "img/space.jpg"
@@ -61,3 +62,6 @@ google_verify:
 bing_verify:
 
 # Links to include in footer navigation
+=======
+theme: jekyll-theme-minimal
+>>>>>>> 64e1b92b9082d45e449d6475ca25c1d38386ee0d
