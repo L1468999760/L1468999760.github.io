@@ -36,8 +36,7 @@ exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
 timezone: Asia/Shanghai
 
 # Defaults for posts
-default:
-  -
+defaults:
     scope: 
       path: ""
       type: "posts"
