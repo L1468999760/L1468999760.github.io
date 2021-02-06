@@ -1,6 +1,6 @@
 # Site settings
 title: 如遇古剑 # 你的博客名字，可以定义修订
-header-img: "img/1.jfif"
+header-img: "img/space.jpg"
 tagline: "cn"  
 description: "千里之行，始于足下"  # 一句话描述你的博客
 baseurl: ""
@@ -8,13 +8,13 @@ url: "lijinning.top"  # 此处填写你的博客地址
 
 # About/contact
 owner: 
-  name: "李晋宁" # 填写作者信息：名字
+  name: "LiJinning" # 填写作者信息：名字
   email: 1468999760@qq.com # 填写作者信息：邮箱
   bio: "学生" # 填写作者信息：博客描述
 
 # Data
-gavatar: img/favicon.png # 浏览器地址栏小图标，可自定义更改
-favicon: img/favicon.png # 浏览器地址栏小图标，可自定义更改
+gavatar: img/huojian.jpg # 浏览器地址栏小图标，可自定义更改
+favicon: img/huojian.jpg # 浏览器地址栏小图标，可自定义更改
 
 douban_username:  # 你的豆瓣id
 twitter_username: 
@@ -43,7 +43,7 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-      author: "李晋宁" # 你的名字
+      author: "LiJinning" # 你的名字
       header-img: "img/1.jfif" # We don't want posts without a header image, that whould mean white on white
 
 # Comments 
