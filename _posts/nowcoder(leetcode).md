@@ -1,3 +1,12 @@
+---
+layout: post
+title: 牛客上的leetcode题
+date: 2021-03-15
+categories: blog
+tags: [leetcode]
+description: 牛客上的leetcode题。
+---
+
 牛客上面的leetcode题，把以前写的搬运一下。
 
 [TOC]
