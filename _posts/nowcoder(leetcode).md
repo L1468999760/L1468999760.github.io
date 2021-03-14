@@ -1,0 +1,623 @@
+牛客上面的leetcode题，把以前写的搬运一下。
+
+[TOC]
+
+## minimum-depth-of-binary-tree
+
+求给定二叉树的最小深度。最小深度是指树的根结点到最近叶子结点的最短路径上结点的数量。
+
+解析：
+
+注意边界情况：左右孩子均为空--返回0，左孩子为空--返回右子树的深度+1，有孩子为空--返回左子树的深度+1.否则，返回较小的子树+1.
+
+~~~c++
+class Solution {
+public:
+    int run(TreeNode *root) {
+        if(root==NULL) return 0;
+        else if(root->left==NULL) return run(root->right)+1;
+        else if(root->right==NULL) return run(root->left)+1;
+        int a=run(root->left);
+        int b=run(root->right);
+        if(a<b) return a+1;
+        else return b+1;
+    }
+};
+~~~
+
+## evaluate-reverse-polish-notation
+
+计算逆波兰式（后缀表达式）的值
+
+运算符仅包含"+","-","*"和"/"，被操作数可能是整数或其他表达式
+
+例如：
+
+```html
+  ["2", "1", "+", "3", "*"] -> ((2 + 1) * 3) -> 9↵  ["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6
+```
+
+解析：
+
+逆波兰表达式用栈存储，由于已经给出了后缀表达式，所以只需要一个栈存数字就行。（如果给出的是普通算式，即中缀表达式，那么要建立两个栈分别存放数字和符号）
+
+~~~c++
+class Solution {
+public:
+    int evalRPN(vector<string> &tokens) {
+        stack <int> num;
+        for(int i=0;i<tokens.size();i++)
+        {
+            if(tokens[i]=="+"||tokens[i]=="-"||tokens[i]=="*"||tokens[i]=="/")
+            {
+                if(num.size()<2) return 0;
+                int x=num.top();
+                num.pop();
+                int y=num.top();
+                num.pop();
+                if(tokens[i]=="+")
+                        num.push(x+y);
+                else if(tokens[i]=="-")               
+                        num.push(y-x);
+                else if(tokens[i]=="*") 
+                        num.push(x*y);
+                else if(tokens[i]=="/"&&x) 
+                         num.push(y/x);
+                
+            }
+            else num.push(atoi(tokens[i].c_str()));
+        }
+        return num.top();
+    }
+};
+~~~
+
+## max-points-on-a-line
+
+对于给定的n个位于同一二维平面上的点，求最多能有多少个点位于同一直线上
+
+解析：
+
+三重循环进行遍历。由于不重合的两点可以确定一条直线，判断是否在同一直线上可以用斜率进行衡量，这时要特殊考虑与X轴垂直的情况（X坐标相同，所以两点重合的情况也认为是垂线）。先用一个二重循环遍历每种可能的直线，然后再嵌套一个循环看其它点是否在这条直线上。
+
+~~~c++
+int maxPoints(vector<Point> &points)
+{
+	int ans=0,sum=1;
+	if(points.size()==1) ans=1;  //只有一个点，则一个点共线
+	for(int i=0; i<points.size(); i++)
+		{
+			for(int j=i+1; j<points.size(); j++)
+				{
+					int ok=0;  //标记值，斜率是否存在
+					double flag;  //斜率
+					if(points[j].x==points[i].x) //与X轴垂直或者两点重合的情况
+						{
+							ok=1;
+						}
+					sum=1;
+					if(!ok) //x不等
+						{
+							flag=double(points[j].y-points[i].y)/double(points[j].x-points[i].x);
+							for(int k=0; k<points.size(); k++)  //遍历其它点
+								{
+									if(k==j) continue;
+									if(points[k].y==points[j].y&&points[k].x==points[j].x) sum++; //重合
+									else if(points[k].x==points[j].x) continue; //斜率不存在
+									double flag1=double(points[k].y-points[j].y)/double(points[k].x-points[j].x);
+									if(fabs(flag1-flag)<0.000001) sum++; //浮点数判断相等
+								}
+						}
+					else
+						{
+							for(int k=0; k<points.size(); k++)
+								{
+									if(k==j) continue;
+									if(points[k].x==points[j].x) sum++;
+								}
+						}
+					if(sum>ans) ans=sum;
+				}
+		}
+	return ans;
+}
+~~~
+
+## sort-list
+
+在O(n log n)的时间内使用常数级空间复杂度对链表进行排序。
+
+解析：
+
+利用归并排序，先将链表分成等长的两部分，然后分别对每部分进行排序，最后将两部分合并。于是，子问题便是对每部分进行排序。找中间节点时用快慢指针的方法（先设置两个指针指向链表头，一个每次前进一单位，另一个每次前进两个单位，于是走的快的到达链表尾时，慢指针刚好到达中间节点）。
+
+目前程序还有点bug，过几天再改。。
+
+~~~c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *findmid(ListNode *head)
+    {
+        
+        ListNode *front=head;
+        ListNode *after=head;
+        while(front->next->next!=NULL&&front->next!=NULL)
+        {
+            front=front->next->next;
+            after=after->next;
+        }
+        return after;
+    }
+    ListNode *merge(ListNode *A,ListNode *B)
+     {
+        if(A==NULL) return B;
+        if(B==NULL) return A;
+        ListNode *CC,*C;
+        
+        if(A->val>B->val) 
+        {
+            CC=C=B;
+            B=B->next;
+        }
+        else 
+        {
+            CC=C=A;
+            A=A->next;
+        }
+        
+        while(A!=NULL&&B!=NULL)
+        {
+            if(A->val>B->val)
+            {
+                C->next=B;
+                B=B->next;
+                C=C->next;
+            }
+            else
+            {
+                C->next=A;
+                A=A->next;
+                C=C->next;
+            }
+        }
+        if(A!=NULL) C->next=B;
+        if(B!=NULL) C->next=A;
+        return CC->next;
+    }
+    ListNode *sortList(ListNode *head) {
+        if(head->next==NULL||head==NULL) return head;
+        ListNode *middle=findmid(head);
+        ListNode *right=sortList(middle->next);
+        middle->next=NULL;
+        ListNode *left=sortList(head);
+        return merge(left,right);
+    }
+};
+~~~
+
+## insertion-sort-list
+
+使用插入排序对链表进行排序。
+
+解析：
+
+这里复习了一下.和->的区别，A->B用于A是指针的情况（即ListNode *A），A.B用于A是对象或结构体（即ListNode A）。
+
+~~~c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *insertionSortList(ListNode *head) {
+        if(head==NULL) return head;
+       	ListNode *pre,*q,*t;
+	    ListNode H(0); //初始化一个节点值为0的节点
+	while(head)
+		{
+			pre=&H;
+			q=pre->next;
+			t=head;
+            head=head->next;
+			while(q&&q->val<t->val)
+				{
+					pre=pre->next;
+					q=q->next;
+                }
+                t->next=q;
+				pre->next=t;
+		}
+		return H.next;  
+    }
+};
+~~~
+
+## binary-tree-postorder-traversal
+
+求给定的二叉树的后序遍历。
+
+例如：
+
+给定的二叉树为{1,#,2,3},
+
+~~~html
+   1↵    ↵     2↵    /↵   3↵
+~~~
+
+返回[3,2,1].
+
+备注；用递归来解这道题太没有新意了，可以给出迭代的解法么？
+
+解析：
+
+最直观的递归写法
+
+~~~c++
+    void postorder(TreeNode *root,vector<int>&vec){
+        if(root){
+            postorder(root->left,vec);
+            postorder(root->right,vec);
+            vec.push_back(root->val);
+        }
+    }
+    vector<int> postorderTraversal(TreeNode *root) {
+        vector<int>vec;
+        postorder(root,vec);
+        return vec;      
+         
+    }
+~~~
+
+非递归写法
+
+注意到先序遍历是 根-左-右，于是可以先求出 根-右-左，再用reverse倒转一下。用栈实现。
+
+~~~c++
+ vector<int> postorderTraversal(TreeNode *root) {
+        vector<int>vec;
+        stack <TreeNode*> s;
+        if(root==NULL) return vec;
+        s.push(root);
+        while(!s.empty())
+        {
+            TreeNode* p=s.top();
+            s.pop();
+            vec.push_back(p->val);
+            if(p->left) s.push(p->left);
+            if(p->right) s.push(p->right);
+        }
+        reverse(vec.begin(),vec.end());
+        return vec;      
+         
+    }
+~~~
+
+## binary-tree-preorder-traversal
+
+求给定的二叉树的前序遍历。
+
+例如：
+
+给定的二叉树为{1,#,2,3},
+
+~~~html
+   1↵    ↵     2↵    /↵   3↵
+~~~
+
+返回：[1,2,3].
+
+备注；用递归来解这道题太没有新意了，可以给出迭代的解法么？
+
+解析：
+
+先给出递归写法：
+
+~~~c++
+class Solution {
+public:
+    void preorder(TreeNode *root,vector<int> &vec)
+    {
+        if(root)
+        {
+            vec.push_back(root->val);
+            preorder(root->left,vec);
+            preorder(root->right,vec);
+        }
+    }
+    vector<int> preorderTraversal(TreeNode *root) {
+        vector<int> vec;
+        preorder(root,vec);
+        return vec;
+    }
+};
+~~~
+
+非递归写法
+
+~~~c++
+vector<int> preorderTraversal(TreeNode *root) {
+        vector<int> vec;
+        stack<TreeNode*> s;
+        if(root==NULL) return vec;
+        s.push(root);
+        while(!s.empty())
+        {
+            TreeNode* p=s.top();
+            s.pop();
+            vec.push_back(p->val);
+            if(p->right) s.push(p->right);
+            if(p->left) s.push(p->left);
+        }
+        return vec;
+    }
+~~~
+
+## binary-tree-inorder-traversal 
+
+给出一棵二叉树，返回这棵树的中序遍历
+
+例如：
+
+给出的二叉树为{1,#,2,3},
+
+~~~html
+   1↵    ↵     2↵    /↵   3↵
+~~~
+
+返回[1,3,2].
+
+
+
+备注：递归的解法太没有新意了，你能用迭代的方法来解这道题吗？
+
+
+
+如果你不清楚“{1,#,2,3}"的含义的话，请继续阅读
+
+我们用如下方法将二叉树序列化：
+
+二叉树的序列化遵循层序遍历的原则，”#“代表该位置是一条路径的终结，下面不再存在结点。
+
+例如：
+
+~~~html
+   1↵  / ↵ 2   3↵    /↵   4↵    ↵     5
+~~~
+
+上述的二叉树序列化的结果是："{1,2,3,#,#,4,#,#,5}".
+
+解析：
+
+栈内只存放根节点和左孩子节点。
+
+~~~c++
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode *root) {
+        vector<int> ans;
+        if(root==NULL) return ans;
+        stack<TreeNode*> s;
+        while(!s.empty()||root)
+        {
+            while(root)
+            {
+                s.push(root);
+                root=root->left;
+            }
+                root=s.top();
+                s.pop();
+                ans.push_back(root->val);
+                root=root->right;
+            
+        }
+        return ans;
+    }
+};
+~~~
+
+## reorder-list
+
+将给定的单链表L： L 0→L 1→…→L n-1→L n,
+
+重新排序为： L 0→L n →L 1→L n-1→L 2→L n-2→…
+
+要求使用原地算法，并且不改变节点的值
+
+例如：
+
+对于给定的单链表{1,2,3,4}，将其重新排序为{1,4,2,3}.
+
+Given a singly linked list L: L 0→L 1→…→L n-1→L n,
+
+reorder it to: L 0→L n →L 1→L n-1→L 2→L n-2→…
+
+You must do this in-place without altering the nodes' values.
+
+For example,
+Given{1,2,3,4}, reorder it to{1,4,2,3}.
+
+解析：
+
+忽然发现这不就是2019年计算机统考408的第一道大题吗？？看来多刷题对于考研还是非常有用的。
+
+基本思路：
+
+先用快慢指针的思想找到中间节点，分成前后两个链表，对后半部分链表进行原地逆置（空间复杂度O（1）），最后再交叉存储。
+
+~~~c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    void reorderList(ListNode *head) {
+        if(head==NULL||head->next==NULL) return ;
+        ListNode *fast=head->next;
+        ListNode *slow=head;
+        while(fast&&fast->next)
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+
+        ListNode *rhead=slow->next,*p=rhead->next,*q;
+        slow->next=NULL;
+        rhead->next=NULL;
+        while(p)
+        {
+            q=p->next;
+            p->next=rhead;
+            rhead=p;
+            p=q;
+        }
+        
+        ListNode *after=rhead;
+        ListNode *C=head;
+        
+        while(C&&after)
+        {
+            ListNode *A=C->next;
+            ListNode *B=after->next;
+            C->next=after;
+            after->next=A;
+            C=A;
+            after=B;
+        }
+       
+    }
+};
+~~~
+
+## linked-list-cycle-ii
+
+对于一个给定的链表，返回环的入口节点，如果没有环，返回null
+
+拓展：
+
+你能给出不利用额外空间的解法么？
+
+解析：
+
+发现LeetCode的题好经典，奈何我还是不会。。看了别人的解答，豁然开朗。
+
+①用快慢指针的方法找到相遇点；
+
+②设置两个指针，一个指向链表头，另一个指向相遇点，同时同速前进，第一次相遇的位置就是环开始的位置，证明见 
+
+[链表入口节点的证明](https://www.nowcoder.com/questionTerminal/6e630519bf86480296d0f1c868d425ad)
+
+~~~c++
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        if(head==NULL||head->next==NULL) return NULL; //单链表中环至少有两个节点
+        ListNode *slow=head;
+        ListNode *fast=head;
+        while(fast&&fast->next)
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast) break;   //相遇点
+        }
+        //可能fast走到尽头，退出循环，但此时fast!=slow
+        if(fast==NULL||fast->next==NULL) return NULL; //没有环
+        while(fast!=head) 
+        {
+            head=head->next;
+            fast=fast->next;
+        }
+        return fast;
+    }
+};
+~~~
+
+## linked-list-cycle 
+
+判断给定的链表中是否有环
+
+扩展：
+
+你能给出不利用额外空间的解法么？
+
+解析：
+
+通过上一道题的思想，可以根据快慢指针是否相遇来判断是否有环。
+
+~~~c++
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        if(head==NULL||head->next==NULL) return false;
+        ListNode *fast=head,*slow=head;
+        while(fast&&fast->next)
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast) return true;
+        }
+        return false;
+    }
+};
+~~~
+
+由于链表的节点中有定义val值，于是也可以使用哈希的思想，遍历链表，把经过的节点值标记为0，一次往后走，当再次遇到节点值为0的节点时则说明有环。 
+
+~~~c++
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        if(head==NULL||head->next==NULL) return false;
+        ListNode *p=head;
+        while(p->val!=0&&p)
+        {
+            p->val=0;
+            p=p->next;
+        }
+        if(p) return true;
+        else return false;
+    }
+};
+~~~
+
+此外，我觉得当有环时退出循环时候的节点就是环的入口节点（p），但上一道题这样写通不过。。
+
+## word-break-ii
+
+给定一个字符串s和一组单词dict，在s中添加空格将s变成一个句子，使得句子中的每一个单词都是dict中的单词
+
+返回所有可能的结果
+
+例如：给定的字符串s ="catsanddog",
+
+dict =["cat", "cats", "and", "sand", "dog"].
+
+返回的结果为["cats and dog", "cat sand dog"].
+
+解析：
+
+动态规划，这道题比较难，结果还要限制顺序。。
+
+先学习了一下unordered_set和set的区别：
+
+①set基于红黑树实现，具有自动排序的功能；
+
+②unordered_set基于哈希表实现，没有排序的功能。
+
