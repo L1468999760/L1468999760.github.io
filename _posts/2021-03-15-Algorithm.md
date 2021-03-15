@@ -191,7 +191,7 @@ int main()
 ~~~
 
 最长回文子串（动态规划）
-$$
+
 \begin{eqnarray}
 &&dp[i][i]=1 \\ 
 \\
@@ -199,7 +199,6 @@ $$
 \\
 &&dp[i][j]=\left\{\begin{matrix} dp[i+1][j-1]+2 &,s[i] = s[j], \\ max(dp[i+1][j],dp[i][j-1]) & ,s[i] = s[j] .\end{matrix}\right.
 \end{eqnarray}
-$$
 
 ## 最长上升子序列（LIS）
 
