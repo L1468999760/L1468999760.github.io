@@ -9,7 +9,18 @@ description: 牛客上的leetcode题。
 
 牛客上面的leetcode题，把以前写的搬运一下。
 
-[TOC]
+- [minimum-depth-of-binary-tree](#minimum-depth-of-binary-tree)
+- [evaluate-reverse-polish-notation](#evaluate-reverse-polish-notation)
+- [max-points-on-a-line](#max-points-on-a-line)
+- [sort-list](#sort-list)
+- [insertion-sort-list](#insertion-sort-list)
+- [binary-tree-postorder-traversal](#binary-tree-postorder-traversal)
+- [binary-tree-preorder-traversal](#binary-tree-preorder-traversal)
+- [binary-tree-inorder-traversal](#binary-tree-inorder-traversal)
+- [reorder-list](#reorder-list)
+- [linked-list-cycle-ii](#linked-list-cycle-ii)
+- [linked-list-cycle](#linked-list-cycle)
+- [word-break-ii](#word-break-ii)
 
 ## minimum-depth-of-binary-tree
 
