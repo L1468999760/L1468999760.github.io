@@ -16,7 +16,7 @@ description: 常用算法模板。
 
 ## Kruskal（并查集）
 
-~~~
+~~~cpp
 #define MAXV 1000 //最大点数  
 #define MAXE 1000 //最大边数  
 #include <iostream>  
@@ -85,7 +85,7 @@ int main()
 
 ## Prim
 
-~~~
+~~~cpp
 #define MAXV 1000 //最大点数  
 #define MAXE 1000 //最大边数  
 #define MAXL 0x3fffffff  
@@ -124,7 +124,7 @@ int main()
 
 ## 拓扑排序
 
-~~~
+~~~cpp
 #define MAXV 1000  
 #include <iostream>  
 #include <vector>  
@@ -165,7 +165,7 @@ int main()
 
 中心扩散法
 
-~~~
+~~~cpp
 #define MAXL 10005  
 #include <iostream>  
 #include <cstring>  
@@ -195,7 +195,7 @@ int main()
 
 ## 最长上升子序列（LIS）
 
-~~~
+~~~cpp
 #include <iostream>  
 #include <cmath>  
 #include <vector>  
