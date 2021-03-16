@@ -6,7 +6,8 @@ categories: blog
 tags: [算法]
 description: 常用算法模板。
 ---
-
+  
+  目录
 - [Kruskal（并查集）](#kruskal并查集)
 - [Prim](#prim)
 - [拓扑排序](#拓扑排序)
@@ -16,12 +17,11 @@ description: 常用算法模板。
 ## Kruskal（并查集）
 
 ~~~c++
-#define MAXV 1000 //最大点数 
-#define MAXE 1000 //最大边数 
-
-#include <iostream>
-#include <algorithm>
-using namespace std;
+#define MAXV 1000 //最大点数  
+#define MAXE 1000 //最大边数  
+#include <iostream>  
+#include <algorithm>  
+using namespace std;  
 
 struct Edge //定义边 
 {
@@ -52,9 +52,9 @@ int main()
 	int r[MAXV]={0}; //r用来统计频率 
 	int count=0; //统计加入的边数
 	int ans=0;  
-	/*
-	输入,存储边 
-	*/
+	/*  
+	输入,存储边  
+	*/  
 	sort(E,E+countE,cmp);
 	for(int i=0;i<countV;i++) fa[i]=i; //初始化并查集
 	for(int i=0;i<countE;i++)
@@ -62,7 +62,7 @@ int main()
 		int root_s=find(E[i].s),root_t=find(E[i].t);
 		if(root_s!=root_t)
 		{
-            //Union(root_s,root_t);
+            	//Union(root_s,root_t);
 			if(r[root_s]<r[root_t])
 			{
 				r[root_t]++;
@@ -86,22 +86,21 @@ int main()
 ## Prim
 
 ~~~c++
-#define MAXV 1000 //最大点数 
-#define MAXE 1000 //最大边数 
-#define MAXL 0x3fffffff
-
-#include <iostream>
-#include <iomanip>
-#include <algorithm>
-using namespace std;
+#define MAXV 1000 //最大点数  
+#define MAXE 1000 //最大边数  
+#define MAXL 0x3fffffff  
+#include <iostream>  
+#include <iomanip>  
+#include <algorithm>  
+using namespace std;  
 
 int main()
 {
 	int d[MAXV],vis[MAXV]={0},G[MAXV][MAXV];
 	int ans=0;  
-	/*
+	/*  
 	输入,存储边 
-	*/
+	*/  
 	fill(d,d+MAXV,MAXL);
 
 	for(int i=0;i<MAXV;i++)
@@ -126,11 +125,11 @@ int main()
 ## 拓扑排序
 
 ~~~c++
-#define MAXV 1000
-#include <iostream>
-#include <vector> 
-#include <queue> 
-using namespace std;
+#define MAXV 1000  
+#include <iostream>  
+#include <vector>  
+#include <queue>  
+using namespace std;  
 
 int main()
 {
@@ -140,9 +139,9 @@ int main()
 	vector<int> d; //记录路径 
 	queue<int> q; //存储入度为0的点
 	//priority_queue<int> q;
-	/*
+	/*  
 	存储边、入度
-	*/
+	*/  
 	while(!q.empty())
 	{
 		int cur=q.front();
@@ -167,10 +166,10 @@ int main()
 中心扩散法
 
 ~~~c++
-#define MAXL 10005
-#include <iostream>
-#include <cstring>
-using namespace std;
+#define MAXL 10005  
+#include <iostream>  
+#include <cstring>  
+using namespace std;  
 
 int main()
 {
@@ -197,10 +196,10 @@ int main()
 ## 最长上升子序列（LIS）
 
 ~~~c++
-#include <iostream> 
-#include <cmath>
-#include <vector>
-using namespace std;
+#include <iostream>  
+#include <cmath>  
+#include <vector>  
+using namespace std;  
 //暴力求解 O(n^2) 
 int maxIncSub(vector<int>& vec)
 {
