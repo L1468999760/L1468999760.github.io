@@ -1,5 +1,5 @@
 ---
-layout: <!-- page-->
+layout: page
 title: "作品"
 description: ""
 header-img: "img/zhihu.jpg"
