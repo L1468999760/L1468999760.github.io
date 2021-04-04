@@ -45,6 +45,10 @@ defaults :
     author: "LiJinning" # 你的名字
     header-img: "img/1.jfif" # We don't want posts without a header image, that whould mean white on white
 
+
+# Disqus settings（https://disqus.com/）
+disqus_username: disqus_fAw061f5oG
+
 # Comments 
 comments :
   provider : disqus # 使用 disqus 评论模块，读者翻墙才能看见
