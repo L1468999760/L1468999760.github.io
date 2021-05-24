@@ -13,6 +13,7 @@ description: 常用算法模板。
 - [拓扑排序](#拓扑排序)
 - [判断回文子串](#判断回文子串)
 - [最长上升子序列（LIS）](#最长上升子序列lis)
+- [树形dp](#树形dp)
 
 ## Kruskal（并查集）
 
@@ -250,3 +251,28 @@ int main()
 }
 ~~~
 
+## 树形dp
+
+在树中选取若干节点，其中两两节点间不能相连，求最大值。（打家劫舍Ⅲ）
+
+![](https://latex.codecogs.com/svg.image?\begin{cases}dp[i][1] = i.val + dp[i.left][0] + dp[i.right][0], \\dp[i][0] = max(dp[i.left][0],dp[i.left][1]) + max(dp[i.right][0],dp[i.right][1]).\end{cases}\)
+
+其中 dp[i][0] 表示不选取 i 节点，dp[i][1]表示选取 i 节点。
+
+~~~
+class Solution {
+    int[] dfs(TreeNode root){
+        if(root==null) return new int[]{0,0};
+        int[] tmp = new int[2];
+        var l = dfs(root.left);
+        var r = dfs(root.right);
+        tmp[0] = Math.max(l[0],l[1]) + Math.max(r[0],r[1]);
+        tmp[1] = root.val + l[0] + r[0];
+        return tmp;
+    }
+    public int rob(TreeNode root) {
+       var res = dfs(root);
+       return Math.max(res[0],res[1]);
+    }
+}
+~~~
