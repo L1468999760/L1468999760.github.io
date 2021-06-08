@@ -14,6 +14,8 @@ description: 常用算法模板。
 - [判断回文子串](#判断回文子串)
 - [最长上升子序列（LIS）](#最长上升子序列lis)
 - [树形dp](#树形dp)
+- [求所有集合的子集](#求所有集合的子集)
+- [全排列](#全排列)
 
 ## Kruskal（并查集）
 
@@ -275,4 +277,97 @@ class Solution {
        return Math.max(res[0],res[1]);
     }
 }
+~~~
+
+## 求所有集合的子集
+
+例如给定1 2 3，则可能的集合为{}、{1}、{1，2}、 {1,2,3}、{1,3}、{2}、{2,3}、{3}。 
+
+dfs法
+
+~~~
+class Solution{
+public:
+    vector<vector<int>> res;
+    void dfs(int pos,vector<int> nums,vector<int> cur){
+        if(pos==nums.size()){
+            res.push_back(cur);
+            return;
+        }
+        //选取
+        cur.push_back(nums[pos]);
+        dfs(pos+1,nums,cur);
+        cur.pop_back();
+        //不选取
+        dfs(pos+1,nums,cur);
+    }
+    vector<vector<int>> subsetGet(vector<int>& nums){
+        vector<int> cur;
+        dfs(0,nums,cur);
+        return res;
+    }
+}
+~~~
+
+二进制法
+
+~~~
+class Solution {
+public:
+    vector<vector<int>> subsetGet(vector<int>& nums) {
+        int len=nums.size();
+        if(len==0) return res;
+        
+        vector<vector<int>> ans; //开辟二维数组
+        int all_set = 1 << nums.size(); //所有的可能数 +1
+
+        for(int i = 0; i < all_set; i++){
+            vector<int> item; //开辟一维数组
+            int cur=0;
+            for(int j = 0; j < nums.size(); j++){
+                if(i & (1 << j)){ //某位置元素是否存在的条件
+                    item.push_back(nums[j]);
+                }
+            }
+            ans.push_back(item);
+        }
+        return ans;
+
+    }
+};
+~~~
+
+## 全排列
+
+例如给定1 2 3，输出{1 2 3}、{1 3 2}、{2 1 3}、{2 3 1}、{3 1 2}、{3 2 1}.
+
+~~~
+class Solution {
+public:
+    vector<vector<int>> ans;
+    void swap(int from,int to,vector<int> cur)
+    {
+        if(from==to) ans.push_back(cur);
+        else
+        {
+            for(int i=from;i<=to;i++)
+            {
+                if(i!=from&&nums[from]==nums[i]) continue;//去重
+                int tmp=cur[i];
+                cur[i]=cur[from];
+                cur[from]=tmp;
+                swap(from+1,to,cur);
+                cur[from]=cur[i];
+                cur[i]=tmp;
+            }
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        int len=nums.size();
+        if(!len) return ans;
+        //sort(nums.begin(),nums.end());
+        swap(0,len-1,nums);
+        return ans;
+    }
+};
 ~~~
