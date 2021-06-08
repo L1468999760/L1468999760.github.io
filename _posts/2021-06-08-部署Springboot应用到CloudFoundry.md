@@ -13,7 +13,7 @@ IBM CloudFoundry上有256MB免费空间，可以部署一个Springboot应用。
 
 ### 环境准备
 
-IBM Cloud官网：[cloud.ibm.com]()
+IBM Cloud官网：cloud.ibm.com
 
 在官网上注册一个账号。
 
