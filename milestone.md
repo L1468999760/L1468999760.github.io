@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: 
 title: ""
 description: ""
 header-img: "img/zhihu.jpg"
