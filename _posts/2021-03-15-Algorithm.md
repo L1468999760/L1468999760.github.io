@@ -387,12 +387,11 @@ public:
 
 **一般解法**
 
-<img src="https://latex.codecogs.com/svg.image?dp[i][j]" title="dp[i][j]" />表示前<img src="https://latex.codecogs.com/svg.image?i" title="i" />件物品体积为<img src="https://latex.codecogs.com/svg.image?j" title="j" />的最大价值，
+dp[i][j] 表示前 i 件物品体积为 j 的最大价值，
 
 <img src="https://latex.codecogs.com/svg.image?dp[i][j]=max(dp[i-1][j],dp[i-1][j-v[i]]&plus;w[i])" title="dp[i][j]=max(dp[i-1][j],dp[i-1][j-v[i]]+w[i])" />
 
 ~~~java
-import java.util.*;
 class Main{
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
@@ -446,10 +445,9 @@ for(int i=1;i<=N;i++){
 
 例如一种物品有11件，可以分解为11=1+2+4+4。
 
-一种物品11件 -> 四种物品各1件。
+一种物品11件 → 四种物品各1件。
 
 ~~~java
-import java.util.*;
 class Main{
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
