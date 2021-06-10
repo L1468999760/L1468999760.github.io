@@ -16,6 +16,9 @@ description: 常用算法模板。
 - [树形dp](#树形dp)
 - [求所有集合的子集](#求所有集合的子集)
 - [全排列](#全排列)
+- [0-1背包](#0-1背包)
+- [多重背包](#多重背包)
+- [完全背包](#完全背包)
 
 ## Kruskal（并查集）
 
@@ -371,3 +374,138 @@ public:
     }
 };
 ~~~
+
+## 0-1背包
+
+有 <img src="https://latex.codecogs.com/svg.image?N" title="N" /> 件物品和一个容量是 <img src="https://latex.codecogs.com/svg.image?V" title="V" /> 的背包。每件物品只能使用一次。
+
+第<img src="https://latex.codecogs.com/svg.image?i" title="i" />件物品的体积是<img src="https://latex.codecogs.com/svg.image?v_i" title="v_i" />，价值是 <img src="https://latex.codecogs.com/svg.image?w_i" title="w_i" />。
+
+求解将哪些物品装入背包，可使这些物品的总体积不超过背包容量，且总价值最大。
+
+输出最大价值。
+
+**一般解法**
+
+<img src="https://latex.codecogs.com/svg.image?dp[i][j]" title="dp[i][j]" />表示前<img src="https://latex.codecogs.com/svg.image?i" title="i" />件物品体积为<img src="https://latex.codecogs.com/svg.image?j" title="j" />的最大价值，
+
+<img src="https://latex.codecogs.com/svg.image?dp[i][j]=max(dp[i-1][j],dp[i-1][j-v[i]]&plus;w[i])" title="dp[i][j]=max(dp[i-1][j],dp[i-1][j-v[i]]+w[i])" />
+
+~~~
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int N,V;
+        int v,w;
+        int[][] dp = new int[1001][1001];
+        N=scan.nextInt();
+        V=scan.nextInt();
+        for(int i=1;i<=N;i++){
+            v=scan.nextInt();
+            w=scan.nextInt();
+            for(int j=V;j>=0;j--){
+                if(j<v) dp[i][j]=dp[i-1][j];
+                else dp[i][j]=Math.max(dp[i-1][j],dp[i-1][j-v]+w);
+            }
+        }
+        System.out.println(dp[N][V]);
+    }
+}
+~~~
+
+**一维优化**
+
+<img src="https://latex.codecogs.com/svg.image?dp[j]=max(dp[j],dp[j-v]&plus;w),v\leq&space;j\leq&space;V" title="dp[j]=max(dp[j],dp[j-v]+w),v\leq j\leq V" />
+
+容量要逆序枚举。
+
+~~~
+for(int i=1;i<=N;i++){
+    v=scan.nextInt();
+    w=scan.nextInt();
+    for(int j=V;j>=v;j--){
+        dp[j]=Math.max(dp[j],dp[j-v]+w);
+    }
+}
+~~~
+
+## 多重背包
+
+第 <img src="https://latex.codecogs.com/svg.image?i" title="i" /> 种物品最多有 <img src="https://latex.codecogs.com/svg.image?s_i" title="s_i" /> 件 。
+
+**一般解法**
+
+<img src="https://latex.codecogs.com/svg.image?dp[i][j]=max(dp[i][j],dp[i-1][j-v[i]*k]&plus;w[i]*k),0\leq&space;k\leq&space;s_i" title="dp[i][j]=max(dp[i][j],dp[i-1][j-v[i]*k]+w[i]*k),0\leq k\leq s_i" />
+
+**二进制优化**
+
+如果同一种物品的数量有很多，算法的复杂度过高。
+
+将相同种类的多个物品重组，转化为0-1背包问题。
+
+例如一种物品有11件，可以分解为11=1+2+4+4。
+
+一种物品11件 -> 四种物品各1件。
+
+~~~
+import java.util.*;
+class Main{
+    public static void main(String[] args){
+        Scanner scan = new Scanner(System.in);
+        int N,V;
+        int v,w,s;
+        int cnt = 0;//分组的组别
+        int[] volume = new int[12001];
+        int[] worth = new int[12001];
+        int[] dp = new int[2001];
+        N=scan.nextInt();
+        V=scan.nextInt();
+        for(int i=1;i<=N;i++){
+            v=scan.nextInt();
+            w=scan.nextInt();
+            s=scan.nextInt();
+            int k = 1;//组别里的个数
+            while(k<=s){
+            	cnt++;//从1开始
+            	volume[cnt]=v*k;//整体体积
+            	worth[cnt]=w*k;//整体价值
+            	s-=k;
+            	k*=2;
+            }
+            //剩余的形成一组
+            if(s>0){
+            	cnt++;
+            	volume[cnt]=v*s;
+            	worth[cnt]=w*s;
+            }
+        }
+        for(int i=1;i<=cnt;i++){
+        	for(int j=V;j>=volume[i];j--){
+        		dp[j]=Math.max(dp[j],dp[j-volume[i]]+worth[i]);
+        	}
+        }
+        System.out.println(dp[V]);
+    }
+}
+~~~
+
+**单调队列优化**
+
+以后补上。
+
+## 完全背包
+
+每种物品有无限件可用。
+
+**一般解法**
+
+<img src="https://latex.codecogs.com/svg.image?dp[i][j]=max(dp[i][j],dp[i-1][j-v[i]*k]&plus;w[i]*k),0\leq&space;k*v_i\leq&space;j" title="dp[i][j]=max(dp[i][j],dp[i-1][j-v[i]*k]+w[i]*k),0\leq k*v_i\leq j" />
+
+**一维优化**
+
+<img src="https://latex.codecogs.com/svg.image?dp[j]&space;=&space;max(dp[j],dp[j-v]&plus;w),v\leq&space;j\leq&space;V" title="dp[j] = max(dp[j],dp[j-v]+w),v\leq j\leq V" />
+
+容量要顺序枚举。
+
+> 更多种背包问题见[《背包九讲》](https://github.com/tianyicui/pack/blob/master/V2.pdf)
