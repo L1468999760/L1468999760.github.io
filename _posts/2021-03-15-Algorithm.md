@@ -377,7 +377,7 @@ public:
 
 ## 0-1背包
 
-有 <img src="https://latex.codecogs.com/svg.image?N" title="N" /> 件物品和一个容量是 <img src="https://latex.codecogs.com/svg.image?V" title="V" /> 的背包。每件物品只能使用一次。
+有 <img src="https://latex.codecogs.com/svg.image?N"/>件物品和一个容量是 <img src="https://latex.codecogs.com/svg.image?V" title="V" />的背包。每件物品只能使用一次。
 
 第<img src="https://latex.codecogs.com/svg.image?i" title="i" />件物品的体积是<img src="https://latex.codecogs.com/svg.image?v_i" title="v_i" />，价值是 <img src="https://latex.codecogs.com/svg.image?w_i" title="w_i" />。
 
@@ -391,7 +391,7 @@ public:
 
 <img src="https://latex.codecogs.com/svg.image?dp[i][j]=max(dp[i-1][j],dp[i-1][j-v[i]]&plus;w[i])" title="dp[i][j]=max(dp[i-1][j],dp[i-1][j-v[i]]+w[i])" />
 
-~~~
+~~~java
 import java.util.*;
 class Main{
     public static void main(String[] args){
@@ -420,7 +420,7 @@ class Main{
 
 容量要逆序枚举。
 
-~~~
+~~~java
 for(int i=1;i<=N;i++){
     v=scan.nextInt();
     w=scan.nextInt();
@@ -448,7 +448,7 @@ for(int i=1;i<=N;i++){
 
 一种物品11件 -> 四种物品各1件。
 
-~~~
+~~~java
 import java.util.*;
 class Main{
     public static void main(String[] args){
