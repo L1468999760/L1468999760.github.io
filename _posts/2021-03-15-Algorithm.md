@@ -498,7 +498,7 @@ class Main{
 
 **一般解法**
 
-<img src="https://latex.codecogs.com/svg.image?dp[i][j]=max(dp[i][j],dp[i-1][j-v[i]*k]&plus;w[i]*k),0\leq&space;k*v_i\leq&space;j" title="dp[i][j]=max(dp[i][j],dp[i-1][j-v[i]*k]+w[i]*k),0\leq k*v_i\leq j" />
+<img src="https://latex.codecogs.com/svg.image?dp[i][j]=max(dp[i][j],dp[i-1][j-v[i]*k]&plus;w[i]*k),0\leq&space;k*v[i]\leq&space;j" title="dp[i][j]=max(dp[i][j],dp[i-1][j-v[i]*k]+w[i]*k),0\leq k*v[i]\leq j" />
 
 **一维优化**
 
