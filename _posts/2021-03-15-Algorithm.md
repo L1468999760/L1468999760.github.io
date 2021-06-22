@@ -355,7 +355,14 @@ public:
         {
             for(int i=from;i<=to;i++)
             {
-                if(i!=from&&nums[from]==nums[i]) continue;//去重
+                int ok=1;
+		for(int j=from;j<i;j++){
+		   if(cur[j]==cur[i]){
+		      ok=0;
+		      break;
+		   }
+		}
+		if(ok==0) continue; //去重
                 int tmp=cur[i];
                 cur[i]=cur[from];
                 cur[from]=tmp;
