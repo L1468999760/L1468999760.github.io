@@ -19,6 +19,8 @@ description: 常用算法模板。
 - [0-1背包](#0-1背包)
 - [多重背包](#多重背包)
 - [完全背包](#完全背包)
+- [快速幂](#快速幂)
+- [快排](#快排)
 
 ## Kruskal（并查集）
 
@@ -514,3 +516,41 @@ class Main{
 容量要顺序枚举。
 
 > 更多种背包问题见[《背包九讲》](https://github.com/tianyicui/pack/blob/master/V2.pdf)
+
+## 快速幂
+
+<img src="https://latex.codecogs.com/svg.image?(a^n)\quad&space;mod&space;\quad&space;m" title="(a^n)\quad mod \quad m" />
+
+~~~java
+int pow_mod(int a,int n,int m){
+    long ans = 1L;
+    while(n>0){
+        if((n&1)==1){
+            ans*=a;
+            ans%=m;
+        }
+        a*=a;
+        a%=m;
+        n>>=1;
+    }
+    return (int)ans;
+}
+~~~
+
+## 快排
+
+~~~java
+void quicksort(int[] arr,int left,int right){
+    if(left >= right) return;
+    int tmp = arr[left],l = left,r = right;
+    while(l<r){
+        while(l<r && tmp<=arr[r]) r--;
+        arr[l] = arr[r];
+        while(l<r && tmp>=arr[l]) l++;
+        arr[r] = arr[l];
+    }
+    arr[l] = tmp;
+    quicksort(arr,left,l-1);
+    quicksort(arr,l+1,right);
+}
+~~~
