@@ -21,6 +21,9 @@ description: 常用算法模板。
 - [完全背包](#完全背包)
 - [快速幂](#快速幂)
 - [快排](#快排)
+- [差分](#差分)
+- [概率](#概率)
+- [约瑟夫环](#约瑟夫环)
 
 ## Kruskal（并查集）
 
@@ -554,3 +557,79 @@ void quicksort(int[] arr,int left,int right){
     quicksort(arr,l+1,right);
 }
 ~~~
+
+## 差分
+
+将区间 [l,r] 整体增加一个值 v。
+
++ dif[l] += v ：对于所有下标大于等于 l 的位置都增加了 v；
++ dif[r+1] -= v ：对下标大于 r 的位置减少 v，抵消影响。
+
+> 练习：1109.航班预定统计, 995.K连续位的最小翻转次数
+
+## 概率
+
+rand7() → rand10()
+
+使用两个rand7()构造1-49的均匀分布，然后去除1-9的数。
+
+~~~java
+class Solution extends SolBase {
+    public int rand10() {
+        int a = (rand7()-1)*7,b = rand7();
+        if(a+b<10) return rand10();
+        return (a+b)%10+1;
+    }
+}
+~~~
+
+## 约瑟夫环
+
+ 0,1,···,n-1这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字（删除后从下一个数字开始计数）。求出这个圆圈里剩下的最后一个数字。 
+ 
+**方法一：模拟**
+ 
+ 使用ArrayList模拟，时间复杂度 O(mn），空间复杂度O(n)。
+ 
+**方法二：递归+反推**
+
+时间复杂度O(n)，空间复杂度O(n)。
+
+当删除了第m%n个元素后，剩下一个长度为n-1的序列。递归地求解f(n-1,m)，令x=f(n-1,m）。长度为n的序列最后一个删除的元素，应当是从m%n开始数的第x个元素：
+
+f(n,m) = (m%n+x)%n = (m+x)%n
+
+```java
+class Solution {
+    public int lastRemaining(int n, int m) {
+        return f(n, m);
+    }
+
+    public int f(int n, int m) {
+        if (n == 1) {
+            return 0;
+        }
+        int x = f(n - 1, m);
+        return (m + x) % n;
+    }
+}
+```
+
+**方法三：迭代+反推**
+
+时间复杂度O(n），空间复杂度O(1)。
+
+（当前index+m）%上一轮剩余数字的个数
+
+```java
+class Solution {
+    public int lastRemaining(int n, int m) {
+        int ans = 0;
+        // 最后一轮剩下2个人，所以从2开始反推
+        for (int i = 2; i <= n; i++) {
+            ans = (ans + m) % i;
+        }
+        return ans;
+    }
+}
+```
