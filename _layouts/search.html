@@ -15,6 +15,14 @@ layout: default
             </div>
         </div>
     </div>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/cloudTag.js"></script>
+    <title></title>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.tagBall').cloudTag({ballSize:100});
+        });
+    </script>
 </header>
 
 <link rel="stylesheet" href="/css/backtop.css">  <!-- Back Top -->
@@ -28,6 +36,11 @@ layout: default
 <div class="container">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="tagBall">
+                {% for tag in site.tags %}
+                <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
+                {% endfor %}
+            </div> 
 			{{ content }}
 		</div>
 	</div>
