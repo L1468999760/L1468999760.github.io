@@ -4,10 +4,10 @@ title: "搜索"
 description: "文章搜索"  
 header-img: "img/semantic.jpg"
 ---
-
+<font size="5">
 {% for tag in site.tags %}
-   <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{<font size="5"> tag[0] </font>}}</a>
-{% endfor %}
+   <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
+{% endfor %}</font>
 
 
 
