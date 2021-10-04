@@ -11,8 +11,6 @@ header-img: "img/semantic.jpg"
 {% endfor %}
 </div><br/>
 
-
-
 <ul class="listing">
 {% for tag in site.tags %}
   <li class="listing-seperator" id="{{ tag[0] }}">{{ tag[0] }}</li>
