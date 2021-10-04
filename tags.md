@@ -5,12 +5,7 @@ description: "文章搜索"
 header-img: "img/semantic.jpg"
 ---
 
-<script src="/js/jquery.js"></script>
-<script src="/js/cloudTag.js" type="text/javascript" charset="utf-8">
-    $(document).ready(function(){
-            $('.tagBall').cloudTag({ballSize:100});
-        });
-</script> 
+
 
 <div class="tagBall">
 {% for tag in site.tags %}
