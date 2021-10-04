@@ -4,9 +4,6 @@ layout: default
 
 <!-- Page Header -->
 <header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet" href="/css/search.css">
-      <script type="text/javascript" src="/js/search-box.js"></script>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -31,6 +28,8 @@ layout: default
 <div class="container">
 	<div class="row">
 		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+			<link href="/css/search.css" rel="stylesheet">
+      		<script type="text/javascript" src="/js/search-box.js"></script>
 			<div class="search">
     				<i class="material-icons search-icon search-start">search</i>
     				<input type="text" class="search-input" placeholder="Searching..." />
