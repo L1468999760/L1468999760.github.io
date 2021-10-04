@@ -7,10 +7,9 @@ header-img: "img/semantic.jpg"
 
 <div>
 {% for tag in site.tags %}
-   <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}"><font size="5">{{ tag[0] }}</font></a>
+   <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}"><b>{{ tag[0] }}</b></a>
 {% endfor %}
-</div>
-
+</div><br/>
 
 
 
@@ -27,3 +26,4 @@ header-img: "img/semantic.jpg"
 {% endfor %}
 {% endfor %}
 </ul>
+
