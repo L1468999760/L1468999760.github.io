@@ -9,9 +9,11 @@ header-img: "img/semantic.jpg"
 
 <div class="tagBall">
 {% for tag in site.tags %}
-<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
+<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}"><b>{{ tag[0] }}</b></a>
 {% endfor %}
-</div>
+</div> <br/>
+
+
 
 
 <ul class="listing">
