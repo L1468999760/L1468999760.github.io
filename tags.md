@@ -1,26 +1,9 @@
 ---
-layout: page
+layout: search
 title: "搜索"
 description: "文章搜索"  
 header-img: "img/semantic.jpg"  
 ---
-
-```html
-<header>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-</header>
-
-<div class="search">
-    <i class="material-icons search-icon search-start">search</i>
-    <input type="text" class="search-input" placeholder="Searching..." />
-    <i class="material-icons search-icon search-clear">clear</i>
-	<div class="search-results"></div>
-</div>
-
-```
-
-
 
 
 
