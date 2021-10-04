@@ -7,7 +7,9 @@ header-img: "img/semantic.jpg"
 
 {% for tag in site.tags %}
    <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}"><b>{{ tag[0] }}</b></a>
-{% endfor %}<br/>
+{% endfor %}
+
+
 
 <ul class="listing">
 {% for tag in site.tags %}
