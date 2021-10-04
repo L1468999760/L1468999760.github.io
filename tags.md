@@ -5,22 +5,19 @@ description: "文章搜索"
 header-img: "img/semantic.jpg"
 ---
 
-<script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script> 
-<script language="javascript">
-$.fn.tagcloud.defaults = {
-    size: {start: 1, end: 1, unit: 'em'},
-      color: {start: '#f8e0e6', end: '#ff3333'}
-};
-$(function () {
-    $('#tag_cloud a').tagcloud();
-});
-</script>
+<script src="/js/jquery.js"></script>
+<script src="/js/cloudTag.js" type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+            $('.tagBall').cloudTag({ballSize:100});
+        });
+</script> 
 
-<div id='tag_cloud'>
+<div class="tagBall">
 {% for tag in site.tags %}
 <a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
 {% endfor %}
 </div>
+
 
 <ul class="listing">
 {% for tag in site.tags %}
