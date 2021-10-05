@@ -3,7 +3,7 @@ layout: post
 title: 部署Springboot应用到CloudFoundry
 date: 2021-06-08
 categories: blog
-tags: [CloudFoundry]
+tags: [Spring]
 description: 
 ---
 
