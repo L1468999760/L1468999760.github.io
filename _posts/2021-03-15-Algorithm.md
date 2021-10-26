@@ -25,6 +25,7 @@ description: 常用算法模板。
 - [概率](#概率)
 - [约瑟夫环](#约瑟夫环)
 - [取石子](#取石子)
+- [求质数](#求质数)
 
 ## Kruskal（并查集）
 
@@ -693,4 +694,48 @@ else return true;
 >②  任意操作都可将奇异局势变为非奇异局势 ；
 >
 >③  采用适当的方法，可以将非奇异局势变为奇异局势 。
+
+## 求质数
+
+**线性筛法**
+
+如果一个数是质数，那么它的整数倍（大于等于2倍）就一定不是质数。例如2是质数，4、6、8不是质数。
+
+```c++
+#include <iostream>
+#include <cstring>
+#include <string>
+using namespace std;
+int prime[10000001]; //存储素数
+bool vis[10000001]; //每个数是否是素数
+int main(){
+    int n,cnt = 0;
+    cin>>n;
+    memset(vis,false,sizeof(vis));
+    memset(prime,0,sizeof(prime));
+    for(int i = 2;i <= n;i++){
+        if(!vis[i]){
+            prime[cnt++] = i;
+            for(int j = 1;j*i<=n;j++) vis[j*i] = true;
+        }
+    }
+    return 0;
+}
+```
+
+**欧拉筛法**
+
+是线性筛法的改进。例如6不是质数，在判断2的时就已经筛过了，到判断3的时候不用再筛了。
+
+```c++
+for(int i = 2;i <= n;i++){
+    if(!vis[i]){
+        prime[cnt++] = i;
+        for(int j=0;j<cnt && i*prime[j]<=n;j++){
+            vis[i*prime[j]] = true;
+            if(i % prime[j] == 0) break;
+        }
+    }
+}
+```
 
