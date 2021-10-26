@@ -701,11 +701,12 @@ else return true;
 
 如果一个数是质数，那么它的整数倍（大于等于2倍）就一定不是质数。例如2是质数，4、6、8不是质数。
 
-~~~
+~~~c++
 #include <iostream>
 #include <cstring>
 #include <string>
 using namespace std;
+
 int prime[10000001]; //存储素数
 bool vis[10000001]; //每个数是否是素数
 int main(){
