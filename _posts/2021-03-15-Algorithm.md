@@ -26,6 +26,7 @@ description: 常用算法模板。
 - [约瑟夫环](#约瑟夫环)
 - [取石子](#取石子)
 - [求质数](#求质数)
+- [LRU](#lru)
 
 ## Kruskal（并查集）
 
@@ -176,7 +177,7 @@ int main()
 
 ## 判断回文子串
 
-中心扩散法
+中心扩散法，时间复杂度`O(n2)`
 
 ~~~
 #define MAXL 10005  
@@ -202,7 +203,15 @@ int main()
 }
 ~~~
 
-最长回文子序列（动态规划）
+Manacher算法，马拉车算法，时间复杂度`O(n)`，思路：
+
++ 在字符串两端和每两个字符之间填充`#`，字符串长度变为`2n+1`，始终为奇数
+
++ 当在位置 i 开始进行中心拓展时，可以先找到` i `关于` j` 的对称点 `2 * j - i`。那么如果点` 2 * j - i `的臂长等于 `n`，就可以知道，点`i` 的臂长至少为 `min(j + length - i, n)`。那么就可以直接跳过`i` 到` i + min(j + length - i, n)` 这部分，从 `i + min(j + length - i, n) + 1` 开始拓展。
+
+  
+
+最长回文**子序列**（动态规划）
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=dp[i][i]=1&space;\newline&space;dp[i][i&plus;1]=\left\{\begin{matrix}&space;0&space;&,s[i]&space;\neq&space;s[i&plus;1],&space;\\&space;2&space;&&space;,s[i]&space;=&space;s[i&plus;1]&space;.\end{matrix}\right.\\&space;dp[i][j]=\left\{\begin{matrix}&space;dp[i&plus;1][j-1]&plus;2&space;&,s[i]&space;=&space;s[j],&space;\\&space;max(dp[i&plus;1][j],dp[i][j-1])&space;&&space;,s[i]&space;=&space;s[j]&space;.\end{matrix}\right." target="_blank"><img src="https://latex.codecogs.com/gif.latex?dp[i][i]=1&space;\newline&space;dp[i][i&plus;1]=\left\{\begin{matrix}&space;0&space;&,s[i]&space;\neq&space;s[i&plus;1],&space;\\&space;2&space;&&space;,s[i]&space;=&space;s[i&plus;1]&space;.\end{matrix}\right.\\&space;dp[i][j]=\left\{\begin{matrix}&space;dp[i&plus;1][j-1]&plus;2&space;&,s[i]&space;=&space;s[j],&space;\\&space;max(dp[i&plus;1][j],dp[i][j-1])&space;&&space;,s[i]&space;=&space;s[j]&space;.\end{matrix}\right." title="dp[i][i]=1 \newline dp[i][i+1]=\left\{\begin{matrix} 0 &,s[i] \neq s[i+1], \\ 2 & ,s[i] = s[i+1] .\end{matrix}\right.\\ dp[i][j]=\left\{\begin{matrix} dp[i+1][j-1]+2 &,s[i] = s[j], \\ max(dp[i+1][j],dp[i][j-1]) & ,s[i] = s[j] .\end{matrix}\right." /></a>
 
@@ -269,7 +278,7 @@ int main()
 
 ![](https://latex.codecogs.com/svg.image?\begin{cases}dp[i][1] = i.val + dp[i.left][0] + dp[i.right][0], \\dp[i][0] = max(dp[i.left][0],dp[i.left][1]) + max(dp[i.right][0],dp[i.right][1]).\end{cases}\)
 
-其中 dp[i][0] 表示不选取 i 节点，dp[i][1]表示选取 i 节点。
+其中 `dp[i][0]` 表示不选取 `i` 节点，`dp[i][1]`表示选取 `i` 节点。
 
 ~~~
 class Solution {
@@ -291,7 +300,7 @@ class Solution {
 
 ## 求所有集合的子集
 
-例如给定1 2 3，则可能的集合为{}、{1}、{1，2}、 {1,2,3}、{1,3}、{2}、{2,3}、{3}。 
+例如给定`1 2 3`，则可能的集合为`{}、{1}、{1，2}、 {1,2,3}、{1,3}、{2}、{2,3}、{3}`。 
 
 dfs法
 
@@ -349,7 +358,7 @@ public:
 
 ## 全排列
 
-例如给定1 2 3，输出{1 2 3}、{1 3 2}、{2 1 3}、{2 3 1}、{3 1 2}、{3 2 1}.
+例如给定`1 2 3`，输出`{1 2 3}、{1 3 2}、{2 1 3}、{2 3 1}、{3 1 2}、{3 2 1}`.
 
 ~~~
 class Solution {
@@ -391,9 +400,9 @@ public:
 
 ## 0-1背包
 
-有 N 件物品和一个容量是 V 的背包。每件物品只能使用一次。
+有 `N` 件物品和一个容量是 `V` 的背包。每件物品只能使用一次。
 
-第 i 件物品的体积是 vi ，价值是 wi 。
+第 `i` 件物品的体积是 `vi` ，价值是 `wi` 。
 
 求解将哪些物品装入背包，可使这些物品的总体积不超过背包容量，且总价值最大。
 
@@ -401,7 +410,7 @@ public:
 
 **一般解法**
 
-dp[i][j] 表示前 i 件物品体积为 j 的最大价值，
+`dp[i][j]` 表示前 `i` 件物品体积为 `j` 的最大价值，
 
 <img src="https://latex.codecogs.com/svg.image?dp[i][j]=max(dp[i-1][j],dp[i-1][j-v[i]]&plus;w[i])" title="dp[i][j]=max(dp[i-1][j],dp[i-1][j-v[i]]+w[i])" />
 
@@ -445,7 +454,7 @@ for(int i=1;i<=N;i++){
 
 ## 多重背包
 
-第 i 种物品最多有 si 件 。
+第 `i` 种物品最多有 `si` 件 。
 
 **一般解法**
 
@@ -562,18 +571,18 @@ void quicksort(int[] arr,int left,int right){
 
 ## 差分
 
-将区间 [l,r] 整体增加一个值 v。
+将区间 `[l,r]` 整体增加一个值 `v`。
 
-+ dif[l] += v ：对于所有下标大于等于 l 的位置都增加了 v；
-+ dif[r+1] -= v ：对下标大于 r 的位置减少 v，抵消影响。
++ `dif[l] += v` ：对于所有下标大于等于 `l` 的位置都增加了 `v`；
++ `dif[r+1] -= v` ：对下标大于 `r` 的位置减少 `v`，抵消影响。
 
 > 练习：1109.航班预定统计, 995.K连续位的最小翻转次数
 
 ## 概率
 
-rand7() → rand10()
+`rand7() → rand10()`
 
-使用两个rand7()构造1-49的均匀分布，然后去除1-9的数。
+使用两个`rand7()`构造`1-49`的均匀分布，然后去除`1-9`的数。
 
 ~~~java
 class Solution extends SolBase {
@@ -587,19 +596,19 @@ class Solution extends SolBase {
 
 ## 约瑟夫环
 
- 0,1,···,n-1这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字（删除后从下一个数字开始计数）。求出这个圆圈里剩下的最后一个数字。 
+ `0,1,···,n-1`这`n`个数字排成一个圆圈，从数字`0`开始，每次从这个圆圈里删除第`m`个数字（删除后从下一个数字开始计数）。求出这个圆圈里剩下的最后一个数字。 
 
 **方法一：模拟**
 
- 使用ArrayList模拟，时间复杂度 O(mn），空间复杂度O(n)。
+ 使用ArrayList模拟，时间复杂度 `O(mn）`，空间复杂度`O(n)`。
 
 **方法二：递归+反推**
 
-时间复杂度O(n)，空间复杂度O(n)。
+时间复杂度`O(n)`，空间复杂度`O(n)`。
 
-当删除了第m%n个元素后，剩下一个长度为n-1的序列。递归地求解f(n-1,m)，令x=f(n-1,m）。长度为n的序列最后一个删除的元素，应当是从m%n开始数的第x个元素：
+当删除了第`m%n`个元素后，剩下一个长度为`n-1`的序列。递归地求解`f(n-1,m)`，令`x=f(n-1,m）`。长度为`n`的序列最后一个删除的元素，应当是从`m%n`开始数的第`x`个元素：
 
-f(n,m) = (m%n+x)%n = (m+x)%n
+`f(n,m) = (m%n+x)%n = (m+x)%n`
 
 ```java
 class Solution {
@@ -619,9 +628,9 @@ class Solution {
 
 **方法三：迭代+反推**
 
-时间复杂度O(n），空间复杂度O(1)。
+时间复杂度`O(n）`，空间复杂度`O(1)`。
 
-（当前index+m）%上一轮剩余数字的个数
+（当前`index`+`m`）%上一轮剩余数字的个数
 
 ```java
 class Solution {
@@ -642,8 +651,8 @@ class Solution {
 
 **巴什博弈**
 
-+ 游戏双方轮流取石子（共N颗）
-+ 每人每次取走若干颗石子（最少取1颗，最多取K颗）
++ 游戏双方轮流取石子（共`N`颗）
++ 每人每次取走若干颗石子（最少取`1`颗，最多取`K`颗）
 + 石子取光，则游戏结束
 + 最后取石子的一方获胜
 
@@ -654,17 +663,17 @@ else return true;
 
 **尼姆博弈**
 
-+ K 堆各 N1，N2，...，Nk 颗石子
++ `K` 堆各 `N1，N2，...，Nk` 颗石子
 + 每次至少取一个，多者不限
 + 最后取走的一方获胜
 
 **解析**
 
-（0，0，0，...，0）是奇异局势，（1，1，0，...，0）也是奇异局势。
+`（0，0，0，...，0）`是奇异局势，`（1，1，0，...，0）`也是奇异局势。
 
 奇异局势时，后手只需要取相等数量的石子，先手必败。
 
-奇异局势时，二进制每一比特位上1的个数是偶数，使用异或运算求解。
+奇异局势时，二进制每一比特位上`1`的个数是偶数，使用异或运算求解。
 
 ```c++
 if(N1^N2^...^Nk==0) return false;
@@ -679,9 +688,9 @@ else return true;
 
 **解析**
 
-前几个奇异局势：（0，0）、（1，2）、（3，5）、（4，7）、（6，10）。
+前几个奇异局势：`（0，0）、（1，2）、（3，5）、（4，7）、（6，10）`。
 
-其中，a[0]=b[0]=0，a[k]是未在前面出现过的最小自然数，b[k]=a[k]+k 。
+其中，`a[0]=b[0]=0`，`a[k]`是未在前面出现过的最小自然数，`b[k]=a[k]+k` 。
 
 换一种表达方式：
 
@@ -740,3 +749,81 @@ for(int i = 2;i <= n;i++){
 }
 ```
 
+## LRU
+
+哈希表+双向链表
+
+~~~c++
+class LRUCache {
+public:
+    struct DLink{
+        int key,value;
+        DLink* prev;
+        DLink* next;
+        DLink(){}
+        DLink(int _key,int _value){
+            this->key = _key;
+            this->value = _value;
+        }
+    };
+    map<int,DLink*> m;
+    int maxsize;
+    DLink* head;
+    DLink* tail;
+
+    LRUCache(int capacity) {
+        head = new DLink();
+        tail = new DLink();
+        maxsize = capacity;
+        head->next = tail;
+        tail->prev = head;
+    }
+
+    int get(int key) {
+        if(m.count(key)){
+            DLink* node = m[key];
+            //移除该节点
+            node->prev->next = node->next;
+            node->next->prev = node->prev;
+            //插入到头部
+            node->next = head->next;
+            head->next->prev = node;
+            head->next = node;
+            node->prev = head;
+            return m[key]->value;
+        }
+        else return -1;
+    }
+
+    void put(int key, int value) {
+        if(m.count(key)){
+            DLink* node = m[key];
+            node->value = value;
+            //移除
+            node->prev->next = node->next;
+            node->next->prev = node->prev;
+            //插入头部
+            node->next = head->next;
+            head->next->prev = node;
+            head->next = node;
+            node->prev = head;
+        }
+        else{
+            DLink* newNode = new DLink(key,value);
+            //插入头部
+            head->next->prev = newNode;
+            newNode->next = head->next;
+            head->next = newNode;
+            newNode->prev = head;
+            m.insert(pair<int,DLink*>(key,newNode));
+            if(m.size()>maxsize){
+                m.erase(tail->prev->key);
+                DLink* curNode = tail->prev;
+                //移除尾部
+                curNode->prev->next = tail;
+                tail->prev = curNode->prev;
+            }
+        }
+    }
+};
+~~~
