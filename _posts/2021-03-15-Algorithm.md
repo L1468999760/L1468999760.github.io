@@ -21,6 +21,7 @@ description: 常用算法模板。
 - [完全背包](#完全背包)
 - [快速幂](#快速幂)
 - [快排](#快排)
+- [堆排](#堆排)
 - [差分](#差分)
 - [概率](#概率)
 - [约瑟夫环](#约瑟夫环)
@@ -269,6 +270,53 @@ int main()
 {
     
     return 0;
+}
+~~~
+
+输出路径：
+
+~~~
+public class Solution {
+    /**
+     * retrun the longest increasing subsequence
+     * @param arr int整型一维数组 the array
+     * @return int整型一维数组
+     */
+    public int[] LIS (int[] arr) {
+        // write code here
+        int len = arr.length;
+        if(len==0) return arr;
+        int[] dp = new int[len];
+        int[] nums = new int[len];
+        dp[0] = arr[0];
+        nums[0] = 1; // 下标为0的数截止的最长上升子序列的长度是1
+        int cur = 0;
+        for(int i=1;i<len;i++){
+            if(arr[i]>dp[cur]){
+                cur++;
+                dp[cur] = arr[i];
+                nums[i] = cur+1;
+            }
+            else{
+                int l=0,r=cur;
+                while(l<r){
+                    int mid = l+(r-l)/2;
+                    if(dp[mid]>=arr[i]) r=mid;
+                    else l=mid+1;
+                }
+                dp[l] = arr[i];
+                nums[i] = l+1;
+            }
+        }
+        int[] ans = new int[cur+1];
+        for(int i=nums.length-1;i>=0;i--){
+            if(nums[i]==cur+1){
+                ans[cur] = arr[i];
+                cur--;
+            }
+        }
+        return ans;
+    }
 }
 ~~~
 
@@ -568,6 +616,47 @@ void quicksort(int[] arr,int left,int right){
     quicksort(arr,l+1,right);
 }
 ~~~
+
+## 堆排
+
+堆排序是一种不稳定的排序，平均时间复杂度和最坏时间复杂度都是`O(nlogn)`。
+
+小顶堆的实现：
+
+```java
+void adjust(int[] nums,int i,int len){ // i为待调整节点
+     int j  =2*i+1; // 左子节点（下标从0开始）
+     while(j<len){
+         if(j+1<len && nums[j+1]>nums[j]) j++; // 如果右孩子比左孩子大，切换到右孩子
+         if(nums[j]<nums[i]) break; // 都比父节点小
+         else{
+             int tmp = nums[i];
+             nums[i] = nums[j];
+             nums[j] = tmp;
+             i=j; // 向下调整
+             j=2*i+1;
+            }
+     }
+}
+
+void HeapSort(int[] nums){
+    int len = nums.length;
+    for(int i=len/2-1;i>=0;i--) adjust(nums,i,len);
+    for(int i=len-1;i>=1;i--){
+        // 交换堆顶和最后一个元素
+        int tmp = nums[0];
+        nums[0] = nums[i];
+        nums[i] = tmp;
+                
+        adjust(nums,0,i); // 去除最后一个元素
+    }
+}
+        
+public static void main(String[] args){
+    int[] arr = {4,1,6,2,5,3,7};
+    HeapSort(arr);
+}
+```
 
 ## 差分
 
