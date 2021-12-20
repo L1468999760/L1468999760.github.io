@@ -935,7 +935,7 @@ public int kmp (String S, String T) { //S是模式串，T是主串
     int len2 = S.length();
     
     while(i<len1&&j<len2){
-        if(j==-1||S.charAt(i)==T.charAt(j)){ //T的第一个字符不匹配或SyuT对应位匹配
+        if(j==-1||S.charAt(i)==T.charAt(j)){ //T的第一个字符不匹配或S与T对应位匹配
             i++;
             j++;
         }
