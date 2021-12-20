@@ -28,6 +28,7 @@ description: 常用算法模板。
 - [取石子](#取石子)
 - [求质数](#求质数)
 - [LRU](#lru)
+- [KMP算法](#kmp算法)
 
 ## Kruskal（并查集）
 
@@ -916,3 +917,49 @@ public:
     }
 };
 ~~~
+
+## KMP算法
+
+设模式串`pattern`的长度为`n`，主串`str`的长度为`m`，时间复杂度为`O(m+n)`。
+
+`next`数组表示模式串的子串的前缀和后缀相同的最长长度，`next[i]`表示最大的`x`，满足`pattern[0:x-1]`是`pattern[0:i-1]`的后缀。
+
+KMP的详细过程参考https://segmentfault.com/a/1190000008575379
+
+~~~java
+public int kmp (String S, String T) { //S是模式串，T是主串
+	int[] next = getNext(S);
+    int i = 0; //T下标
+    int j = 0; //S下标
+    int len1 = T.length();
+    int len2 = S.length();
+    
+    while(i<len1&&j<len2){
+        if(j==-1||S.charAt(i)==T.charAt(j)){ //T的第一个字符不匹配或SyuT对应位匹配
+            i++;
+            j++;
+        }
+        else j = next[j];
+    }
+	if(j==len2) return i-j; //如果匹配成功，返回主串匹配位置的首位
+    else return -1;
+}
+
+int[] getNext(String S){
+    int len = S.length();
+    int[] next = new int[len];
+    int i = 0; //S下标
+    int j = -1; //T下标
+    next[0] = -1;
+    
+    while(i<len){
+        if(j==-1||S.charAt(i)==S.charAt(j)){
+            i++;
+            j++;
+            next[i] = j;
+        }
+        else j = next[j];
+    }
+}
+~~~
+
