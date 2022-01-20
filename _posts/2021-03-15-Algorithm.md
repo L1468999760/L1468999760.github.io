@@ -29,6 +29,7 @@ description: 常用算法模板。
 - [求质数](#求质数)
 - [LRU](#lru)
 - [KMP算法](#kmp算法)
+- [双向BFS](#双向bfs)
 
 ## Kruskal（并查集）
 
@@ -427,7 +428,7 @@ public:
 		      break;
 		   }
 		}
-		if(ok==0) continue; //去重
+		if(ok==0) continue; //去重，按照任意顺序输出
                 int tmp=cur[i];
                 cur[i]=cur[from];
                 cur[from]=tmp;
@@ -446,6 +447,85 @@ public:
     }
 };
 ~~~
+
+**含有重复数字的全排列**
+
+按照字典序输出结果。
+
+**方法一**
+
+count计数法，使用一个哈希表记录每个数字出现的次数，然后深度优先遍历该哈希表。
+
+```java
+class Solution {
+    List<List<Integer>> ans = new ArrayList<>();
+    void dfs(int[] nums,List<Integer> cur,Map<Integer,Integer> map,int len) {
+        if(cur.size()==len) {
+            ans.add(new ArrayList(cur));
+            return;
+        } else {
+            for(Map.Entry<Integer,Integer> it:map.entrySet()) {
+                if(it.getValue()>0) {
+                    map.put(it.getKey(),map.get(it.getKey())-1);
+                    cur.add(it.getKey());
+                    dfs(nums,cur,map,len);
+                    cur.remove(cur.size()-1);
+                    map.put(it.getKey(),map.get(it.getKey())+1);
+                }
+            }
+        }
+    }
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        int len = nums.length;
+        if(len==0) return ans;
+        Map<Integer,Integer> map = new HashMap<>();
+        Arrays.sort(nums);
+        for(int i=0;i<len;i++) {
+            map.put(nums[i],map.getOrDefault(nums[i],0)+1);
+        }
+        dfs(nums,new ArrayList<>(),map,len);
+        return ans;
+    }
+}
+```
+
+**方法二**
+
+先排序，对于相同的数字，保证每次都是拿从左往右第一个未被填过的数字。
+
+时间复杂度`O(n × n!)`  。
+
+```java
+class Solution {
+    int[] vis;
+    void dfs(int[] nums,List<Integer> list,int cur,List<List<Integer> > ans) {
+        if(cur == nums.length) {
+            ans.add(new ArrayList(list));
+            return;
+        } else {
+            for(int i=0;i<nums.length;i++) {
+                // 当前数访问过 或 当前数与上一个数相同且上一个数没有被访问过
+                if(vis[i]==1||(i>0&&nums[i]==nums[i-1]&&vis[i-1]==0)) continue;
+                list.add(nums[i]);
+                vis[i]=1;
+                dfs(nums,list,cur+1,ans);
+                list.remove(list.size()-1);
+                vis[i]=0;
+            }
+        }
+    }
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer> > ans = new ArrayList<>();
+        int len = nums.length;
+        if(len==0) return ans;
+        Arrays.sort(nums);
+        vis = new int[len];
+        Arrays.fill(vis,0);
+        dfs(nums,new ArrayList<>(),0,ans);
+        return ans;
+    }
+}
+```
 
 ## 0-1背包
 
@@ -963,3 +1043,21 @@ int[] getNext(String S){
 }
 ~~~
 
+## 双向BFS
+
+朴素BFS可能造成搜索空间爆炸，瓶颈在于搜索空间中的最大宽度。
+
+**当前问题：**从源点开始搜索，直到找到目标节点，得到最短路径。
+
+**转换问题：**同时从源点和汇点开始搜索，一旦搜索到相同的值，即可得到最短路径。
+
+方法：
+
++ 创建两个队列分别用于两个方向的搜索；
++ 创建两个哈希表用于解决相同节点重复搜索和记录转换次数；
++ 为了尽可能让两个搜索方向“平均”，每次从队列中取值进行扩展时，先判断哪个队列容量较少；
++ 如果在搜索过程中搜索到对方搜索过的节点，说明找到了最短路径。
+
+> 参考自leetcode752 [宫水三叶]题解。
+>
+> 相关题目：127 单词接龙、752 打开转盘锁
