@@ -30,6 +30,7 @@ description: 常用算法模板。
 - [LRU](#lru)
 - [KMP算法](#kmp算法)
 - [双向BFS](#双向bfs)
+- [单例模式](#单例模式)
 
 ## Kruskal（并查集）
 
@@ -1061,3 +1062,32 @@ int[] getNext(String S){
 > 参考自leetcode752 [宫水三叶]题解。
 >
 > 相关题目：127 单词接龙、752 打开转盘锁
+
+## 单例模式
+
+`uniqueInstance`采用`volatile`关键字修饰，`uniqueInstance = new Singleton();`代码分三步执行：
+
++ 为`uniqueInstance`分配内存空间
++ 初始化`uniqueInstance`
++ 将`uniqueInstance`指向分配的内存地址
+
+使用`volatile`可以禁止JVM的指令重排，多线程下也能正常运行。
+
+~~~java
+public class Singleton {
+    private volatile static Singleton uniqueInstance;
+    private Singleton() {
+    }
+    public static Singleton getUniqueInstance() {
+        if (uniqueInstance == null) {
+            synchronized (Singleton.class) {
+                if (uniqueInstance == null) {
+                    uniqueInstance = new Singleton();
+                }
+            }
+        }
+        return uniqueInstance;
+    }
+}
+~~~
+
