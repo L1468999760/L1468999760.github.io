@@ -31,6 +31,7 @@ description: 常用算法模板。
 - [KMP算法](#kmp算法)
 - [双向BFS](#双向bfs)
 - [单例模式](#单例模式)
+- [字符串哈希](#字符串哈希)
 
 ## Kruskal（并查集）
 
@@ -1091,3 +1092,38 @@ public class Singleton {
 }
 ~~~
 
+## 字符串哈希
+
+使用两个不同的mod值来计算Hash，如果两个Hash值都相等才认为是同一个字符串。
+
+原字符串为s，pre是一个大整数，可以取为233333，base数组存储pre的幂。
+
+![](https://latex.codecogs.com/svg.image?\left\{\begin{matrix}Hash[0]&space;=&space;0\\Hash[i]&space;=&space;(Hash[i-1]*pre&space;&plus;&space;s[i]-'a'&plus;1)\%mod\end{matrix}\right.&space;)
+
+![](https://latex.codecogs.com/svg.image?\left\{\begin{matrix}base[0]&space;=&space;1\\base[i]&space;=&space;base[i-1]*pre\end{matrix}\right.&space;)
+
+区间Hash值：
+
+<img src="https://latex.codecogs.com/svg.image?Hash[L...R]&space;=&space;(Hash[R]-Hash[L-1]*base[R-L&plus;1]&plus;mod)\%mod" title="https://latex.codecogs.com/svg.image?Hash[L...R] = (Hash[R]-Hash[L-1]*base[R-L+1]+mod)\%mod" />
+
+~~~java
+// 字符串str的长度为len
+long[] hash = new long[len+1];
+long[] base = new long[len+1];
+long pre = 233333; 
+
+base[0] = 1;
+for(int i = 1; i <= len; i++)
+{
+	hash[i] = hash[i - 1] * pre + str[i-1] - 'a' + 1;
+	base[i] = base[i - 1] * pre;
+}
+// L~R的hash值
+hashLR = hash[R] - hash[L - 1] * base[R - L + 1]; 
+~~~
+
+> 参考：
+>
+> https://blog.csdn.net/qq_45778406/article/details/113920372
+>
+> 1044 最长重复子串
