@@ -684,6 +684,8 @@ int pow_mod(int a,int n,int m){
 
 ## 快排
 
+递归：
+
 ~~~java
 void quicksort(int[] arr,int left,int right){
     if(left >= right) return;
@@ -699,6 +701,34 @@ void quicksort(int[] arr,int left,int right){
     quicksort(arr,l+1,right);
 }
 ~~~
+
+非递归：
+
+```java
+void quickSort(int[] arr,int left,int right) {
+    Deque<Integer> s = new ArrayDeque<>();
+    s.push(left);
+    s.push(right);
+    while(!s.isEmpty()) {
+        int rindex = s.poll(),lindex = s.poll();
+        int l = lindex,r = rindex;
+        int tmp = arr[l];
+        while(l<r&&arr[r]>=tmp) r--;
+        arr[l] = arr[r];
+        while(l<r&&arr[l]<=tmp) l++;
+        arr[r] = arr[l];
+        arr[l] = tmp;
+        if(l-1>lindex) {
+            s.push(lindex);
+            s.push(l-1);
+        }
+        if(l+1<rindex) {
+            s.push(l+1);
+            s.push(rindex);
+        }
+    }
+}
+```
 
 ## 堆排
 
