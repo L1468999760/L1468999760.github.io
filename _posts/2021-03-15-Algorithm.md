@@ -730,6 +730,33 @@ void quickSort(int[] arr,int left,int right) {
 }
 ```
 
+快排实现稳定排序：
+
+快排是不稳定的，可以使用一个辅助数组，从前往后把小于基准数的放进辅助数组，再把基准数放进去，然后再遍历一遍把大于基准数的放进辅助数组，避免交换操作就可以稳定了。
+
+```java
+void quicksort(int[] arr,int left,int right){
+    if(left>=right) return;
+    int len = right-left+1;
+    int[] tmp = new int[len];
+    int target = arr[left];
+    int cnt = 0,mid = 0;
+    for(int i=left+1;i<=right;i++){
+        if(arr[i]<target) tmp[cnt++] = arr[i];
+    }
+    tmp[cnt++] = target;
+    mid = left+cnt-1;
+    for(int i=left+1;i<=right;i++){
+        if(arr[i]>=target) tmp[cnt++] = arr[i];
+    }
+    for(int i=left;i<=right;i++){
+        arr[i] = tmp[i-left];
+    }
+    quicksort(arr,left,mid-1);
+    quicksort(arr,mid+1,right);
+}
+```
+
 ## 堆排
 
 堆排序是一种不稳定的排序，平均时间复杂度和最坏时间复杂度都是`O(nlogn)`。
@@ -912,7 +939,7 @@ else return true;
 
 如果一个数是质数，那么它的整数倍（大于等于2倍）就一定不是质数。例如2是质数，4、6、8不是质数。
 
-~~~c++
+~~~
 #include <iostream>
 #include <cstring>
 #include <string>
