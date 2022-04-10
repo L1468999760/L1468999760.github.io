@@ -21,6 +21,7 @@ description: 常用算法模板。
 - [完全背包](#完全背包)
 - [快速幂](#快速幂)
 - [快排](#快排)
+- [归并排序](#归并排序)
 - [堆排](#堆排)
 - [差分](#差分)
 - [概率](#概率)
@@ -757,6 +758,42 @@ void quicksort(int[] arr,int left,int right){
 }
 ```
 
+## 归并排序
+
+```java
+void mergSort(int[] arr,int start,int end) {
+    if(start >= end) return;
+
+    int mid = (start + end)/2;
+    mergSort(arr,start,mid);
+    mergSort(arr,mid+1,end);
+
+    merge(arr,start,mid,end);
+}
+void merge(int[]arr,int start,int mid,int end) {
+    int[] tmp = new int[end-start+1];
+    int i = start,j = mid + 1;
+    int count = 0;
+    while(i<=mid && j<=end) {
+        if(arr[i]<=arr[j]) {
+            tmp[count++] = arr[i++];
+        } else {
+            tmp[count++] = arr[j++];
+        }
+    }
+    while(i<=mid) {
+        tmp[count++] = arr[i++];
+    }
+    while(j<=end) {
+        tmp[count++] = arr[j++];
+    }
+
+    for(int k=0;k<count;k++) {
+        arr[start+k] = tmp[k];
+    }
+}
+```
+
 ## 堆排
 
 堆排序是一种不稳定的排序，平均时间复杂度和最坏时间复杂度都是`O(nlogn)`。
@@ -1067,6 +1104,7 @@ KMP的详细过程参考https://segmentfault.com/a/1190000008575379
 
 ~~~java
 public int kmp (String S, String T) { //S是模式串，T是主串
+
 	int[] next = getNext(S);
     int i = 0; //T下标
     int j = 0; //S下标
