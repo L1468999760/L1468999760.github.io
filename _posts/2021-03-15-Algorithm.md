@@ -33,6 +33,7 @@ description: 常用算法模板。
 - [双向BFS](#双向bfs)
 - [单例模式](#单例模式)
 - [字符串哈希](#字符串哈希)
+- [生产者消费者问题](#生产者消费者问题)
 
 ## Kruskal（并查集）
 
@@ -1222,3 +1223,152 @@ hashLR = hash[R] - hash[L - 1] * base[R - L + 1];
 > https://blog.csdn.net/qq_45778406/article/details/113920372
 >
 > 1044 最长重复子串
+
+## 生产者消费者问题
+
+> 参考自https://blog.csdn.net/qq_32505207/article/details/116662834
+
+**使用wait/notify实现**
+
+```java
+static class Producer implements Runnable{
+
+    private LinkedList<Integer> list;
+    private int maxL = 10;
+    private Random random;
+
+    Producer(LinkedList<Integer> linkedList){
+        this.list = linkedList;
+        random = new Random();
+    }
+
+    @Override
+    public void run() {
+        while(true) {
+            synchronized (list) {
+                try {
+                    while (list.size()==maxL){
+                        System.out.println("生产者"+Thread.currentThread().getName()+" list达到最大，进行wait()");
+                        list.wait();
+                        System.out.println("生产者"+Thread.currentThread().getName()+" wait()结束");
+                    }
+
+                    int p = random.nextInt();
+                    System.out.println("生产者"+Thread.currentThread().getName()+"生产了"+p);
+                    list.add(p);
+                    list.notifyAll();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
+
+static class Consumer implements Runnable {
+    private  LinkedList<Integer> list;
+
+    public Consumer(LinkedList<Integer> linkedList) {
+        this.list = linkedList;
+    }
+
+    @Override
+    public void run() {
+        while(true) {
+            synchronized (list) {
+                try {
+                    while (list.isEmpty()){
+                        System.out.println("消费者"+Thread.currentThread().getName()+" list为空，进行wait()");
+                        list.wait();
+                        System.out.println("消费者"+Thread.currentThread().getName()+" wait()结束");
+                    }
+                    Integer p = list.remove(0);
+                    System.out.println("消费者"+Thread.currentThread().getName()+"消费了"+p);
+                    list.notifyAll();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+}
+
+public static void main(String[] args) {
+    LinkedList<Integer> list = new LinkedList<>();
+    //5个生产者，10个消费者
+    ExecutorService service = Executors.newFixedThreadPool(15);
+    for(int i=0;i<5;i++) {
+        service.execute(new Producer(list));
+    }
+    for(int i=0;i<10;i++) {
+        service.execute(new Consumer(list));
+    }
+}
+```
+
+**使用BlockingQueue实现**
+
+使用BlockingQueue的put、take实现。
+
+```java
+private static LinkedBlockingQueue<Integer> queue = new LinkedBlockingQueue<>();
+
+static class Productor implements Runnable{
+
+    private BlockingQueue queue;
+    private Random random;
+
+    public Productor(LinkedBlockingQueue<Integer> queue){
+        this.queue = queue;
+        random = new Random();
+    }
+
+    @Override
+    public void run() {
+        while (true){
+            try {
+                int p = random.nextInt();
+                System.out.println("生产者"+Thread.currentThread().getName()+" 生产了"+p);
+                queue.put(p);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+static class Consumer implements Runnable{
+
+    private BlockingQueue queue;
+
+    public Consumer(LinkedBlockingQueue<Integer> queue){
+        this.queue = queue;
+    }
+
+    @Override
+    public void run() {
+        while (true){
+            try {
+                Integer p = (Integer) queue.take();
+                System.out.println("消费者"+Thread.currentThread().getName()+" 消费了"+p);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+public static void main(String[] args) {
+    //5个生产者，10个消费者
+    ExecutorService service = Executors.newFixedThreadPool(15);
+    for (int i = 0; i < 5; i++) {
+        service.execute(new Productor(queue));
+    }
+    for (int i = 0; i < 10; i++) {
+        service.execute(new Consumer(queue));
+    }
+}
+```
+
+**使用Lock的Condition的await/signal消息通知机制**
