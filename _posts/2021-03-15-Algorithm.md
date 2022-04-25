@@ -802,16 +802,21 @@ void merge(int[]arr,int start,int mid,int end) {
 小顶堆的实现：
 
 ```java
-void adjust(int[] nums,int i,int len){ // i为待调整节点
-     int j  =2*i+1; // 左子节点（下标从0开始）
+// i为待调整节点
+void adjust(int[] nums,int i,int len){ 
+    // 左子节点（下标从0开始）
+     int j  =2*i+1; 
      while(j<len){
-         if(j+1<len && nums[j+1]>nums[j]) j++; // 如果右孩子比左孩子大，切换到右孩子
-         if(nums[j]<nums[i]) break; // 都比父节点小
+         // 如果右孩子比左孩子大，切换到右孩子
+         if(j+1<len && nums[j+1]>nums[j]) j++; 
+         // 都比父节点小
+         if(nums[j]<nums[i]) break; 
          else{
              int tmp = nums[i];
              nums[i] = nums[j];
              nums[j] = tmp;
-             i=j; // 向下调整
+             // 向下调整
+             i=j; 
              j=2*i+1;
             }
      }
@@ -825,8 +830,8 @@ void HeapSort(int[] nums){
         int tmp = nums[0];
         nums[0] = nums[i];
         nums[i] = tmp;
-                
-        adjust(nums,0,i); // 去除最后一个元素
+        // 去除最后一个元素       
+        adjust(nums,0,i); 
     }
 }
         
@@ -984,16 +989,17 @@ else return true;
 using namespace std;
 
 int prime[10000001]; //存储素数
-bool vis[10000001]; //每个数是否是素数
+bool vis[10000001]; //每个数是否是质数，false表示是质数
 int main(){
     int n,cnt = 0;
     cin>>n;
     memset(vis,false,sizeof(vis));
     memset(prime,0,sizeof(prime));
+    vis[1] = true;
     for(int i = 2;i <= n;i++){
         if(!vis[i]){
             prime[cnt++] = i;
-            for(int j = 1;j*i<=n;j++) vis[j*i] = true;
+            for(int j = 2;j*i<=n;j++) vis[j*i] = true;
         }
     }
     return 0;
