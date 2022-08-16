@@ -34,6 +34,7 @@ description: 常用算法模板。
 - [单例模式](#单例模式)
 - [字符串哈希](#字符串哈希)
 - [生产者消费者问题](#生产者消费者问题)
+- [GCD](#GCD)
 
 ## Kruskal（并查集）
 
@@ -1378,3 +1379,28 @@ public static void main(String[] args) {
 ```
 
 **使用Lock的Condition的await/signal消息通知机制**
+
+## GCD
+
+求最大公约数
+
+```java
+public int gcd(int a,int b) {
+    if(b==0) {
+        return a;
+    } else {
+        return gcd(b,a%b);
+    }
+}
+```
+
+判断两个数是否互质
+
+```java
+boolean f(int a,int b) {
+    if(a==1||b==1) return true;
+    if(a%b==0) return false;
+    else return f(b,a%b);
+}
+```
+
