@@ -34,7 +34,8 @@ description: 常用算法模板。
 - [单例模式](#单例模式)
 - [字符串哈希](#字符串哈希)
 - [生产者消费者问题](#生产者消费者问题)
-- [GCD](#GCD)
+- [GCD](#gcd)
+- [约瑟夫环](#约瑟夫环)
 
 ## Kruskal（并查集）
 
@@ -1401,6 +1402,25 @@ boolean f(int a,int b) {
     if(a==1||b==1) return true;
     if(a%b==0) return false;
     else return f(b,a%b);
+}
+```
+
+## 约瑟夫环
+
+0，1，...，n-1这n个数字围成一个圆，从数字0开始，每次从这个圆里删除第m个数字（删除后从下一个数字开始重新计数）。求圆圈里剩下的最后一个数字是多少。
+
+令f(n,m)为n个数，每次删除第m个时该问题的解
+
+f(n,m) = (f(n-1,m)+m)%n
+
+直到 f(1,m) = 0
+
+时间复杂度O(n)，空间复杂度O(n)。
+
+```java
+int lastNum(int n, int m) {
+    if(n==1) return 0;
+    else return (lastNum(n-1,m)+m)%n;
 }
 ```
 
