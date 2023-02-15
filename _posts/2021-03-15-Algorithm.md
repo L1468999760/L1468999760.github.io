@@ -900,6 +900,23 @@ class Solution {
 }
 ```
 
+另解：
+
+令f(n,m)为n个数，每次删除第m个时该问题的解
+
+f(n,m) = (f(n-1,m)+m)%n
+
+直到 f(1,m) = 0
+
+时间复杂度O(n)，空间复杂度O(n)。
+
+```java
+int lastNum(int n, int m) {
+    if(n==1) return 0;
+    else return (lastNum(n-1,m)+m)%n;
+}
+```
+
 **方法三：迭代+反推**
 
 时间复杂度`O(n）`，空间复杂度`O(1)`。
@@ -1383,7 +1400,9 @@ public static void main(String[] args) {
 
 ## GCD
 
-求最大公约数
+求最大公约数。
+
+**辗转相除法**。时间复杂度为O(logn)。
 
 ```java
 public int gcd(int a,int b) {
@@ -1405,22 +1424,15 @@ boolean f(int a,int b) {
 }
 ```
 
-## 约瑟夫环
+**二进制GCD**
 
-0，1，...，n-1这n个数字围成一个圆，从数字0开始，每次从这个圆里删除第m个数字（删除后从下一个数字开始重新计数）。求圆圈里剩下的最后一个数字是多少。
+![](https://latex.codecogs.com/svg.image?gcd(a,b)=\left\{\begin{matrix}
+a &,a=b  \\
+gcd(\frac{a}{2},\frac{b}{2}) &,both
+\ a\ and\ b\ are\ even\\
+gcd(\frac{a}{2},b) &,a\ is\ even,b\ is\ odd  \\
+gcd(\frac{a-b}{2},b) &,both\ a\ and\ b\ are\ odd  \\
+\end{matrix}\right.)
 
-令f(n,m)为n个数，每次删除第m个时该问题的解
-
-f(n,m) = (f(n-1,m)+m)%n
-
-直到 f(1,m) = 0
-
-时间复杂度O(n)，空间复杂度O(n)。
-
-```java
-int lastNum(int n, int m) {
-    if(n==1) return 0;
-    else return (lastNum(n-1,m)+m)%n;
-}
-```
+> 参考https://zhuanlan.zhihu.com/p/553890800
 
