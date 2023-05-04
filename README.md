@@ -13,6 +13,7 @@
 * 个人介绍页面：about.md
 * 文章归档：archive.md
 * 文章模板：blog.io/_posts/2021-02-01-how-to-write.md 
+* 页面加速：使用jsDelivr加速静态资源
 
 
 ## 作者
