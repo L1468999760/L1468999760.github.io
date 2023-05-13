@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "关于我"
-description: "千里之行，始于足下" 
+description: "Stay hungry, stay foolish" 
 header-img: "img/twitter.jpg"
 ---
 
