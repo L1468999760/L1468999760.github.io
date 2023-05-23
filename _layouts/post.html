@@ -19,8 +19,8 @@ layout: default
                         {% endfor %}
                     </div>
                     <h1>{{ page.title }}</h1>
-                    {% if page.subtitle %}
-                    <h2 class="subheading">{{ page.subtitle }}</h2>
+                    {% if page.description %}
+                    <h3 class="subheading">{{ page.description }}</h3>
                     {% endif %}
                     <span class="meta">Posted on {{ page.date | date: "%B %-d, %Y" }}</span>
                 </div>
