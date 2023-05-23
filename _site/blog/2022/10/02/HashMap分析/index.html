@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="千里之行，始于足下">
+
+    <title>HashMap分析 - 如遇古剑</title>
+
+    <link rel="canonical" href="http://localhost:4000/blog/2022/10/02/HashMap%E5%88%86%E6%9E%90/">
+
+    <!-- Icons -->
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/clean-blog.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+
+
+
+
+
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+               
+            </button>
+            <a class="navbar-brand" href="/">如遇古剑</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">主页</a>
+                </li>
+                
+                <li>
+                    <a href="/about/">关于我</a>
+                </li>
+                
+                <li>
+                    <a href="/archive/">文章归档</a>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/blue.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="Tags">
+                        
+                        <!-- <a class="tag" href="/Tags/#HashMap" title="HashMap">HashMap</a> -->
+                        
+                    </div>
+                    <h1>HashMap分析</h1>
+                    
+                    <span class="meta">Posted on October 2, 2022</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+
+                <p>目录</p>
+
+<ul>
+  <li><a href="#内部节点类">内部节点类</a></li>
+  <li><a href="#成员变量">成员变量</a></li>
+  <li><a href="#构造方法">构造方法</a></li>
+  <li><a href="#散列函数">散列函数</a></li>
+  <li><a href="#put方法">put方法</a></li>
+  <li><a href="#get方法">get方法</a></li>
+  <li><a href="#扩容方法">扩容方法</a></li>
+</ul>
+
+<h2 id="内部节点类">内部节点类</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;</span> <span class="o">{</span>
+    <span class="c1">// 键值对</span>
+    <span class="kd">private</span> <span class="no">K</span> <span class="n">key</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="no">V</span> <span class="n">value</span><span class="o">;</span>
+    
+    <span class="c1">// 链表，后继</span>
+    <span class="kd">private</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">;</span>
+    
+    <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="no">K</span> <span class="n">key</span><span class="o">,</span> <span class="no">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="nf">Node</span><span class="o">(</span><span class="no">K</span> <span class="n">key</span><span class="o">,</span> <span class="no">V</span> <span class="n">value</span><span class="o">,</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;</span> <span class="n">next</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="成员变量">成员变量</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 默认初始容量</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="no">DEFAULT_INITIAL_CAPACITY</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="o">;</span>
+<span class="c1">// 最大容量</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="no">MAXIMUM_CAPACITY</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">30</span><span class="o">;</span>
+<span class="c1">// 负载因子</span>
+<span class="kd">final</span> <span class="kt">float</span> <span class="no">DEFAULT_LOAD_FACTOR</span> <span class="o">=</span> <span class="mf">0.75f</span><span class="o">;</span>
+<span class="c1">// 链表转红黑树的长度阈值</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="no">TREEIFY_THRESHOLD</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+<span class="c1">// 红黑树退化成链表的长度阈值</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="no">UNTREEIFY_THRESHOLD</span> <span class="o">=</span> <span class="mi">6</span><span class="o">;</span>
+<span class="c1">// 链表转红黑树时，要求数组的最小长度</span>
+<span class="kd">final</span> <span class="kt">int</span> <span class="no">MIN_TREEIFY_CAPACITY</span> <span class="o">=</span> <span class="mi">64</span><span class="o">;</span>
+<span class="c1">// 桶数组，每次2倍扩容，允许长度为0</span>
+<span class="kd">transient</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;[]</span> <span class="n">table</span><span class="o">;</span>
+<span class="c1">// key-value映射的数量</span>
+<span class="kd">transient</span> <span class="kt">int</span> <span class="n">size</span><span class="o">;</span>
+<span class="c1">// 修改内部结构的次数</span>
+<span class="kd">transient</span> <span class="kt">int</span> <span class="n">modCount</span><span class="o">;</span>
+</code></pre></div></div>
+
+<h2 id="构造方法">构造方法</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 无参构造器 </span>
+<span class="kd">public</span> <span class="nf">ThirdHashMap</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">buckets</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Node</span><span class="o">[</span><span class="no">DEFAULT_CAPACITY</span><span class="o">];</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="c1">// 有参构造器</span>
+<span class="kd">public</span> <span class="nf">ThirdHashMap</span><span class="o">(</span><span class="kt">int</span> <span class="n">capacity</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">buckets</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Node</span><span class="o">[</span><span class="n">capacity</span><span class="o">];</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="散列函数">散列函数</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">int</span> <span class="nf">getIndex</span><span class="o">(</span><span class="no">K</span> <span class="n">key</span><span class="o">,</span> <span class="kt">int</span> <span class="n">length</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 获取hash code</span>
+    <span class="kt">int</span> <span class="n">hashCode</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="na">hashCode</span><span class="o">();</span>
+    <span class="c1">// 和桶数组长度取余</span>
+    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">hashCode</span> <span class="o">%</span> <span class="n">length</span><span class="o">;</span>
+    <span class="k">return</span> <span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">index</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="put方法">put方法</h2>
+
+<p>基本逻辑：</p>
+
+<ul>
+  <li>获取元素插入位置</li>
+  <li>当前位置为空，直接插入</li>
+  <li>位置不为空，发生冲突，遍历链表</li>
+  <li>如果元素key和节点相同，覆盖，否则新建节点插入链表头部</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kt">void</span> <span class="nf">put</span><span class="o">(</span><span class="no">K</span> <span class="n">key</span><span class="o">,</span> <span class="no">V</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">size</span> <span class="o">&gt;=</span> <span class="n">buckets</span><span class="o">.</span><span class="na">length</span> <span class="o">*</span> <span class="no">LOAD_FACTOR</span><span class="o">)</span> <span class="n">resize</span><span class="o">();</span>
+    <span class="n">putVal</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">buckets</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">putVal</span><span class="o">(</span><span class="no">K</span> <span class="n">key</span><span class="o">,</span> <span class="no">V</span> <span class="n">value</span><span class="o">,</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span> <span class="no">V</span><span class="o">&gt;[]</span> <span class="n">table</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 获取位置</span>
+    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">getIndex</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">table</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+    <span class="nc">Node</span> <span class="n">node</span> <span class="o">=</span> <span class="n">table</span><span class="o">[</span><span class="n">index</span><span class="o">];</span>
+    <span class="c1">// 插入的位置为空</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">table</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Node</span><span class="o">&lt;&gt;(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
+        <span class="n">size</span><span class="o">++;</span>
+        <span class="k">return</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// 插入位置不为空，说明发生冲突，使用链地址法，遍历链表</span>
+    <span class="k">while</span><span class="o">(</span><span class="n">node</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 如果key相同，就覆盖掉</span>
+        <span class="k">if</span><span class="o">((</span><span class="n">node</span><span class="o">.</span><span class="na">key</span><span class="o">.</span><span class="na">hashCode</span><span class="o">()</span> <span class="o">==</span> <span class="n">key</span><span class="o">.</span><span class="na">hashCode</span><span class="o">())</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">key</span> <span class="o">==</span> <span class="n">key</span> <span class="o">||</span> <span class="n">node</span><span class="o">.</span><span class="na">key</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">key</span><span class="o">)))</span> <span class="o">{</span>
+            <span class="n">node</span><span class="o">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">;</span>
+            <span class="k">return</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="c1">// 当前key不在链表中，插入链表头部</span>
+    <span class="nc">Node</span> <span class="n">newNode</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Node</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">,</span> <span class="n">table</span><span class="o">[</span><span class="n">index</span><span class="o">]);</span>
+    <span class="n">table</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">=</span> <span class="n">newNode</span><span class="o">;</span>
+    <span class="n">size</span><span class="o">++;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="get方法">get方法</h2>
+
+<p>通过散列函数获取地址。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="no">V</span> <span class="nf">get</span><span class="o">(</span><span class="no">K</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// 获取key对应的地址</span>
+    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">getIndex</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">buckets</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">buckets</span><span class="o">[</span><span class="n">index</span><span class="o">]</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="nc">Node</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="n">buckets</span><span class="o">[</span><span class="n">index</span><span class="o">];</span>
+    <span class="c1">// 查找链表</span>
+    <span class="k">while</span><span class="o">(</span><span class="n">node</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">((</span><span class="n">node</span><span class="o">.</span><span class="na">key</span><span class="o">.</span><span class="na">hashCode</span><span class="o">()</span> <span class="o">==</span> <span class="n">key</span><span class="o">.</span><span class="na">hashCode</span><span class="o">())</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">key</span> <span class="o">==</span> <span class="n">key</span> <span class="o">||</span> <span class="n">node</span><span class="o">.</span><span class="na">key</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">key</span><span class="o">)))</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">node</span><span class="o">.</span><span class="na">value</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="扩容方法">扩容方法</h2>
+
+<ul>
+  <li>创建两倍容量的新数组</li>
+  <li>将当前桶数组的元素重新散列到新的数组</li>
+  <li>新数组置为map的桶数组</li>
+</ul>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">private</span> <span class="kt">void</span> <span class="nf">resize</span><span class="o">()</span> <span class="o">{</span>
+    <span class="c1">// 创建一个两倍容量的桶数组</span>
+    <span class="nc">Node</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;[]</span> <span class="n">newBuckets</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Node</span><span class="o">[</span><span class="n">buckets</span><span class="o">.</span><span class="na">length</span> <span class="o">*</span> <span class="mi">2</span><span class="o">];</span>
+    <span class="c1">// 将当前元素重新散列到新的桶数组</span>
+    <span class="n">rehash</span><span class="o">(</span><span class="n">newBuckets</span><span class="o">);</span>
+    <span class="n">buckets</span> <span class="o">=</span> <span class="n">newBuckets</span><span class="o">;</span>
+<span class="o">}</span>
+<span class="cm">/**
+ * 重新散列当前元素
+ *
+ */</span>
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">rehash</span><span class="o">(</span><span class="nc">Node</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;[]</span> <span class="n">newBuckets</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// map大小重新计算</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="c1">// 将旧的桶数组元素全部刷到新的桶数组里</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">buckets</span><span class="o">.</span><span class="na">length</span><span class="o">;</span><span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+        <span class="c1">// 为空，跳过</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">buckets</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">continue</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="nc">Node</span><span class="o">&lt;</span><span class="no">K</span><span class="o">,</span><span class="no">V</span><span class="o">&gt;</span> <span class="n">node</span> <span class="o">=</span> <span class="n">buckets</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">node</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+            <span class="c1">// 将元素放入新数组</span>
+            <span class="n">putVal</span><span class="o">(</span><span class="n">node</span><span class="o">.</span><span class="na">key</span><span class="o">,</span> <span class="n">node</span><span class="o">.</span><span class="na">value</span><span class="o">,</span> <span class="n">newBuckets</span><span class="o">);</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="参考">参考</h2>
+
+<p>[1] 牛客网，手写HashMap。https://www.nowcoder.com/discuss/997806</p>
+
+<p>[2] jdk1.8 HashMap源码</p>
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/blog/2022/05/02/%E5%BF%AB%E6%8E%92(Arrays.sort())%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" data-toggle="tooltip" data-placement="top" title="快排源码分析（Arrays.sort()）">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/blog/2022/10/04/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" data-toggle="tooltip" data-placement="top" title="redis设计与实现 笔记">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+                <!-- Duoshuo Share start -->
+                <style>
+                    .ds-share{
+                        text-align: right;
+                    }
+                    
+                    @media only screen and (max-width: 700px) {
+                        .ds-share {
+
+                        }
+                    }
+                </style>
+
+                <div class="ds-share"
+                    data-thread-key="/blog/2022/10/02/HashMap分析" data-title="HashMap分析"
+                    data-images="http://localhost:4000/img/blue.jpg"
+                    data-content="目录
+
+
+  内部节点类
+  成员变量
+  构造方法
+  散列函数
+  put方法
+  get方法
+  扩容方法
+
+
+内部节点类
+
+class Node&... | Microdust:Azeril's blog"
+                    data-url="http://localhost:4000/blog/2022/10/02/HashMap%E5%88%86%E6%9E%90/">
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                       <!--  <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>  
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                       --> 
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- Duoshuo Share end-->
+
+
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread" data-thread-key="/blog/2022/10/02/HashMap分析" data-title="HashMap分析" data-url="http://localhost:4000/blog/2022/10/02/HashMap%E5%88%86%E6%9E%90/"></div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ruyugujian"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//ruyugujian.disqus.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: ''
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <!-- kill the Facebook and Weibo -->
+                    <!--
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    -->
+                    
+                    <!--
+                    
+                    -->
+                    
+                    
+                    <li>
+                        <a href="mailto:1468999760@qq.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="https://github.com/L1468999760">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                  
+                    
+                    <li>
+                        <a target="_blank" href="https://blog.csdn.net/Reticent_Man">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-1x fa-inverse">C</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                </ul>
+                <p class="copyright text-muted">
+                &copy; 2023 LiJinning <!--❖ Powered by Jekyll. -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+        <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="关键词" autocomplete="off">
+
+        <div style="position: fixed; top: 16px; right: 16px;">
+            <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        </div>
+    </div>
+
+    <div style="position: fixed; right: 16px; bottom: 20px;">
+        <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="搜索"/>
+    </div>
+
+    <link rel="stylesheet" href="/search/css/cb-search.css">
+
+</footer>
+
+<!-- jQuery -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/clean-blog.min.js "></script>
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js",function(){
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+</body>
+
+</html>

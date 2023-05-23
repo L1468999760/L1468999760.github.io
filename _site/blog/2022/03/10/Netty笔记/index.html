@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="千里之行，始于足下">
+
+    <title>Netty笔记 - 如遇古剑</title>
+
+    <link rel="canonical" href="http://localhost:4000/blog/2022/03/10/Netty%E7%AC%94%E8%AE%B0/">
+
+    <!-- Icons -->
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/clean-blog.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+
+
+
+
+
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+               
+            </button>
+            <a class="navbar-brand" href="/">如遇古剑</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">主页</a>
+                </li>
+                
+                <li>
+                    <a href="/about/">关于我</a>
+                </li>
+                
+                <li>
+                    <a href="/archive/">文章归档</a>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/blue.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="Tags">
+                        
+                        <!-- <a class="tag" href="/Tags/#Netty" title="Netty">Netty</a> -->
+                        
+                    </div>
+                    <h1>Netty笔记</h1>
+                    
+                    <span class="meta">Posted on March 10, 2022</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+
+                <h3 id="简介">简介</h3>
+
+<ul>
+  <li>
+    <p>Netty是一个基于NIO模型的高性能网络通信框架，是对NIO网络模型的一个封装，提供了一个简单易用的API</p>
+  </li>
+  <li>
+    <p>在NIO的基础上进行了优化，例如零拷贝机制、高性能无锁队列、内存池，因此性能比NIO更高</p>
+
+    <ul>
+      <li>
+        <p>零拷贝机制</p>
+
+        <blockquote>
+          <p>计算机在网络上发送文件时，不需要将文件内容拷贝到用户空间而直接在内核空间中传输到网络的方式。</p>
+        </blockquote>
+
+        <p>Java NIO中的FileChannel.transferTo()方法实现了零拷贝的功能，在Netty中也通过在FIleRegion中包装了NIO的FileChannel.transferTo()方法实现了零拷贝。</p>
+
+        <p>Netty中还有另一种形式的零拷贝，允许将多段数据合并为一整段虚拟数据供用户使用，过程中不需要对数据进行拷贝操作。</p>
+      </li>
+      <li>
+        <p>高性能无锁队列</p>
+
+        <p>每个子线程都维护了一个任务队列，netty中的NioEventLoop重写了队列的实现方法。</p>
+
+        <p>如果使用锁，线程切换会特别消耗资源，因此采用CAS的操作方式。</p>
+
+        <p>队列的数据结构是一种单项链表式的结构。</p>
+      </li>
+      <li>
+        <p>内存池</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>支持多种通信协议，如HTTP、WebSocket等，针对数据通信拆包粘包问题，Netty内置了拆包策略</p>
+  </li>
+</ul>
+
+<h3 id="netty优点">Netty优点</h3>
+
+<ul>
+  <li>相比于JDK自带的NIO相关的API来说，更加简单，统一的API，支持多种通信类型，如阻塞、非阻塞，以及epoll、poll等模型</li>
+  <li>可以用较少的代码实现多线程Reactor模型以及主从多线程Reactor模型</li>
+  <li>自带编解码器，解决TCP粘包、拆包问题</li>
+  <li>自带各种通信协议</li>
+  <li>Netty提高更高的吞吐量和更低的延迟、更低的资源消耗和更少的内存复制</li>
+  <li>安全性强，有完整的SSL/TLS支持</li>
+  <li>经历了大项目的考验，如Dubbo、Zookeeper、RocketMQ都用到Netty</li>
+</ul>
+
+<h3 id="netty核心组件">Netty核心组件</h3>
+
+<p>Netty由三层结构构成：</p>
+
+<ul>
+  <li>网络通信层
+    <ul>
+      <li>Bootstrap：负责客户端启动，并且连接远程的Netty Server</li>
+      <li>ServerBootStrap：负责服务端的监听，用来监听指定的一个端口</li>
+      <li>Channel：负责网络通信的一个载体</li>
+    </ul>
+  </li>
+  <li>事件调度层
+    <ul>
+      <li>EventLoopGroup：本质上是一个线程池，主要负责接收IO请求，并分配线程去执行这些请求</li>
+      <li>EventLoop：线程池中的一个具体线程</li>
+    </ul>
+  </li>
+  <li>服务编排层
+    <ul>
+      <li>ChannelPipeline：负责处理多个Channelhandler，会把多个Channelhandler构成一个链，形成一个Pipeline</li>
+      <li>Channelhandler：针对IO数据的一个处理器</li>
+      <li>ChannelHandlerContext：保存ChannnelHandler的上下文信息</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="netty对线程模型的支持">Netty对线程模型的支持</h3>
+
+<ul>
+  <li>
+    <p>单线程单Reactor模型</p>
+
+    <p>连接进来到处理全部是由一个线程来处理（后果：Handler处可能发生阻塞）</p>
+
+    <p><img src="https://s3.bmp.ovh/imgs/2022/03/45ef1fb5e1fd1574.png" alt="" /></p>
+  </li>
+  <li>
+    <p>多线程单Reactor模型</p>
+
+    <p>所有的IO操作由一个Reactor完成（瓶颈在Reactor，高并发情况下导致大量客户端超时，重新发送，导致大量消息积压和处理超时）</p>
+
+    <p><img src="https://s3.bmp.ovh/imgs/2022/03/992d930b230fceb8.png" alt="" /></p>
+  </li>
+  <li>
+    <p>多线程多Reactor模型</p>
+
+    <p>多线程多Reactor模型，也叫主从多Reactor模型</p>
+
+    <p><img src="https://s3.bmp.ovh/imgs/2022/03/368e200395ac36e2.png" alt="" /></p>
+  </li>
+</ul>
+
+<p>Reactor模型的组件：</p>
+
+<ul>
+  <li>Reactor：负责将IO事件分配给对应的Handler</li>
+  <li>Acceptor：处理客户端的连接请求</li>
+  <li>handlers：执行业务逻辑的读写操作</li>
+</ul>
+
+<p><a href="https://imgtu.com/i/bfHKYV"><img src="https://s1.ax1x.com/2022/03/10/bfHKYV.jpg" alt="bfHKYV.jpg" /></a></p>
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/blog/2022/02/05/Linux%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6-%E4%BC%99%E4%BC%B4%E7%AE%97%E6%B3%95/" data-toggle="tooltip" data-placement="top" title="Linux内存分配与回收-伙伴算法">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/blog/2022/05/02/%E5%BF%AB%E6%8E%92(Arrays.sort())%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" data-toggle="tooltip" data-placement="top" title="快排源码分析（Arrays.sort()）">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+                <!-- Duoshuo Share start -->
+                <style>
+                    .ds-share{
+                        text-align: right;
+                    }
+                    
+                    @media only screen and (max-width: 700px) {
+                        .ds-share {
+
+                        }
+                    }
+                </style>
+
+                <div class="ds-share"
+                    data-thread-key="/blog/2022/03/10/Netty笔记" data-title="Netty笔记"
+                    data-images="http://localhost:4000/img/blue.jpg"
+                    data-content="简介
+
+
+  
+    Netty是一个基于NIO模型的高性能网络通信框架，是对NIO网络模型的一个封装，提供了一个简单易用的API
+  
+  
+    ... | Microdust:Azeril's blog"
+                    data-url="http://localhost:4000/blog/2022/03/10/Netty%E7%AC%94%E8%AE%B0/">
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                       <!--  <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>  
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                       --> 
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- Duoshuo Share end-->
+
+
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread" data-thread-key="/blog/2022/03/10/Netty笔记" data-title="Netty笔记" data-url="http://localhost:4000/blog/2022/03/10/Netty%E7%AC%94%E8%AE%B0/"></div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ruyugujian"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//ruyugujian.disqus.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: ''
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <!-- kill the Facebook and Weibo -->
+                    <!--
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    -->
+                    
+                    <!--
+                    
+                    -->
+                    
+                    
+                    <li>
+                        <a href="mailto:1468999760@qq.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="https://github.com/L1468999760">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                  
+                    
+                    <li>
+                        <a target="_blank" href="https://blog.csdn.net/Reticent_Man">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-1x fa-inverse">C</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                </ul>
+                <p class="copyright text-muted">
+                &copy; 2023 LiJinning <!--❖ Powered by Jekyll. -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+        <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="关键词" autocomplete="off">
+
+        <div style="position: fixed; top: 16px; right: 16px;">
+            <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        </div>
+    </div>
+
+    <div style="position: fixed; right: 16px; bottom: 20px;">
+        <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="搜索"/>
+    </div>
+
+    <link rel="stylesheet" href="/search/css/cb-search.css">
+
+</footer>
+
+<!-- jQuery -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/clean-blog.min.js "></script>
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js",function(){
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+</body>
+
+</html>

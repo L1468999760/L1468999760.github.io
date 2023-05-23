@@ -1,0 +1,2260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="千里之行，始于足下">
+
+    <title>如遇古剑</title>
+
+    <link rel="canonical" href="http://localhost:4000/feed.xml">
+
+    <!-- Icons -->
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/clean-blog.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+
+
+
+
+
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+               
+            </button>
+            <a class="navbar-brand" href="/">如遇古剑</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">主页</a>
+                </li>
+                
+                <li>
+                    <a href="/about/">关于我</a>
+                </li>
+                
+                <li>
+                    <a href="/archive/">文章归档</a>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>如遇古剑</title>
+    <description>千里之行，始于足下</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Tue, 23 May 2023 18:22:22 +0800</pubDate>
+    <lastBuildDate>Tue, 23 May 2023 18:22:22 +0800</lastBuildDate>
+    <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>ChatGPT应用场景</title>
+        <description>&lt;p&gt;使用OpenAI API Key还可以做很多有趣的事情。&lt;/p&gt;
+
+&lt;h2 id=&quot;代码翻译&quot;&gt;代码翻译&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;参考开源项目&lt;a href=&quot;https://github.com/mckaywrigley/ai-code-translator&quot;&gt;https://github.com/mckaywrigley/ai-code-translator&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;将代码从一种语言翻译成另外一种语言。主要通过加入上下文信息，调用接口让AI实现翻译。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2023/05/03/fOWbiBV3gw5J8oN.png&quot; width=&quot;540&quot; height=&quot;400&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如图所示，提前构造情景，让AI实现代码翻译功能，以下是效果展示：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2023/05/03/3ipvGmatB8OqVDK.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;我部署的服务地址，已经内置了秘钥，可以直接使用。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://code-translator.lijinning.top/&quot;&gt;code-translator.lijinning.top&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;chatpdf&quot;&gt;ChatPDF&lt;/h2&gt;
+
+&lt;p&gt;顾名思义，与PDF对话o(&amp;gt;_&amp;lt;)o。上传PDF文件后，向ChatGPT提问关于文件中的内容，AI给出回答。如果后续模型进一步增强，简直读论文神器哈哈。&lt;/p&gt;
+
+&lt;p&gt;基本原理：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;读取PDF文档，并对内容进行分割&lt;/li&gt;
+  &lt;li&gt;对于每段文本，使用Embedding模型生成特征向量&lt;/li&gt;
+  &lt;li&gt;将向量和文本对应关系存入本地文件&lt;/li&gt;
+  &lt;li&gt;对用户输入生成向量&lt;/li&gt;
+  &lt;li&gt;在数据库中进行最近邻搜索，返回最相似的文本列表&lt;/li&gt;
+  &lt;li&gt;设计Prompt（提示语），让ChatGPT基于最相似的文件列表给出回答&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;详细原理解释&lt;a href=&quot;https://postor.medium.com/how-to-code-a-project-like-chatpdf-e40441cb4168&quot;&gt;How to Code a Project like ChatPDF?&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;github上相关的代码很多，记录一个用的多的地址，需要科学上网访问。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.chatpdf.com/&quot;&gt;https://www.chatpdf.com/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2023/05/03/V2t8KkSTzxAMZaf.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;真人对话&quot;&gt;真人对话&lt;/h2&gt;
+
+&lt;p&gt;通过ChatGPT和Whisper语音识别，实现真人对话。&lt;/p&gt;
+
+&lt;p&gt;体验地址：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://huggingface.co/spaces/JavaFXpert/Chat-GPT-LangChain&quot;&gt;https://huggingface.co/spaces/JavaFXpert/Chat-GPT-LangChain&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2023/05/03/jC7M9KhgmGvwWXn.png&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Wed, 03 May 2023 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/blog/2023/05/03/ChatGPT%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2023/05/03/ChatGPT%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/</guid>
+        
+        <category>ChatGPT</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>部署ChatGPT网页服务</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;项目地址https://github.com/L1468999760/chatgpt-next-web&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;目录&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#简介&quot;&gt;简介&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#准备&quot;&gt;准备&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#主要内容&quot;&gt;主要内容&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#效果展示&quot;&gt;效果展示&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#pc端界面&quot;&gt;PC端界面&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#移动端界面&quot;&gt;移动端界面&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+
+&lt;p&gt;本项目Fork自开源仓库&lt;a href=&quot;https://github.com/Yidadaa/ChatGPT-Next-Web&quot;&gt;ChatGPT-Next-Web&lt;/a&gt;，基于Vercel部署个人的ChatGPT网页服务，优点是服务器和域名是免费的，操作简单，可以在PC端和移动端使用。主要练习了Vercel的使用和ChatGPT官网OpenAI API Key的使用。&lt;/p&gt;
+
+&lt;h2 id=&quot;准备&quot;&gt;准备&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;一个Vercel账户&lt;/li&gt;
+  &lt;li&gt;注册ChatGPT账号，在官网获取OpenAI API Key&lt;/li&gt;
+  &lt;li&gt;科学上网&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;主要内容&quot;&gt;主要内容&lt;/h2&gt;
+
+&lt;p&gt;具体操作方法见&lt;a href=&quot;https://github.com/Yidadaa/ChatGPT-Next-Web/blob/main/README_CN.md&quot;&gt;ChatGPT-Next-Web使用说明&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;注意在部署时候要设置一个访问密码和自己的OpenAI API Key。&lt;/p&gt;
+
+&lt;h2 id=&quot;效果展示&quot;&gt;效果展示&lt;/h2&gt;
+
+&lt;p&gt;以下是我部署的网页地址，登录秘钥可以私信联系。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://chatgpt-next-web-jnli1998.vercel.app&quot;&gt;chatgpt-next-web-jnli1998.vercel.app&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;由于vercel.app被DNS污染，国内无法访问，我又绑定了一个自己的域名，该地址可以直接访问。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://chatgpt.lijinning.top&quot;&gt;chatgpt.lijinning.top&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;pc端界面&quot;&gt;PC端界面&lt;/h4&gt;
+
+&lt;p&gt;首页&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/L1468999760/chatgpt-next-web/main/pic/main.png&quot; alt=&quot;首页&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在设置界面添加访问密码或者API Key&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/L1468999760/chatgpt-next-web/main/pic/key.png&quot; alt=&quot;设置&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;进行正常聊天&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/L1468999760/chatgpt-next-web/main/pic/chatPC.png&quot; alt=&quot;聊天&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;移动端界面&quot;&gt;移动端界面&lt;/h4&gt;
+
+&lt;p&gt;用手机浏览器打开上面的网址后，会弹出添加桌面图标的提示，生成一个桌面图标。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/L1468999760/chatgpt-next-web/main/pic/icon.jpg&quot; width=&quot;100&quot; height=&quot;100&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;首页&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/L1468999760/chatgpt-next-web/main/pic/start.jpg&quot; width=&quot;300&quot; height=&quot;600&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;聊天页面&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/L1468999760/chatgpt-next-web/main/pic/chat.jpg&quot; width=&quot;300&quot; height=&quot;600&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 17 Apr 2023 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/blog/2023/04/17/ChatGPT/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2023/04/17/ChatGPT/</guid>
+        
+        <category>ChatGPT</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>redis设计与实现 笔记</title>
+        <description>&lt;p&gt;目录&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;#数据结构与对象&quot;&gt;数据结构与对象&lt;/a&gt;&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#简单动态字符串sds&quot;&gt;简单动态字符串SDS&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#哈希表&quot;&gt;哈希表&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#跳跃表&quot;&gt;跳跃表&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#压缩列表&quot;&gt;压缩列表&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;数据结构与对象&quot;&gt;数据结构与对象&lt;/h3&gt;
+
+&lt;h5 id=&quot;简单动态字符串sds&quot;&gt;简单动态字符串SDS&lt;/h5&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://s3.bmp.ovh/imgs/2022/05/16/58415e86dc629f05.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;结构：&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sdshdr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//buf数组中已使用字节的数量&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//buf数组中未使用字节的数量&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;free&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//字节数组，用于保存字符串&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[];&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;字符串以空字符’\0’结尾，原因是可以重用一部分C字符串函数库里面的函数。例如执行&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;可以打印SDS保存的字符串值“Redis”，而无须为SDS编写专门的打印函数。&lt;/p&gt;
+
+&lt;p&gt;C字符串的缺陷：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如果程序执行的是增长字符串的操作， 比如拼接操作（append）， 那么在执行这个操作之前， 程序需要先通过内存重分配来扩展底层数组的空间大小 —— 如果忘了这一步就会产生&lt;strong&gt;缓冲区溢出&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;如果程序执行的是缩短字符串的操作， 比如截断操作（trim）， 那么在执行这个操作之后， 程序需要通过内存重分配来释放字符串不再使用的那部分空间 —— 如果忘了这一步就会产生&lt;strong&gt;内存泄漏&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;SDS比C字符串更适用于Redis的原因：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;常数复杂度获取字符串长度
+    &lt;ul&gt;
+      &lt;li&gt;C获取字符串长度需要从头到尾进行遍历，而SDS执行STRLEN命令的复杂度仅为O(1)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;杜绝缓冲区溢出
+    &lt;ul&gt;
+      &lt;li&gt;C中进行字符串拼接时，如果没有分配足够的空间 ，可能造成缓冲区溢出，而SDS会自动扩容&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;空间分配与释放策略：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;空间预分配
+    &lt;ul&gt;
+      &lt;li&gt;如果修改后SDS的长度小于1MB，那么程序分配和len属性同样大小的未使用空间，这时len的值将和free的值相同，如果len的值变为13字节，buf数组的长度变为13+13+1=27字节&lt;/li&gt;
+      &lt;li&gt;如果修改后SDS的长度大于等于1MB，那么程序会分配1MB的未使用空间，如果len的值变为30MB，那么程序会分配1MB的未使用空间，buf数组的长度变为30MB+1MB+1byte&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;惰性空间释放&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;字符串删除时，不会立即回收空间，而是使用free属性将这些字节的数量记录起来，并等待将来使用&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;sdstrim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;XY&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//移除SDS字符串中的所有‘X&apos;和’Y‘&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;执行sdstrim之前的SDS：&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2022/10/04/ibRAZ8r5hldQtWF.png&quot; alt=&quot;执行sdstrim之前的SDS&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;​       执行sdstrim之后的SDS：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2022/10/04/ue1VMWnwljR3b4H.png&quot; alt=&quot;执行sdstrim之后的SDS&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;其它优点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;二进制安全&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;SDS使用len属性的值而不是空字符来判断字符串是否结束&lt;/li&gt;
+      &lt;li&gt;C字符串除了字符串末尾，字符串里面不能包含空字符，C字符串只能保存文本数据，而不能保存图片。音频、视频这样的二进制数据&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;使用空字符分割单词的特殊数据格式：&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2022/10/04/5LgdDHyeMZKpT2j.png&quot; alt=&quot;使用空字符分割单词的特殊数据格式&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;​       例如这种含有空字符的数据格式，就不能使用C字符串来保存，因为C字符串所用的函数只会识别出其中的“Redis”，而忽略之后的“Cluster“。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;总结：&lt;/p&gt;
+
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;C字符串&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;SDS&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;获取字符串长度的复杂度为O(N)&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;获取字符串长度的复杂度为O(1)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;API是不安全的，可能会造成缓冲区溢出&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;API是安全的，不会造成缓冲区溢出&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;修改字符串长度N次必然需要执行N次内存重分配&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;修改字符串长度N次最多需要执行N次内存重分配&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;只能保存文本数据&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;可以保存文本或者二进制数据&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;可以使用所有&lt;string.h&gt;库中的函数&lt;/string.h&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;可以使用一部分&lt;string.h&gt;库中的函数&lt;/string.h&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;哈希表&quot;&gt;哈希表&lt;/h5&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://s3.bmp.ovh/imgs/2022/05/16/548d604a69f935f4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;结构：&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dictht&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//哈希表数组&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;dictEntry&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//哈希表大小&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//哈希表大小掩码，用于计算索引值&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//总是等于size-1&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sizemask&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//哈希表已有节点的数量&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;used&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dictht&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;哈希表节点&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dictEntry&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//键&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//值&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;union&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;uint64_tu64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;int64_ts64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//指向下个哈希表节点，形成链表&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dictEntry&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dictEntry&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;字典&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dict&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 类型特定函数&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;dictType&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 私有数据&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;privdata&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 哈希表&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;dictht&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ht&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// rehash索引&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rehashidx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dict&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;一般情况下，字典只使用ht[0]哈希表，ht[1]哈希表只会在对ht[0]哈希表进行rehash时使用。&lt;/p&gt;
+
+&lt;p&gt;普通状态下的字典 ：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://s2.loli.net/2022/10/04/E1f7QnYvSU8h4lk.png&quot; alt=&quot;普通状态下的字典&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;跳跃表&quot;&gt;跳跃表&lt;/h5&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://s3.bmp.ovh/imgs/2022/05/16/fc22b9b6f3dee2a7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;结构：&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zskiplistNode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//层&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zskiplistLevel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//前进指针&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zskiplistNode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;//跨度&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;span&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;level&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[];&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;//后退指针&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zskiplistNode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;backward&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//分值&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;score&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//成员对象&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;robj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zskiplistNode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;层&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;每次创建一个新跳跃表节点的时候，根据幂次定律（越大的数出现的概率越小）随机生成一个介于1和32之间的值作为level数组的大小，这个大小就是层的“高度”。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;前进指针&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;用于从表头向表尾方向访问节点。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;后退指针&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;每次只能后退至前一个节点&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zskiplist&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//表头节点和表尾节点&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;structz&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;skiplistNode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//表中节点的数量&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//表中层数最大的节点的层数&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;level&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zskiplist&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h5 id=&quot;压缩列表&quot;&gt;压缩列表&lt;/h5&gt;
+
+&lt;p&gt;压缩列表是列表键和哈希键的底层实现之一。&lt;/p&gt;
+
+&lt;p&gt;压缩列表的结构：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://s3.bmp.ovh/imgs/2022/05/16/53633a70182658f3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;zlbytes：4字节，记录整个压缩列表占用的内存字节数&lt;/li&gt;
+  &lt;li&gt;zltail：4字节，记录压缩列表表尾节点距离压缩列表的起始地址有多少字节&lt;/li&gt;
+  &lt;li&gt;zllen：2字节，记录压缩列表包含的节点数量&lt;/li&gt;
+  &lt;li&gt;entryX：不定长，各个节点&lt;/li&gt;
+  &lt;li&gt;zlend：1字节，用于标记压缩列表的末端&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;每个节点的结构：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://s3.bmp.ovh/imgs/2022/05/18/aa335ecc9a7cedfd.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;previous_entry_length：记录压缩列表中前一个节点的长度
+    &lt;ul&gt;
+      &lt;li&gt;如果前一节点的长度小于254字节，那么previous_entry_length属性的长度为1字节&lt;/li&gt;
+      &lt;li&gt;如果前一节点的长度大于等于254字节，那么previous_entry_length属性的长度为5字节，其中第一字节被设置为0xFE，后面的四个字节用于保存前一节点的长度&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;encoding：记录了节点的content属性所保存数据的类型以及长度&lt;/li&gt;
+  &lt;li&gt;content：保存节点的值&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;参考&quot;&gt;参考&lt;/h5&gt;
+
+&lt;p&gt;[1]redis设计与实现&lt;/p&gt;
+
+&lt;p&gt;[2]redisbook.com&lt;/p&gt;
+</description>
+        <pubDate>Tue, 04 Oct 2022 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/blog/2022/10/04/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2022/10/04/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/</guid>
+        
+        <category>redis</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>HashMap分析</title>
+        <description>&lt;p&gt;目录&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#内部节点类&quot;&gt;内部节点类&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#成员变量&quot;&gt;成员变量&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#构造方法&quot;&gt;构造方法&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#散列函数&quot;&gt;散列函数&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#put方法&quot;&gt;put方法&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#get方法&quot;&gt;get方法&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#扩容方法&quot;&gt;扩容方法&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;内部节点类&quot;&gt;内部节点类&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 键值对&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;V&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;// 链表，后继&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;V&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;V&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;成员变量&quot;&gt;成员变量&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 默认初始容量&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;DEFAULT_INITIAL_CAPACITY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 最大容量&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;MAXIMUM_CAPACITY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 负载因子&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;DEFAULT_LOAD_FACTOR&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.75f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 链表转红黑树的长度阈值&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;TREEIFY_THRESHOLD&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 红黑树退化成链表的长度阈值&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;UNTREEIFY_THRESHOLD&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 链表转红黑树时，要求数组的最小长度&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;MIN_TREEIFY_CAPACITY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 桶数组，每次2倍扩容，允许长度为0&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;transient&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// key-value映射的数量&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;transient&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 修改内部结构的次数&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;transient&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;modCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;构造方法&quot;&gt;构造方法&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 无参构造器 &lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ThirdHashMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;DEFAULT_CAPACITY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 有参构造器&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ThirdHashMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;capacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;capacity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;散列函数&quot;&gt;散列函数&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getIndex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 获取hash code&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hashCode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hashCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 和桶数组长度取余&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;hashCode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;abs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;put方法&quot;&gt;put方法&lt;/h2&gt;
+
+&lt;p&gt;基本逻辑：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;获取元素插入位置&lt;/li&gt;
+  &lt;li&gt;当前位置为空，直接插入&lt;/li&gt;
+  &lt;li&gt;位置不为空，发生冲突，遍历链表&lt;/li&gt;
+  &lt;li&gt;如果元素key和节点相同，覆盖，否则新建节点插入链表头部&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;V&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;LOAD_FACTOR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;putVal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;putVal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;V&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 获取位置&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getIndex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 插入的位置为空&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 插入位置不为空，说明发生冲突，使用链地址法，遍历链表&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 如果key相同，就覆盖掉&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hashCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hashCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 当前key不在链表中，插入链表头部&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newNode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;table&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newNode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;get方法&quot;&gt;get方法&lt;/h2&gt;
+
+&lt;p&gt;通过散列函数获取地址。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;V&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 获取key对应的地址&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getIndex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 查找链表&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hashCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hashCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;扩容方法&quot;&gt;扩容方法&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;创建两倍容量的新数组&lt;/li&gt;
+  &lt;li&gt;将当前桶数组的元素重新散列到新的数组&lt;/li&gt;
+  &lt;li&gt;新数组置为map的桶数组&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;resize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 创建一个两倍容量的桶数组&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newBuckets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 将当前元素重新散列到新的桶数组&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rehash&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;newBuckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newBuckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/**
+ * 重新散列当前元素
+ *
+ */&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;rehash&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newBuckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// map大小重新计算&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 将旧的桶数组元素全部刷到新的桶数组里&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 为空，跳过&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;K&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;V&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// 将元素放入新数组&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;putVal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newBuckets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+
+&lt;p&gt;[1] 牛客网，手写HashMap。https://www.nowcoder.com/discuss/997806&lt;/p&gt;
+
+&lt;p&gt;[2] jdk1.8 HashMap源码&lt;/p&gt;
+</description>
+        <pubDate>Sun, 02 Oct 2022 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/blog/2022/10/02/HashMap%E5%88%86%E6%9E%90/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2022/10/02/HashMap%E5%88%86%E6%9E%90/</guid>
+        
+        <category>HashMap</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>快排源码分析（Arrays.sort()）</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;以Java中的Arrays.sort()为例进行分析。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;目录&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#快排基本原理&quot;&gt;快排基本原理&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#简介&quot;&gt;简介&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#递归、非递归实现&quot;&gt;递归/非递归实现&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#快排实现稳定排序&quot;&gt;快排实现稳定排序&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#时间复杂度推导&quot;&gt;时间复杂度推导&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#Arrays.sort()分析&quot;&gt;Arrays.sort()分析&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#基本思想&quot;&gt;基本思想&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#源码分析&quot;&gt;源码分析&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#参数解释&quot;&gt;参数解释&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#大数组归并排序&quot;&gt;大数组归并排序&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#小数组插入排序&quot;&gt;小数组插入排序&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;#双轴快排&quot;&gt;双轴快排&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#优化点总结&quot;&gt;优化点总结&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#性能对比&quot;&gt;性能测试&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#不同数据量测试&quot;&gt;不同数据量测试&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#正序/逆序/乱序测试&quot;&gt;顺序/逆序/乱序测试&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#参考&quot;&gt;参考&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;快排基本原理&quot;&gt;快排基本原理&lt;/h2&gt;
+
+&lt;h3 id=&quot;简介&quot;&gt;简介&lt;/h3&gt;
+
+&lt;p&gt;快速排序，是一种比较/交换排序算法，最早由英国的东尼·霍尔提出（另外一个知名贡献是提出了和操作系统相关的哲学家进餐问题，首次提出了管程的概念，实现共享资源的互斥访问）。&lt;/p&gt;
+
+&lt;p&gt;时间复杂度：快排的平均时间复杂度是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;O(nlogn)&lt;/code&gt;，最坏时间复杂度是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;O(n^2)&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;基本思想：使用分治法将一个序列分为两个子序列，然后递归地排序两个子序列。&lt;/p&gt;
+
+&lt;p&gt;步骤：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;挑选基准值：从序列中选出一个元素，作为基准（pivot）&lt;/li&gt;
+  &lt;li&gt;分割：所有比基准值小的元素放在基准前面，所有比基准值大的元素放在基准后面（与基准值相等的可以放到任何一边）&lt;/li&gt;
+  &lt;li&gt;递归排序子序列：递归地将小于基准值元素的子序列和大于基准值的子序列进行排序&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;递归非递归实现&quot;&gt;递归/非递归实现&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;递归实现&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;quicksort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;quicksort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;quicksort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;非递归实现&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;非递归借用栈实现，栈中存放的是待排序区间的左右坐标。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;quickSort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;Deque&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ArrayDeque&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rindex&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;poll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lindex&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;poll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lindex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rindex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&amp;gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&amp;lt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lindex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lindex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rindex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rindex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;快排实现稳定排序&quot;&gt;快排实现稳定排序&lt;/h3&gt;
+
+&lt;p&gt;快排是一种不稳定的排序，因为每次&lt;strong&gt;交换&lt;/strong&gt;的过程中可能导致相等值的前后顺序改变。&lt;/p&gt;
+
+&lt;p&gt;为了实现稳定排序，可以使用一个辅助数组，从前往后把小于基准数的放进辅助数组，再把基准数放进去，然后再遍历一遍把大于等于基准数的放进辅助数组，避免交换操作就可以稳定了。&lt;/p&gt;
+
+&lt;p&gt;这种&lt;strong&gt;增加额外空间&lt;/strong&gt;的方式虽然可以实现稳定排序，但是已经不是严格意义的快速排序了。&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;quicksort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;len&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;mid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++){&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&amp;gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++){&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;quicksort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;quicksort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;时间复杂度推导&quot;&gt;时间复杂度推导&lt;/h3&gt;
+
+&lt;p&gt;快排涉及到递归调用，递归调用的通用时间复杂度公式是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;T(n) = aT(n/b) + f(n)&lt;/code&gt;，其中a，b是常数，a可以理解为每次分割成几部分，n/b可以理解为子部分分割后的大小，f(n)是每次递归调用需要额外的计算执行时间。&lt;/p&gt;
+
+&lt;p&gt;对于快速排序，每次分割成两部分(a=2)，假设每次近似平均分成两半(b=2)，每次递归中用于交换的额外执行时间是线性的（f(n)），于是有：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;T(n) = 2T(n/2) + n
+     = 2(2T(n/4) + n/2) + n
+     = 2^2T(n/2^2) + 2n
+     = ...
+     
+令2^m = n，则有
+
+T(n) = 2^mT(1) + mn
+
+因为T(1) = 1，m = logn
+
+所以T(n) = n + nlogn
+
+当n &amp;gt;= 2时，nlogn &amp;gt;= n
+
+所以时间复杂度是O(nlogn)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;以上是一个最优时间复杂度的推导，即假设每次平均分成了相等长度的两半，更一般的推导参考&lt;a href=&quot;http://t.zoukankan.com/javawebsoa-p-3194015.html&quot;&gt;链接&lt;/a&gt;，这里给出精确计算结果（C(n) = 2nlnn = 1.39nlog2(n)）&lt;/p&gt;
+
+&lt;h2 id=&quot;arrayssort分析&quot;&gt;Arrays.sort()分析&lt;/h2&gt;
+
+&lt;h3 id=&quot;基本思想&quot;&gt;基本思想&lt;/h3&gt;
+
+&lt;p&gt;Java中的Arrays.sort()是一种混合排序，采用了插入排序、双插入排序、单轴快排、双轴快排、归并排序的思想，针对不同长度数组、重复元素进行了特殊优化。&lt;/p&gt;
+
+&lt;p&gt;算法流程：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://s3.bmp.ovh/imgs/2022/05/03/ed5f72802bdcc03e.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;源码分析&quot;&gt;源码分析&lt;/h3&gt;
+
+&lt;h4 id=&quot;参数解释&quot;&gt;参数解释&lt;/h4&gt;
+
+&lt;p&gt;进入Arrays.sort()可以看到调用了DualPivotQuicksort类内部的静态方法sort。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/**
+ * 参数int[]代表待排序数组
+ * 参数left表示起始元素下标
+ * 参数right表示终止元素下标
+ * 参数work表示切片
+ * 参数workBase表示切片中可用空间的起始索引
+ * 参数workLen表示切片中可用空间大小
+ */
+public static void sort(int[] a) {
+    DualPivotQuicksort.sort(a, 0, a.length - 1, null, 0, 0);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;DualPivotQuicksort类中的一些参数：&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/**
+ * 归并排序中最大运行数量
+ */
+private static final int MAX_RUN_COUNT = 67;
+
+/**
+ * 归并排序中的数组最大长度
+ */
+private static final int MAX_RUN_LENGTH = 33;
+
+/**
+ * 快排的阈值，如果小于该长度，则采用快排，否则采用归并排序
+ */
+private static final int QUICKSORT_THRESHOLD = 286;
+
+/**
+ * 插入排序的阈值，如果小于该长度，则采用插入排序
+ */
+private static final int INSERTION_SORT_THRESHOLD = 47;
+
+/**
+ * 计数排序的阈值，如果一个字节数组的长度小于该长度，则采用计数排序
+ */
+private static final int COUNTING_SORT_THRESHOLD_FOR_BYTE = 29;
+
+/**
+ * 如果短数组或字符数组的长度大于该长度，则采用计数排序
+ */
+private static final int COUNTING_SORT_THRESHOLD_FOR_SHORT_OR_CHAR = 3200;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;大数组归并排序&quot;&gt;大数组归并排序&lt;/h4&gt;
+
+&lt;p&gt;静态内部类sort，长度小于286采用快排，第四个参数代表是否在区间最左侧&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Use Quicksort on small arrays
+if (right - left &amp;lt; QUICKSORT_THRESHOLD) {
+    sort(a, left, right, true);
+    return;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;对于长度大于等于286的，检查数组是否接近有序，如果接近有序，采用归并排序，否则采用快排。（是否接近有序的判别标准是MAX_RUN_COUNT和MAX_RUN_LENGTH两个参数）&lt;/p&gt;
+
+&lt;p&gt;使用归并排序的条件：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;数组长度&lt;/li&gt;
+  &lt;li&gt;数组局部有序&lt;/li&gt;
+  &lt;li&gt;不存在较多连续相等的元素&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;run&lt;/code&gt;记录有序子序列的坐标范围，如&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;run[0]==0 &amp;amp;&amp;amp; run[1]==3&lt;/code&gt;表示第一段有序序列的其实索引是0，终止索引是2，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;count&lt;/code&gt;记录有序子序列的个数，如果&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;count&lt;/code&gt;值过大，表示平均有序子序列较短，数组基本无序，此时应该采用快排&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int[] run = new int[MAX_RUN_COUNT + 1];
+int count = 0; run[0] = left;
+
+// Check if the array is nearly sorted
+for (int k = left; k &amp;lt; right; run[count] = k) {
+    if (a[k] &amp;lt; a[k + 1]) { // ascending
+        while (++k &amp;lt;= right &amp;amp;&amp;amp; a[k - 1] &amp;lt;= a[k]);
+    } else if (a[k] &amp;gt; a[k + 1]) { // descending
+        while (++k &amp;lt;= right &amp;amp;&amp;amp; a[k - 1] &amp;gt;= a[k]);
+        for (int lo = run[count] - 1, hi = k; ++lo &amp;lt; --hi; ) {
+            int t = a[lo]; a[lo] = a[hi]; a[hi] = t;
+        }
+    } else { // equal
+        for (int m = MAX_RUN_LENGTH; ++k &amp;lt;= right &amp;amp;&amp;amp; a[k - 1] == a[k]; ) {
+            if (--m == 0) {
+                sort(a, left, right, true);
+                return;
+            }
+        }
+    }
+
+    /*
+     * The array is not highly structured,
+     * use Quicksort instead of merge sort.
+     */
+    if (++count == MAX_RUN_COUNT) {
+        sort(a, left, right, true);
+        return;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;小数组插入排序&quot;&gt;小数组插入排序&lt;/h4&gt;
+
+&lt;p&gt;双轴快排，进入快速排序的sort：&lt;/p&gt;
+
+&lt;p&gt;如果长度小于47，使用插入排序。如果属于最左区间，采用普通的插入排序；如果不属于最左区间，采用双插入排序。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Use insertion sort on tiny arrays
+if (length &amp;lt; INSERTION_SORT_THRESHOLD) {
+    if (leftmost) {
+        /*
+         * Traditional (without sentinel) insertion sort,
+         * optimized for server VM, is used in case of
+         * the leftmost part.
+         */
+        for (int i = left, j = i; i &amp;lt; right; j = ++i) {
+            int ai = a[i + 1];
+            while (ai &amp;lt; a[j]) {
+                a[j + 1] = a[j];
+                if (j-- == left) {
+                    break;
+                }
+            }
+            a[j + 1] = ai;
+        }
+    } else {
+        /*
+         * Skip the longest ascending sequence.
+         */
+        do {
+            if (left &amp;gt;= right) {
+                return;
+            }
+        } while (a[++left] &amp;gt;= a[left - 1]);
+
+        /*
+         * Every element from adjoining part plays the role
+         * of sentinel, therefore this allows us to avoid the
+         * left range check on each iteration. Moreover, we use
+         * the more optimized algorithm, so called pair insertion
+         * sort, which is faster (in the context of Quicksort)
+         * than traditional implementation of insertion sort.
+         */
+        for (int k = left; ++left &amp;lt;= right; k = ++left) {
+            int a1 = a[k], a2 = a[left];
+
+            if (a1 &amp;lt; a2) {
+                a2 = a1; a1 = a[left];
+            }
+            while (a1 &amp;lt; a[--k]) {
+                a[k + 2] = a[k];
+            }
+            a[++k + 1] = a1;
+
+            while (a2 &amp;lt; a[--k]) {
+                a[k + 1] = a[k];
+            }
+            a[k + 1] = a2;
+        }
+        int last = a[right];
+
+        while (last &amp;lt; a[--right]) {
+            a[right + 1] = a[right];
+        }
+        a[right + 1] = last;
+    }
+    return;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;双轴快排&quot;&gt;双轴快排&lt;/h4&gt;
+
+&lt;p&gt;选取基准&lt;/p&gt;
+
+&lt;p&gt;首先计算近似长度的1/7，然后选取五个经验点/中心点，对五个经验点进行插入排序。&lt;/p&gt;
+
+&lt;p&gt;如果五个经验点/中心点各不相等，则 从中选择两个（第二个和第四个）作为基准。如果五个经验点/中心点其中有两个相等，则采用传统的单轴快排（一个基准）。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Inexpensive approximation of length / 7
+int seventh = (length &amp;gt;&amp;gt; 3) + (length &amp;gt;&amp;gt; 6) + 1;
+
+/*
+ * Sort five evenly spaced elements around (and including) the
+ * center element in the range. These elements will be used for
+ * pivot selection as described below. The choice for spacing
+ * these elements was empirically determined to work well on
+ * a wide variety of inputs.
+ */
+int e3 = (left + right) &amp;gt;&amp;gt;&amp;gt; 1; // The midpoint
+int e2 = e3 - seventh;
+int e1 = e2 - seventh;
+int e4 = e3 + seventh;
+int e5 = e4 + seventh;
+
+// Sort these elements using insertion sort
+if (a[e2] &amp;lt; a[e1]) { int t = a[e2]; a[e2] = a[e1]; a[e1] = t; }
+
+if (a[e3] &amp;lt; a[e2]) { int t = a[e3]; a[e3] = a[e2]; a[e2] = t;
+    if (t &amp;lt; a[e1]) { a[e2] = a[e1]; a[e1] = t; }
+}
+if (a[e4] &amp;lt; a[e3]) { int t = a[e4]; a[e4] = a[e3]; a[e3] = t;
+    if (t &amp;lt; a[e2]) { a[e3] = a[e2]; a[e2] = t;
+        if (t &amp;lt; a[e1]) { a[e2] = a[e1]; a[e1] = t; }
+    }
+}
+if (a[e5] &amp;lt; a[e4]) { int t = a[e5]; a[e5] = a[e4]; a[e4] = t;
+    if (t &amp;lt; a[e3]) { a[e4] = a[e3]; a[e3] = t;
+        if (t &amp;lt; a[e2]) { a[e3] = a[e2]; a[e2] = t;
+            if (t &amp;lt; a[e1]) { a[e2] = a[e1]; a[e1] = t; }
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;定义两个指针，less，great，less从左到右遍历找到第一个大于等于pivot1的元素，great从右向左遍历找到第一个小于等于pivot2的元素。k从less-1遍历到great，把小于pivot1的元素放到左边，把大于pivot2的元素放到右边。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/*
+ * Skip elements, which are less or greater than pivot values.
+ */
+while (a[++less] &amp;lt; pivot1);
+while (a[--great] &amp;gt; pivot2);
+
+/*
+ * Partitioning:
+ *
+ *   left part           center part                   right part
+ * +--------------------------------------------------------------+
+ * |  &amp;lt; pivot1  |  pivot1 &amp;lt;= &amp;amp;&amp;amp; &amp;lt;= pivot2  |    ?    |  &amp;gt; pivot2  |
+ * +--------------------------------------------------------------+
+ *               ^                          ^       ^
+ *               |                          |       |
+ *              less                        k     great
+ *
+ * Invariants:
+ *
+ *              all in (left, less)   &amp;lt; pivot1
+ *    pivot1 &amp;lt;= all in [less, k)     &amp;lt;= pivot2
+ *              all in (great, right) &amp;gt; pivot2
+ *
+ * Pointer k is the first index of ?-part.
+ */
+outer:
+for (int k = less - 1; ++k &amp;lt;= great; ) {
+    int ak = a[k];
+    if (ak &amp;lt; pivot1) { // Move a[k] to left part
+        a[k] = a[less];
+        /*
+         * Here and below we use &quot;a[i] = b; i++;&quot; instead
+         * of &quot;a[i++] = b;&quot; due to performance issue.
+         */
+        a[less] = ak;
+        ++less;
+    } else if (ak &amp;gt; pivot2) { // Move a[k] to right part
+        while (a[great] &amp;gt; pivot2) {
+            if (great-- == k) {
+                break outer;
+            }
+        }
+        if (a[great] &amp;lt; pivot1) { // a[great] &amp;lt;= pivot2
+            a[k] = a[less];
+            a[less] = a[great];
+            ++less;
+        } else { // pivot1 &amp;lt;= a[great] &amp;lt;= pivot2
+            a[k] = a[great];
+        }
+        /*
+         * Here and below we use &quot;a[i] = b; i--;&quot; instead
+         * of &quot;a[i--] = b;&quot; due to performance issue.
+         */
+        a[great] = ak;
+        --great;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;交换基准，递归左边和右边&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// Swap pivots into their final positions
+a[left]  = a[less  - 1]; a[less  - 1] = pivot1;
+a[right] = a[great + 1]; a[great + 1] = pivot2;
+
+// Sort left and right parts recursively, excluding known pivots
+sort(a, left, less - 2, leftmost);
+sort(a, great + 2, right, false);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;对于中间部分 ，如果长度超过4/7，需要进行预处理，把等于pivot1的放左边，把等于pivot2的放右边，然后再参与快排。&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/*
+ * If center part is too large (comprises &amp;gt; 4/7 of the array),
+ * swap internal pivot values to ends.
+ */
+if (less &amp;lt; e1 &amp;amp;&amp;amp; e5 &amp;lt; great) {
+    /*
+     * Skip elements, which are equal to pivot values.
+     */
+    while (a[less] == pivot1) {
+        ++less;
+    }
+
+    while (a[great] == pivot2) {
+        --great;
+    }
+
+    /*
+     * Partitioning:
+     *
+     *   left part         center part                  right part
+     * +----------------------------------------------------------+
+     * | == pivot1 |  pivot1 &amp;lt; &amp;amp;&amp;amp; &amp;lt; pivot2  |    ?    | == pivot2 |
+     * +----------------------------------------------------------+
+     *              ^                        ^       ^
+     *              |                        |       |
+     *             less                      k     great
+     *
+     * Invariants:
+     *
+     *              all in (*,  less) == pivot1
+     *     pivot1 &amp;lt; all in [less,  k)  &amp;lt; pivot2
+     *              all in (great, *) == pivot2
+     *
+     * Pointer k is the first index of ?-part.
+     */
+    outer:
+    for (int k = less - 1; ++k &amp;lt;= great; ) {
+        int ak = a[k];
+        if (ak == pivot1) { // Move a[k] to left part
+            a[k] = a[less];
+            a[less] = ak;
+            ++less;
+        } else if (ak == pivot2) { // Move a[k] to right part
+            while (a[great] == pivot2) {
+                if (great-- == k) {
+                    break outer;
+                }
+            }
+            if (a[great] == pivot1) { // a[great] &amp;lt; pivot2
+                a[k] = a[less];
+                /*
+                 * Even though a[great] equals to pivot1, the
+                 * assignment a[less] = pivot1 may be incorrect,
+                 * if a[great] and pivot1 are floating-point zeros
+                 * of different signs. Therefore in float and
+                 * double sorting methods we have to use more
+                 * accurate assignment a[less] = a[great].
+                 */
+                a[less] = pivot1;
+                ++less;
+            } else { // pivot1 &amp;lt; a[great] &amp;lt; pivot2
+                a[k] = a[great];
+            }
+            a[great] = ak;
+            --great;
+        }
+    }
+}
+
+// Sort center part recursively
+sort(a, less, great, false);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;优化点总结&quot;&gt;优化点总结&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;小数组的优化：对于小数组来说，插入排序的效率更高，当前数组长度小于47时，使用插入排序代替快排，提升性能&lt;/li&gt;
+  &lt;li&gt;特殊大数组的优化：由于计数排序特别适合待排序数组很长，类型本身可表示的值相对较少的情况，如byte、char数组 ，对于这样的大数组采用计数排序可以提升性能&lt;/li&gt;
+  &lt;li&gt;双轴快排：使用两个基准，分成三段，在没有明显增加比较次数的情况下减少了递归的次数。&lt;/li&gt;
+  &lt;li&gt;针对重复数据优化，避免了不必要的交换和递归&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;性能测试&quot;&gt;性能测试&lt;/h2&gt;
+
+&lt;h3 id=&quot;不同数据量测试&quot;&gt;不同数据量测试&lt;/h3&gt;
+
+&lt;p&gt;构造大小为1k，5k，1w，5w，10w的数组分别对Arrays.sort()、快排递归、快排非递归进行测试。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Arrays.sort()&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;快排递归&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;快排非递归&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1k&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2ms&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;5k&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;5ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;7ms&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1w&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;-&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;26ms&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;5w&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;7ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;-&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;557ms&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;10w&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;9ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;-&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2182ms&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;其中快排递归在数据量达到1w的时候idea报错StackOverflowError，栈溢出。&lt;/p&gt;
+
+&lt;p&gt;测试代码：&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;len&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;Random&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Random&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nextInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1000000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//Arrays.sort()排序&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;end1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//快排递归&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;quickSort1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;end2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//快排非递归&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;quickSort2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;end3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;算法1(Arrays.sort)：&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;算法2(快排递归)：&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;算法3(快排非递归)：&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;end3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;顺序逆序乱序测试&quot;&gt;顺序/逆序/乱序测试&lt;/h3&gt;
+
+&lt;p&gt;数据量5k：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Arrays.sort()&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;快排递归&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;快排非递归&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;顺序&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;5ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;8ms&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;逆序&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;0ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;5ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;7ms&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;乱序&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;5ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;7ms&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;从表中看不出差别。&lt;/p&gt;
+
+&lt;p&gt;数据量10w：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Arrays.sort()&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;快排非递归&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;顺序&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;1ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2135ms&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;逆序&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2121ms&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;乱序&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;10ms&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;2178ms&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;从顺序、逆序来看也没有大的差别，但Arrays.sort()明显要优于原始的快排。&lt;/p&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+
+&lt;p&gt;[1] 快速排序，维基百科，https://zh.m.wikipedia.org/zh/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F&lt;/p&gt;
+
+&lt;p&gt;[2] 快排时间复杂度推导，http://t.zoukankan.com/javawebsoa-p-3194015.html&lt;/p&gt;
+
+&lt;p&gt;[3] jdk1.8源码&lt;/p&gt;
+
+&lt;p&gt;[4] Why Is Dual-Pivot Quicksort Fast（为什么双轴排序更快），https://arxiv.org/pdf/1511.01138.pdf&lt;/p&gt;
+</description>
+        <pubDate>Mon, 02 May 2022 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/blog/2022/05/02/%E5%BF%AB%E6%8E%92(Arrays.sort())%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2022/05/02/%E5%BF%AB%E6%8E%92(Arrays.sort())%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/</guid>
+        
+        <category>源码</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>Netty笔记</title>
+        <description>&lt;h3 id=&quot;简介&quot;&gt;简介&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Netty是一个基于NIO模型的高性能网络通信框架，是对NIO网络模型的一个封装，提供了一个简单易用的API&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在NIO的基础上进行了优化，例如零拷贝机制、高性能无锁队列、内存池，因此性能比NIO更高&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;零拷贝机制&lt;/p&gt;
+
+        &lt;blockquote&gt;
+          &lt;p&gt;计算机在网络上发送文件时，不需要将文件内容拷贝到用户空间而直接在内核空间中传输到网络的方式。&lt;/p&gt;
+        &lt;/blockquote&gt;
+
+        &lt;p&gt;Java NIO中的FileChannel.transferTo()方法实现了零拷贝的功能，在Netty中也通过在FIleRegion中包装了NIO的FileChannel.transferTo()方法实现了零拷贝。&lt;/p&gt;
+
+        &lt;p&gt;Netty中还有另一种形式的零拷贝，允许将多段数据合并为一整段虚拟数据供用户使用，过程中不需要对数据进行拷贝操作。&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;高性能无锁队列&lt;/p&gt;
+
+        &lt;p&gt;每个子线程都维护了一个任务队列，netty中的NioEventLoop重写了队列的实现方法。&lt;/p&gt;
+
+        &lt;p&gt;如果使用锁，线程切换会特别消耗资源，因此采用CAS的操作方式。&lt;/p&gt;
+
+        &lt;p&gt;队列的数据结构是一种单项链表式的结构。&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;内存池&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;支持多种通信协议，如HTTP、WebSocket等，针对数据通信拆包粘包问题，Netty内置了拆包策略&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;netty优点&quot;&gt;Netty优点&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;相比于JDK自带的NIO相关的API来说，更加简单，统一的API，支持多种通信类型，如阻塞、非阻塞，以及epoll、poll等模型&lt;/li&gt;
+  &lt;li&gt;可以用较少的代码实现多线程Reactor模型以及主从多线程Reactor模型&lt;/li&gt;
+  &lt;li&gt;自带编解码器，解决TCP粘包、拆包问题&lt;/li&gt;
+  &lt;li&gt;自带各种通信协议&lt;/li&gt;
+  &lt;li&gt;Netty提高更高的吞吐量和更低的延迟、更低的资源消耗和更少的内存复制&lt;/li&gt;
+  &lt;li&gt;安全性强，有完整的SSL/TLS支持&lt;/li&gt;
+  &lt;li&gt;经历了大项目的考验，如Dubbo、Zookeeper、RocketMQ都用到Netty&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;netty核心组件&quot;&gt;Netty核心组件&lt;/h3&gt;
+
+&lt;p&gt;Netty由三层结构构成：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;网络通信层
+    &lt;ul&gt;
+      &lt;li&gt;Bootstrap：负责客户端启动，并且连接远程的Netty Server&lt;/li&gt;
+      &lt;li&gt;ServerBootStrap：负责服务端的监听，用来监听指定的一个端口&lt;/li&gt;
+      &lt;li&gt;Channel：负责网络通信的一个载体&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;事件调度层
+    &lt;ul&gt;
+      &lt;li&gt;EventLoopGroup：本质上是一个线程池，主要负责接收IO请求，并分配线程去执行这些请求&lt;/li&gt;
+      &lt;li&gt;EventLoop：线程池中的一个具体线程&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;服务编排层
+    &lt;ul&gt;
+      &lt;li&gt;ChannelPipeline：负责处理多个Channelhandler，会把多个Channelhandler构成一个链，形成一个Pipeline&lt;/li&gt;
+      &lt;li&gt;Channelhandler：针对IO数据的一个处理器&lt;/li&gt;
+      &lt;li&gt;ChannelHandlerContext：保存ChannnelHandler的上下文信息&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;netty对线程模型的支持&quot;&gt;Netty对线程模型的支持&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;单线程单Reactor模型&lt;/p&gt;
+
+    &lt;p&gt;连接进来到处理全部是由一个线程来处理（后果：Handler处可能发生阻塞）&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;https://s3.bmp.ovh/imgs/2022/03/45ef1fb5e1fd1574.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;多线程单Reactor模型&lt;/p&gt;
+
+    &lt;p&gt;所有的IO操作由一个Reactor完成（瓶颈在Reactor，高并发情况下导致大量客户端超时，重新发送，导致大量消息积压和处理超时）&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;https://s3.bmp.ovh/imgs/2022/03/992d930b230fceb8.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;多线程多Reactor模型&lt;/p&gt;
+
+    &lt;p&gt;多线程多Reactor模型，也叫主从多Reactor模型&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;https://s3.bmp.ovh/imgs/2022/03/368e200395ac36e2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Reactor模型的组件：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Reactor：负责将IO事件分配给对应的Handler&lt;/li&gt;
+  &lt;li&gt;Acceptor：处理客户端的连接请求&lt;/li&gt;
+  &lt;li&gt;handlers：执行业务逻辑的读写操作&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://imgtu.com/i/bfHKYV&quot;&gt;&lt;img src=&quot;https://s1.ax1x.com/2022/03/10/bfHKYV.jpg&quot; alt=&quot;bfHKYV.jpg&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 10 Mar 2022 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/blog/2022/03/10/Netty%E7%AC%94%E8%AE%B0/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2022/03/10/Netty%E7%AC%94%E8%AE%B0/</guid>
+        
+        <category>Netty</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>Linux内存分配与回收-伙伴算法</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;把以前写的搬运一下。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;目录&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#简介&quot;&gt;简介&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#背景&quot;&gt;背景&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#内存管理机制&quot;&gt;内存管理机制&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#当前存在的问题&quot;&gt;当前存在的问题&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#伙伴算法&quot;&gt;伙伴算法&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#算法原理&quot;&gt;算法原理&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#内存分配&quot;&gt;内存分配&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#内存回收&quot;&gt;内存回收&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#优缺点分析&quot;&gt;优缺点分析&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#参考&quot;&gt;参考&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;简介&quot;&gt;简介&lt;/h2&gt;
+
+&lt;p&gt;​       在Linux系统中，内存的分配与回收速率直接影响系统的存取效率。当内核频繁请求和释放不同大小的一组连续页框时，会导致许多外部空闲碎片，造成空间的浪费。使用伙伴算法可以有效地缓解该问题。伙伴关系机制是操作系统中的一种动态存储管理算法。在进行内存分配时，该算法通过不断平分较大的空闲内存块来获得较小的空闲内存块，直到获得所需要的内存块；在进行内存回收时，该算法尽可能地合并空闲块。&lt;/p&gt;
+
+&lt;h2 id=&quot;背景&quot;&gt;背景&lt;/h2&gt;
+
+&lt;h3 id=&quot;内存管理机制&quot;&gt;内存管理机制&lt;/h3&gt;
+
+&lt;p&gt;​       内存管理是应用程序通过硬件和软件协作访问内存的一种方法，当进程请求内存使用时，它给进程分配可用的内存；当进程释放内存时，回收相应的内存，同时负责跟踪系统中内存的使用状态。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20200415214633380.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;​       在Linux系统中，首先将内存分为若干个节点，然后每个节点又可以分为1-3个区，每个区下又有若干个页。页是内存管理的基本单元。&lt;/p&gt;
+
+&lt;h3 id=&quot;当前存在的问题&quot;&gt;当前存在的问题&lt;/h3&gt;
+
+&lt;p&gt;​       当系统工作时，CPU最先访问的地址不是物理内存中的实地址，而是虚拟地址空间的虚地址。当请求分页时，首先在虚拟地址空间中分配一个虚拟空间，然后根据需要为此区间分配相应的物理页面并建立映射。&lt;/p&gt;
+
+&lt;p&gt;​       在分配空间时，我们首先想到的便是malloc函数。由于在实际情况中，操作系统必须能够在任意时刻申请和释放任意大小的内存，该函数的实现并不容易，导致的主要问题有延时问题和碎片问题。&lt;/p&gt;
+
+&lt;p&gt;​       延时问题指的是系统查找到可分配单元的时间变长，例如程序请求分配一个64KB的内存空间，系统查看64KB空间发现不全是空余的，于是查看65KB的空间，发现仍不能满足需求，直到查看80KB空间时，才满足了需求，这种方式请求次数多达17次，频繁操作时，非常耗时。&lt;/p&gt;
+
+&lt;p&gt;​       若系统以较大的定长空间来分配内存，在一定程度上可以节省时间，但带来的是碎片过多问题，由于每次用较大的空间进行分配，系统中出现大量碎片，导致内存浪费。严重者会导致内存无法完成分配，虽然仍有许多碎片空间。&lt;/p&gt;
+
+&lt;p&gt;​       基于此，系统需要一种能够高效分配内存，同时又能减少产生碎片的算法，伙伴算法能有效地解决该问题，如今已成为操作系统中的一种基础算法。&lt;/p&gt;
+
+&lt;h2 id=&quot;伙伴算法&quot;&gt;伙伴算法&lt;/h2&gt;
+
+&lt;h3 id=&quot;算法原理&quot;&gt;算法原理&lt;/h3&gt;
+
+&lt;p&gt;​       伙伴算法是一种动态存储器管理算法。该算法通过不断地平分较大的空闲内存块来获得较小的空闲内存块，直到获得所需要的内存块，当内存释放时，该算法尽可能地合并空闲块。其中，在分配和合并内存块时都是以2的次幂为单位，即1,2,4,8,16,32,64,128等。所谓“伙伴”，就是指在空闲块被分裂时，由同一个大块内存分裂出来的两个小块内存就互称“伙伴”。“伙伴”应当满足以下三个条件：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;两个块大小相同&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;两个块地址连续&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;两个块必须是同一个大块中分离出来的&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;​       伙伴算法使用位图和空闲链表作为辅助工具，其中位图用于跟踪内存块的使用情况，空闲链表用来维护内存中还没有被分配的块。假设系统的全部可用空间为2^(max) ,则建立一个长度为max+1的链表，链表尾存放大小为2^(max)的块，如下图所示：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20200415215338515.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1JldGljZW50X01hbg==,size_16,color_FFFFFF,t_70&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;​    当请求大小为size的空间时,  2^(k-1)&amp;lt; size &amp;lt;2^k ，且k &amp;lt; max。于是系统在链表中寻找大小为2^k的块，发现该位置为空，于是继续向下搜寻大小为2^(k+1)的块，若还为空，则继续向下搜寻，直到找到不为空的块2^(max)。&lt;/p&gt;
+
+&lt;p&gt;​   该块不为空，于是该块进行分裂，变为两个大小为2^(max-1)的块。其中一块插入到链表中2^(max-1)的位置，另一块继续分裂。重复此过程，直到分裂产生大小为2^k大小的块为止，结果如图所示：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20200415215509298.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1JldGljZW50X01hbg==,size_16,color_FFFFFF,t_70&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;​       如图所示，最后一次分裂时，由一个大小为2^(k+1)的块分成两个大小均为2^k大小的块。将其中一块交给用户使用，另一块加入到空闲链表相应位置中。&lt;/p&gt;
+
+&lt;p&gt;​	由于进行了多次分裂，链表的同一位置可能会出现多个大小相等的块，此时选用时只需要在表头选取一个即可。当进行合并操作时，只需将大小相等的块合并，然后插入到链表中相应位置即可。  &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://img-blog.csdnimg.cn/20200415215610223.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;​	以下用具体实例说明伙伴算法在内存分配与回收中的应用。&lt;/p&gt;
+
+&lt;h3 id=&quot;内存分配&quot;&gt;内存分配&lt;/h3&gt;
+
+&lt;p&gt;​      下面通过一个例子说明内存分配的过程：&lt;/p&gt;
+
+&lt;p&gt;​      现内存总容量为16KB，用户请求分配4KB大小的内存空间，且规定最小的内存分配单元是2KB。于是位图分为8个区域，用1表示已分配，用0表示未分配，则初始位图和空闲链表如图所示。从上到下依次是位图、内存块、空闲链表。&lt;/p&gt;
+
+&lt;p&gt;​																&lt;img src=&quot;https://img-blog.csdnimg.cn/20200415215748161.png&quot; alt=&quot;&quot; /&gt;   	
+  	 由于需要分配4KB内存，数显到链表中4KB位置进行查看，发现为空，于是继续向后查找8KB位置，发现仍为空，直到到达链表尾16KB位置不为空。16KB块分裂成两个8KB的块，其中一块插入到链表相应位置，另一块继续分裂成两个4KB的块，其中一个交付使用，另一个插入到链表中，结果如下图所示。&lt;/p&gt;
+
+&lt;p&gt;​																&lt;img src=&quot;https://img-blog.csdnimg.cn/20200415215835411.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1JldGljZW50X01hbg==,size_16,color_FFFFFF,t_70&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;内存回收&quot;&gt;内存回收&lt;/h3&gt;
+
+   	内存回收是内存分配的逆过程，假设以上存储要释放4KB内存，首先到链表中4KB位置查看是否有它的“伙伴”，发现该位置不为空，于是合并成一个8KB的块，继续寻找它的“伙伴”，然后合并成一个16KB的块，插入链表中。
+
+   	若在查找过程中没有发现“伙伴”，则直接插入到链表中，然后将位图中的标记清零，表示内存可用。
+
+&lt;h2 id=&quot;优缺点分析&quot;&gt;优缺点分析&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;伙伴算法采用2的幂次方进行分配内存块，可以避免把大的内存块拆分的过小，更重要的是可以加快分配和释放速度，但如果所需要的空间不是2的整数次幂，则会产生许多内部碎片。&lt;/li&gt;
+  &lt;li&gt;分配和合并采用链表和位图操作，操作方便，但是开销比较大。&lt;/li&gt;
+  &lt;li&gt;一个很小的块往往会阻碍一个大块的合并，一个系统中，对内存块的分配，大小是随机的，一片内存中仅一个小的内存块没有释放，旁边两个大的内存块就不能合并。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;《Linux操作系统原理与应用》&lt;/li&gt;
+  &lt;li&gt;《深入理解Linux内核》&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/lcl497049972/article/details/82954124&quot;&gt;伙伴算法buddy_27Up的博客-CSDN博客_伙伴算法实现&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cnblogs.com/alantu2018/p/8527821.html&quot;&gt;Linux伙伴算法 - AlanTu - 博客园&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Sat, 05 Feb 2022 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/blog/2022/02/05/Linux%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6-%E4%BC%99%E4%BC%B4%E7%AE%97%E6%B3%95/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2022/02/05/Linux%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6-%E4%BC%99%E4%BC%B4%E7%AE%97%E6%B3%95/</guid>
+        
+        <category>Linux</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>redis缓存一致性</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;这里主要指mysql与redis的数据一致性问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;1先更新数据库再更新缓存&quot;&gt;1.先更新数据库，再更新缓存&lt;/h3&gt;
+
+&lt;p&gt;很少使用，存在并发更新问题：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;有两个线程：线程A、线程B&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A更新数据库 → B更新数据库 → B更新缓存 → A更新缓存&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;后果：存入脏数据&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;2先删除缓存再更新数据库&quot;&gt;2.先删除缓存，再更新数据库&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;有的缓存可能是数据的聚合，有多张表作为数据源，伴随多个数据源的变动，可能会频繁更新缓存，该场景适合先删缓存。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;使用较多，可能出现脏数据：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A删除缓存 → B缓存未命中，从数据库获取 → B存入缓存 → A更新数据库&lt;/li&gt;
+  &lt;li&gt;使用双删：A删除缓存 → A更新数据库 → 等待一段时间，A删除缓存&lt;/li&gt;
+  &lt;li&gt;延迟删除导致性能不高，可以使用消息队列（缺点是可能产生消息堆积），删除失败则重试&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;3先更新数据库再删除缓存&quot;&gt;3.先更新数据库，再删除缓存&lt;/h3&gt;
+
+&lt;p&gt;订阅mysql的binlog，异步的更新缓存，有一些binlog同步组件，如领英的databus，阿里巴巴的canal，美团点评的puma。&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 13 Dec 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/blog/2021/12/13/redis%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2021/12/13/redis%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/</guid>
+        
+        <category>redis</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>Git常用命令</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;一个具有动画演示的学习git命令的网站：https://learngitbranching.js.org/?locale=zh_CN&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;目录&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#基础篇&quot;&gt;基础篇&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#git-commit&quot;&gt;Git Commit&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#git-branch&quot;&gt;Git Branch&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#git-merge&quot;&gt;Git Merge&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#git-rebase&quot;&gt;Git Rebase&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#高级篇&quot;&gt;高级篇&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#分离head&quot;&gt;分离HEAD&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#相对引用&quot;&gt;相对引用&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#撤销变更&quot;&gt;撤销变更&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#远程仓库&quot;&gt;远程仓库&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#git-fetch&quot;&gt;Git Fetch&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#git-pull&quot;&gt;Git Pull&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#制造远程仓库变更&quot;&gt;制造远程仓库变更&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#git-push&quot;&gt;Git Push&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#目录偏离&quot;&gt;目录偏离&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#main锁定&quot;&gt;main锁定&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;基础篇&quot;&gt;基础篇&lt;/h2&gt;
+
+&lt;h3 id=&quot;git-commit&quot;&gt;Git Commit&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/QvxGoZfNeyl4Cmq.png&quot; alt=&quot;commit1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/E5uM3Xgm6GQTeHK.png&quot; alt=&quot;commit2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git commit
+git commit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;git-branch&quot;&gt;Git Branch&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/iT4YpEfUOkgem9A.png&quot; alt=&quot;branch1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/rP5lNTWFUa8igRE.png&quot; alt=&quot;branch2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git branch bugFix
+git checkout bugFix
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;git-merge&quot;&gt;Git Merge&lt;/h3&gt;
+
+&lt;p&gt;一种分支合并的方法。不会移动之前的工作，创建新的合并提交。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/3vc14SQjaPOXTAN.png&quot; alt=&quot;merge1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/feHSNOz2ji5Il9Y.png&quot; alt=&quot;merge2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git branch bugFix
+git checkout bugFix
+git commit
+git checkout main
+git commit
+git merge bugFix
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;git-rebase&quot;&gt;Git Rebase&lt;/h3&gt;
+
+&lt;p&gt;一种分支合并的方法。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Rebase&lt;/code&gt;是取出一系列的提交记录，“复制”它们，然后在另外一个地方逐个的放下去。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/ZAMKRd5wstbL41c.png&quot; alt=&quot;rebase1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/5GcPp2gr3QeKVt9.png&quot; alt=&quot;rebase2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/3msVPMokbSTrIZE.png&quot; alt=&quot;rebase3.png&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git branch bugFix
+git checkout bugFix
+git commit
+git checkout main
+git commit
+git checkout bugFix
+git rebase main
+
+git checkout main
+git rebase bugFix 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;高级篇&quot;&gt;高级篇&lt;/h2&gt;
+
+&lt;h3 id=&quot;分离head&quot;&gt;分离HEAD&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;head&lt;/code&gt;总是指向当前分支上最近一次提交记录。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/7kZucqxsKvd3Li1.png&quot; alt=&quot;head1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/nvT1yHX2PrusYli.png&quot; alt=&quot;head2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git checkout C4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;相对引用&quot;&gt;相对引用&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;^&lt;/code&gt;表示父提交，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~3&lt;/code&gt;表示第&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3&lt;/code&gt;级父提交。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/qsKevTazFY4rSnc.png&quot; alt=&quot;相对引用1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/wftD3ALZMuhmyFQ.png&quot; alt=&quot;相对引用2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git checkout C4^
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/FBWu9QTYljgvAeC.png&quot; alt=&quot;相对引用3.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/MySZCldpAz1U3HO.png&quot; alt=&quot;相对引用4.png&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git checkout C6
+git branch -f main HEAD
+git checkout C1
+git branch -f bugFix HEAD^
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;-f表示强制移动&lt;/p&gt;
+
+&lt;h3 id=&quot;撤销变更&quot;&gt;撤销变更&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;git reset：适用于单人使用的本地分支&lt;/li&gt;
+  &lt;li&gt;git revert：适用于多人使用的远程分支，可以撤销更改并分享给别人&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/P6nikTABs3xGMRJ.png&quot; alt=&quot;撤销变更1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/4TgZikbRwdQlAUp.png&quot; alt=&quot;撤销变更2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C2&apos;&lt;/code&gt;引入了更改，是用来撤销&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C2&lt;/code&gt;这个提交的，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C2&apos;&lt;/code&gt;状态与&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;C1&lt;/code&gt;相同。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git reset local~1
+git checkout pushed
+git revert pushed
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;远程仓库&quot;&gt;远程仓库&lt;/h2&gt;
+
+&lt;h3 id=&quot;git-fetch&quot;&gt;Git Fetch&lt;/h3&gt;
+
+&lt;p&gt;将远程仓库更新的数据下载了下来，但并没有修改本地的文件。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/kfYDPWvELAqhyli.png&quot; alt=&quot;fetch1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/A4q7nM3FQrLeCBU.png&quot; alt=&quot;fetch2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git fetch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;git-pull&quot;&gt;Git Pull&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pull = fetch + merge&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pull --rebase = fetch + rebase&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/dsbKjuUiazxhYNI.png&quot; alt=&quot;pull1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/M25amKOG6up1LNw.png&quot; alt=&quot;pull2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git pull
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;制造远程仓库的变更&quot;&gt;制造远程仓库的变更&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/a5gShv9MOrK42nw.png&quot; alt=&quot;remotechange1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/6otgfaUJyzWICsq.png&quot; alt=&quot;remotechange2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;假设 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git fakeTeamwork&lt;/code&gt;是在远程仓库的main分支上做一次提交。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git clone
+git fakeTeamwork
+git fakeTeamwork
+git commit
+git fetch
+git merge o/main
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;git-push&quot;&gt;Git Push&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/qAnmkeOEhfRjiwI.png&quot; alt=&quot;push1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/rtijbBIdcuRCezV.png&quot; alt=&quot;push2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git commit
+git commit
+git push
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;目录偏离&quot;&gt;目录偏离&lt;/h3&gt;
+
+&lt;p&gt;情景大概就是远程仓库修改了，然后本地也做了修改，如何进行统一？直接&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;push&lt;/code&gt;是不行的。&lt;/p&gt;
+
+&lt;p&gt;我们用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git fetch&lt;/code&gt; 更新了本地仓库中的远程分支，然后用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt; rebase &lt;/code&gt;将我们的工作移动到最新的提交记录下，最后再用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git push&lt;/code&gt; 推送到远程仓库。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/tmxvOd81PKIknGf.png&quot; alt=&quot;目录偏离1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/G4vwPRFhQmYWHyc.png&quot; alt=&quot;目录偏离2.png&quot; /&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-git&quot;&gt;git clone
+git fakeTeamwork
+git commit
+git pull --rebase
+git push
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;main锁定&quot;&gt;main锁定&lt;/h3&gt;
+
+&lt;p&gt;在合作团队中工作时，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt;可能被锁定，需要一些&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Pull Request&lt;/code&gt;流程来合并修改。如果提交(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;commit&lt;/code&gt;)到本地&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt;, 然后试图推送(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;push&lt;/code&gt;)修改, 将会收到这样类似的信息:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;! [远程服务器拒绝] main -&amp;gt; main (TF402455: 不允许推送(push)这个分支; 你必须使用pull request来更新这个分支.)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;新建一个分支&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;feature&lt;/code&gt;, 推送到远程服务器. 然后&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;reset&lt;/code&gt;本地的&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt;分支和远程服务器保持一致, 否则下次&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pull&lt;/code&gt;并且他人的提交和本地冲突的时候就会有问题.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/pL9iaKVR63MxObF.png&quot; alt=&quot;main锁定1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.loli.net/2021/11/21/gpbVsNSRM9KTuCc.png&quot; alt=&quot;main锁定2.png&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sun, 21 Nov 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/blog/2021/11/21/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2021/11/21/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+        
+        <category>版本控制</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+      <item>
+        <title>切片扩容</title>
+        <description>&lt;p&gt;go的切片扩容可以分为三种情况。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;切片每次新增个数不超过原来的1倍，且每次增加数不超过1024个，且增加后总长度小于1024个，扩容为原来的2倍。&lt;/p&gt;
+
+    &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([]&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;The capacity of s1: %d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;17&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;s1(%d): len: %d, cap: %d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;//结果：&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;capacity&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;14&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;14&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;17&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;17&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;32&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;切片一次新增个数超过原来1倍，但不超过1024个，且增加后总长度小于1024个，扩容增加的个数为新增个数（偶）或新增个数+1（奇）。&lt;/p&gt;
+
+    &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([]&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;The capacity of s2: %d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;r1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([]&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;r1: len: %d, cap: %d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;r2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([]&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;r2: len: %d, cap: %d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;r3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([]&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;21&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;r3: len: %d, cap: %d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;注意：像r2,r3 一次增加个数超过原容量的1倍，增加后结果比实际总长度预想的稍大一点 &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;//结果：&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;capacity&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;r1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;r2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;21&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;22&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;r3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;31&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;32&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;//注意：像r2,r3 一次增加个数超过原容量的1倍，增加后结果比实际总长度预想的稍大一点 &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;原切片长度超过1024，一次扩容的容量是0.25倍，每次超过预定的都是0.25累乘。&lt;/p&gt;
+
+    &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;// 1024 * 0.25 = 256&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;s3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([]&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;The capacity of s3: %d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;r4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([]&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;r4: len: %d, cap: %d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;r5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([]&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;r5: len: %d, cap: %d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;// 1280 * 0.25 = 320&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;r6&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([]&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;266&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;r6: len: %d, cap: %d&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;r6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;注意：像r6 一次增加个数超过原容量的0.25倍，增加后结果比原容量1.25倍预想的稍大一点 &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;//结果：&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;capacity&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1024&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;r4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1224&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1280&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;r5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1280&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1280&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;r6&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1290&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1696&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;//注意：像r6 一次增加个数超过原容量的0.25倍，增加后结果比原容量1.25倍预想的稍大一点&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Tue, 05 Oct 2021 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/blog/2021/10/05/%E5%88%87%E7%89%87%E6%89%A9%E5%AE%B9/</link>
+        <guid isPermaLink="true">http://localhost:4000/blog/2021/10/05/%E5%88%87%E7%89%87%E6%89%A9%E5%AE%B9/</guid>
+        
+        <category>go</category>
+        
+        
+        <category>blog</category>
+        
+      </item>
+    
+  </channel>
+</rss>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <!-- kill the Facebook and Weibo -->
+                    <!--
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    -->
+                    
+                    <!--
+                    
+                    -->
+                    
+                    
+                    <li>
+                        <a href="mailto:1468999760@qq.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="https://github.com/L1468999760">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                  
+                    
+                    <li>
+                        <a target="_blank" href="https://blog.csdn.net/Reticent_Man">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-1x fa-inverse">C</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                </ul>
+                <p class="copyright text-muted">
+                &copy; 2023 LiJinning <!--❖ Powered by Jekyll. -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+        <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="关键词" autocomplete="off">
+
+        <div style="position: fixed; top: 16px; right: 16px;">
+            <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        </div>
+    </div>
+
+    <div style="position: fixed; right: 16px; bottom: 20px;">
+        <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="搜索"/>
+    </div>
+
+    <link rel="stylesheet" href="/search/css/cb-search.css">
+
+</footer>
+
+<!-- jQuery -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/clean-blog.min.js "></script>
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js",function(){
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+</body>
+
+</html>

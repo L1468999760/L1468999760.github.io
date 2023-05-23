@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="千里之行，始于足下">
+
+    <title>快排源码分析（Arrays.sort()） - 如遇古剑</title>
+
+    <link rel="canonical" href="http://localhost:4000/blog/2022/05/02/%E5%BF%AB%E6%8E%92(Arrays.sort())%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+
+    <!-- Icons -->
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/clean-blog.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+
+
+
+
+
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+               
+            </button>
+            <a class="navbar-brand" href="/">如遇古剑</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">主页</a>
+                </li>
+                
+                <li>
+                    <a href="/about/">关于我</a>
+                </li>
+                
+                <li>
+                    <a href="/archive/">文章归档</a>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/blue.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="Tags">
+                        
+                        <!-- <a class="tag" href="/Tags/#源码" title="源码">源码</a> -->
+                        
+                    </div>
+                    <h1>快排源码分析（Arrays.sort()）</h1>
+                    
+                    <span class="meta">Posted on May 2, 2022</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+
+                <blockquote>
+  <p>以Java中的Arrays.sort()为例进行分析。</p>
+</blockquote>
+
+<p>目录</p>
+<ul>
+  <li><a href="#快排基本原理">快排基本原理</a>
+    <ul>
+      <li><a href="#简介">简介</a></li>
+      <li><a href="#递归、非递归实现">递归/非递归实现</a></li>
+      <li><a href="#快排实现稳定排序">快排实现稳定排序</a></li>
+      <li><a href="#时间复杂度推导">时间复杂度推导</a></li>
+    </ul>
+  </li>
+  <li><a href="#Arrays.sort()分析">Arrays.sort()分析</a>
+    <ul>
+      <li><a href="#基本思想">基本思想</a></li>
+      <li><a href="#源码分析">源码分析</a>
+        <ul>
+          <li><a href="#参数解释">参数解释</a></li>
+          <li><a href="#大数组归并排序">大数组归并排序</a></li>
+          <li><a href="#小数组插入排序">小数组插入排序</a></li>
+          <li><a href="#双轴快排">双轴快排</a></li>
+        </ul>
+      </li>
+      <li><a href="#优化点总结">优化点总结</a></li>
+    </ul>
+  </li>
+  <li><a href="#性能对比">性能测试</a>
+    <ul>
+      <li><a href="#不同数据量测试">不同数据量测试</a></li>
+      <li><a href="#正序/逆序/乱序测试">顺序/逆序/乱序测试</a></li>
+    </ul>
+  </li>
+  <li><a href="#参考">参考</a></li>
+</ul>
+
+<h2 id="快排基本原理">快排基本原理</h2>
+
+<h3 id="简介">简介</h3>
+
+<p>快速排序，是一种比较/交换排序算法，最早由英国的东尼·霍尔提出（另外一个知名贡献是提出了和操作系统相关的哲学家进餐问题，首次提出了管程的概念，实现共享资源的互斥访问）。</p>
+
+<p>时间复杂度：快排的平均时间复杂度是<code class="language-plaintext highlighter-rouge">O(nlogn)</code>，最坏时间复杂度是<code class="language-plaintext highlighter-rouge">O(n^2)</code>。</p>
+
+<p>基本思想：使用分治法将一个序列分为两个子序列，然后递归地排序两个子序列。</p>
+
+<p>步骤：</p>
+
+<ul>
+  <li>挑选基准值：从序列中选出一个元素，作为基准（pivot）</li>
+  <li>分割：所有比基准值小的元素放在基准前面，所有比基准值大的元素放在基准后面（与基准值相等的可以放到任何一边）</li>
+  <li>递归排序子序列：递归地将小于基准值元素的子序列和大于基准值的子序列进行排序</li>
+</ul>
+
+<h3 id="递归非递归实现">递归/非递归实现</h3>
+
+<p><strong>递归实现</strong></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">quicksort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">,</span><span class="kt">int</span> <span class="n">left</span><span class="o">,</span><span class="kt">int</span> <span class="n">right</span><span class="o">){</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">left</span> <span class="o">&gt;=</span> <span class="n">right</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">left</span><span class="o">],</span><span class="n">l</span> <span class="o">=</span> <span class="n">left</span><span class="o">,</span><span class="n">r</span> <span class="o">=</span> <span class="n">right</span><span class="o">;</span>
+    <span class="k">while</span><span class="o">(</span><span class="n">l</span><span class="o">&lt;</span><span class="n">r</span><span class="o">){</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">l</span><span class="o">&lt;</span><span class="n">r</span> <span class="o">&amp;&amp;</span> <span class="n">tmp</span><span class="o">&lt;=</span><span class="n">arr</span><span class="o">[</span><span class="n">r</span><span class="o">])</span> <span class="n">r</span><span class="o">--;</span>
+        <span class="n">arr</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">r</span><span class="o">];</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">l</span><span class="o">&lt;</span><span class="n">r</span> <span class="o">&amp;&amp;</span> <span class="n">tmp</span><span class="o">&gt;=</span><span class="n">arr</span><span class="o">[</span><span class="n">l</span><span class="o">])</span> <span class="n">l</span><span class="o">++;</span>
+        <span class="n">arr</span><span class="o">[</span><span class="n">r</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">l</span><span class="o">];</span>
+    <span class="o">}</span>
+    <span class="n">arr</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+    <span class="n">quicksort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span><span class="n">left</span><span class="o">,</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+    <span class="n">quicksort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span><span class="n">right</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>非递归实现</strong></p>
+
+<p>非递归借用栈实现，栈中存放的是待排序区间的左右坐标。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">quickSort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">,</span><span class="kt">int</span> <span class="n">left</span><span class="o">,</span><span class="kt">int</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Deque</span><span class="o">&lt;</span><span class="nc">Integer</span><span class="o">&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayDeque</span><span class="o">&lt;&gt;();</span>
+    <span class="n">s</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">left</span><span class="o">);</span>
+    <span class="n">s</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">right</span><span class="o">);</span>
+    <span class="k">while</span><span class="o">(!</span><span class="n">s</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">rindex</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">poll</span><span class="o">(),</span><span class="n">lindex</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="na">poll</span><span class="o">();</span>
+        <span class="kt">int</span> <span class="n">l</span> <span class="o">=</span> <span class="n">lindex</span><span class="o">,</span><span class="n">r</span> <span class="o">=</span> <span class="n">rindex</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">l</span><span class="o">];</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">l</span><span class="o">&lt;</span><span class="n">r</span><span class="o">&amp;&amp;</span><span class="n">arr</span><span class="o">[</span><span class="n">r</span><span class="o">]&gt;=</span><span class="n">tmp</span><span class="o">)</span> <span class="n">r</span><span class="o">--;</span>
+        <span class="n">arr</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">r</span><span class="o">];</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">l</span><span class="o">&lt;</span><span class="n">r</span><span class="o">&amp;&amp;</span><span class="n">arr</span><span class="o">[</span><span class="n">l</span><span class="o">]&lt;=</span><span class="n">tmp</span><span class="o">)</span> <span class="n">l</span><span class="o">++;</span>
+        <span class="n">arr</span><span class="o">[</span><span class="n">r</span><span class="o">]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">l</span><span class="o">];</span>
+        <span class="n">arr</span><span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">;</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="o">&gt;</span><span class="n">lindex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">s</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">lindex</span><span class="o">);</span>
+            <span class="n">s</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">l</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="o">&lt;</span><span class="n">rindex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">s</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="o">);</span>
+            <span class="n">s</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">rindex</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="快排实现稳定排序">快排实现稳定排序</h3>
+
+<p>快排是一种不稳定的排序，因为每次<strong>交换</strong>的过程中可能导致相等值的前后顺序改变。</p>
+
+<p>为了实现稳定排序，可以使用一个辅助数组，从前往后把小于基准数的放进辅助数组，再把基准数放进去，然后再遍历一遍把大于等于基准数的放进辅助数组，避免交换操作就可以稳定了。</p>
+
+<p>这种<strong>增加额外空间</strong>的方式虽然可以实现稳定排序，但是已经不是严格意义的快速排序了。</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">quicksort</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="o">,</span><span class="kt">int</span> <span class="n">left</span><span class="o">,</span><span class="kt">int</span> <span class="n">right</span><span class="o">){</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">left</span><span class="o">&gt;=</span><span class="n">right</span><span class="o">)</span> <span class="k">return</span><span class="o">;</span>
+    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">right</span><span class="o">-</span><span class="n">left</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">tmp</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">len</span><span class="o">];</span>
+    <span class="kt">int</span> <span class="n">target</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">left</span><span class="o">];</span>
+    <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span><span class="n">mid</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">left</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">right</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]&lt;</span><span class="n">target</span><span class="o">)</span> <span class="n">tmp</span><span class="o">[</span><span class="n">cnt</span><span class="o">++]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+    <span class="o">}</span>
+    <span class="n">tmp</span><span class="o">[</span><span class="n">cnt</span><span class="o">++]</span> <span class="o">=</span> <span class="n">target</span><span class="o">;</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span><span class="o">+</span><span class="n">cnt</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">left</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">right</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]&gt;=</span><span class="n">target</span><span class="o">)</span> <span class="n">tmp</span><span class="o">[</span><span class="n">cnt</span><span class="o">++]</span> <span class="o">=</span> <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">];</span>
+    <span class="o">}</span>
+    <span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">left</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">right</span><span class="o">;</span><span class="n">i</span><span class="o">++){</span>
+        <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="n">left</span><span class="o">];</span>
+    <span class="o">}</span>
+    <span class="n">quicksort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span><span class="n">left</span><span class="o">,</span><span class="n">mid</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+    <span class="n">quicksort</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span><span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="o">,</span><span class="n">right</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="时间复杂度推导">时间复杂度推导</h3>
+
+<p>快排涉及到递归调用，递归调用的通用时间复杂度公式是<code class="language-plaintext highlighter-rouge">T(n) = aT(n/b) + f(n)</code>，其中a，b是常数，a可以理解为每次分割成几部分，n/b可以理解为子部分分割后的大小，f(n)是每次递归调用需要额外的计算执行时间。</p>
+
+<p>对于快速排序，每次分割成两部分(a=2)，假设每次近似平均分成两半(b=2)，每次递归中用于交换的额外执行时间是线性的（f(n)），于是有：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>T(n) = 2T(n/2) + n
+     = 2(2T(n/4) + n/2) + n
+     = 2^2T(n/2^2) + 2n
+     = ...
+     
+令2^m = n，则有
+
+T(n) = 2^mT(1) + mn
+
+因为T(1) = 1，m = logn
+
+所以T(n) = n + nlogn
+
+当n &gt;= 2时，nlogn &gt;= n
+
+所以时间复杂度是O(nlogn)
+</code></pre></div></div>
+
+<p>以上是一个最优时间复杂度的推导，即假设每次平均分成了相等长度的两半，更一般的推导参考<a href="http://t.zoukankan.com/javawebsoa-p-3194015.html">链接</a>，这里给出精确计算结果（C(n) = 2nlnn = 1.39nlog2(n)）</p>
+
+<h2 id="arrayssort分析">Arrays.sort()分析</h2>
+
+<h3 id="基本思想">基本思想</h3>
+
+<p>Java中的Arrays.sort()是一种混合排序，采用了插入排序、双插入排序、单轴快排、双轴快排、归并排序的思想，针对不同长度数组、重复元素进行了特殊优化。</p>
+
+<p>算法流程：</p>
+
+<p><img src="https://s3.bmp.ovh/imgs/2022/05/03/ed5f72802bdcc03e.png" alt="" /></p>
+
+<h3 id="源码分析">源码分析</h3>
+
+<h4 id="参数解释">参数解释</h4>
+
+<p>进入Arrays.sort()可以看到调用了DualPivotQuicksort类内部的静态方法sort。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+ * 参数int[]代表待排序数组
+ * 参数left表示起始元素下标
+ * 参数right表示终止元素下标
+ * 参数work表示切片
+ * 参数workBase表示切片中可用空间的起始索引
+ * 参数workLen表示切片中可用空间大小
+ */
+public static void sort(int[] a) {
+    DualPivotQuicksort.sort(a, 0, a.length - 1, null, 0, 0);
+}
+</code></pre></div></div>
+
+<p>DualPivotQuicksort类中的一些参数：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+ * 归并排序中最大运行数量
+ */
+private static final int MAX_RUN_COUNT = 67;
+
+/**
+ * 归并排序中的数组最大长度
+ */
+private static final int MAX_RUN_LENGTH = 33;
+
+/**
+ * 快排的阈值，如果小于该长度，则采用快排，否则采用归并排序
+ */
+private static final int QUICKSORT_THRESHOLD = 286;
+
+/**
+ * 插入排序的阈值，如果小于该长度，则采用插入排序
+ */
+private static final int INSERTION_SORT_THRESHOLD = 47;
+
+/**
+ * 计数排序的阈值，如果一个字节数组的长度小于该长度，则采用计数排序
+ */
+private static final int COUNTING_SORT_THRESHOLD_FOR_BYTE = 29;
+
+/**
+ * 如果短数组或字符数组的长度大于该长度，则采用计数排序
+ */
+private static final int COUNTING_SORT_THRESHOLD_FOR_SHORT_OR_CHAR = 3200;
+</code></pre></div></div>
+
+<h4 id="大数组归并排序">大数组归并排序</h4>
+
+<p>静态内部类sort，长度小于286采用快排，第四个参数代表是否在区间最左侧</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Use Quicksort on small arrays
+if (right - left &lt; QUICKSORT_THRESHOLD) {
+    sort(a, left, right, true);
+    return;
+}
+</code></pre></div></div>
+
+<p>对于长度大于等于286的，检查数组是否接近有序，如果接近有序，采用归并排序，否则采用快排。（是否接近有序的判别标准是MAX_RUN_COUNT和MAX_RUN_LENGTH两个参数）</p>
+
+<p>使用归并排序的条件：</p>
+
+<ul>
+  <li>数组长度</li>
+  <li>数组局部有序</li>
+  <li>不存在较多连续相等的元素</li>
+</ul>
+
+<p>使用<code class="language-plaintext highlighter-rouge">run</code>记录有序子序列的坐标范围，如<code class="language-plaintext highlighter-rouge">run[0]==0 &amp;&amp; run[1]==3</code>表示第一段有序序列的其实索引是0，终止索引是2，<code class="language-plaintext highlighter-rouge">count</code>记录有序子序列的个数，如果<code class="language-plaintext highlighter-rouge">count</code>值过大，表示平均有序子序列较短，数组基本无序，此时应该采用快排</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int[] run = new int[MAX_RUN_COUNT + 1];
+int count = 0; run[0] = left;
+
+// Check if the array is nearly sorted
+for (int k = left; k &lt; right; run[count] = k) {
+    if (a[k] &lt; a[k + 1]) { // ascending
+        while (++k &lt;= right &amp;&amp; a[k - 1] &lt;= a[k]);
+    } else if (a[k] &gt; a[k + 1]) { // descending
+        while (++k &lt;= right &amp;&amp; a[k - 1] &gt;= a[k]);
+        for (int lo = run[count] - 1, hi = k; ++lo &lt; --hi; ) {
+            int t = a[lo]; a[lo] = a[hi]; a[hi] = t;
+        }
+    } else { // equal
+        for (int m = MAX_RUN_LENGTH; ++k &lt;= right &amp;&amp; a[k - 1] == a[k]; ) {
+            if (--m == 0) {
+                sort(a, left, right, true);
+                return;
+            }
+        }
+    }
+
+    /*
+     * The array is not highly structured,
+     * use Quicksort instead of merge sort.
+     */
+    if (++count == MAX_RUN_COUNT) {
+        sort(a, left, right, true);
+        return;
+    }
+}
+</code></pre></div></div>
+
+<h4 id="小数组插入排序">小数组插入排序</h4>
+
+<p>双轴快排，进入快速排序的sort：</p>
+
+<p>如果长度小于47，使用插入排序。如果属于最左区间，采用普通的插入排序；如果不属于最左区间，采用双插入排序。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Use insertion sort on tiny arrays
+if (length &lt; INSERTION_SORT_THRESHOLD) {
+    if (leftmost) {
+        /*
+         * Traditional (without sentinel) insertion sort,
+         * optimized for server VM, is used in case of
+         * the leftmost part.
+         */
+        for (int i = left, j = i; i &lt; right; j = ++i) {
+            int ai = a[i + 1];
+            while (ai &lt; a[j]) {
+                a[j + 1] = a[j];
+                if (j-- == left) {
+                    break;
+                }
+            }
+            a[j + 1] = ai;
+        }
+    } else {
+        /*
+         * Skip the longest ascending sequence.
+         */
+        do {
+            if (left &gt;= right) {
+                return;
+            }
+        } while (a[++left] &gt;= a[left - 1]);
+
+        /*
+         * Every element from adjoining part plays the role
+         * of sentinel, therefore this allows us to avoid the
+         * left range check on each iteration. Moreover, we use
+         * the more optimized algorithm, so called pair insertion
+         * sort, which is faster (in the context of Quicksort)
+         * than traditional implementation of insertion sort.
+         */
+        for (int k = left; ++left &lt;= right; k = ++left) {
+            int a1 = a[k], a2 = a[left];
+
+            if (a1 &lt; a2) {
+                a2 = a1; a1 = a[left];
+            }
+            while (a1 &lt; a[--k]) {
+                a[k + 2] = a[k];
+            }
+            a[++k + 1] = a1;
+
+            while (a2 &lt; a[--k]) {
+                a[k + 1] = a[k];
+            }
+            a[k + 1] = a2;
+        }
+        int last = a[right];
+
+        while (last &lt; a[--right]) {
+            a[right + 1] = a[right];
+        }
+        a[right + 1] = last;
+    }
+    return;
+}
+</code></pre></div></div>
+
+<h4 id="双轴快排">双轴快排</h4>
+
+<p>选取基准</p>
+
+<p>首先计算近似长度的1/7，然后选取五个经验点/中心点，对五个经验点进行插入排序。</p>
+
+<p>如果五个经验点/中心点各不相等，则 从中选择两个（第二个和第四个）作为基准。如果五个经验点/中心点其中有两个相等，则采用传统的单轴快排（一个基准）。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Inexpensive approximation of length / 7
+int seventh = (length &gt;&gt; 3) + (length &gt;&gt; 6) + 1;
+
+/*
+ * Sort five evenly spaced elements around (and including) the
+ * center element in the range. These elements will be used for
+ * pivot selection as described below. The choice for spacing
+ * these elements was empirically determined to work well on
+ * a wide variety of inputs.
+ */
+int e3 = (left + right) &gt;&gt;&gt; 1; // The midpoint
+int e2 = e3 - seventh;
+int e1 = e2 - seventh;
+int e4 = e3 + seventh;
+int e5 = e4 + seventh;
+
+// Sort these elements using insertion sort
+if (a[e2] &lt; a[e1]) { int t = a[e2]; a[e2] = a[e1]; a[e1] = t; }
+
+if (a[e3] &lt; a[e2]) { int t = a[e3]; a[e3] = a[e2]; a[e2] = t;
+    if (t &lt; a[e1]) { a[e2] = a[e1]; a[e1] = t; }
+}
+if (a[e4] &lt; a[e3]) { int t = a[e4]; a[e4] = a[e3]; a[e3] = t;
+    if (t &lt; a[e2]) { a[e3] = a[e2]; a[e2] = t;
+        if (t &lt; a[e1]) { a[e2] = a[e1]; a[e1] = t; }
+    }
+}
+if (a[e5] &lt; a[e4]) { int t = a[e5]; a[e5] = a[e4]; a[e4] = t;
+    if (t &lt; a[e3]) { a[e4] = a[e3]; a[e3] = t;
+        if (t &lt; a[e2]) { a[e3] = a[e2]; a[e2] = t;
+            if (t &lt; a[e1]) { a[e2] = a[e1]; a[e1] = t; }
+        }
+    }
+}
+</code></pre></div></div>
+
+<p>定义两个指针，less，great，less从左到右遍历找到第一个大于等于pivot1的元素，great从右向左遍历找到第一个小于等于pivot2的元素。k从less-1遍历到great，把小于pivot1的元素放到左边，把大于pivot2的元素放到右边。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+ * Skip elements, which are less or greater than pivot values.
+ */
+while (a[++less] &lt; pivot1);
+while (a[--great] &gt; pivot2);
+
+/*
+ * Partitioning:
+ *
+ *   left part           center part                   right part
+ * +--------------------------------------------------------------+
+ * |  &lt; pivot1  |  pivot1 &lt;= &amp;&amp; &lt;= pivot2  |    ?    |  &gt; pivot2  |
+ * +--------------------------------------------------------------+
+ *               ^                          ^       ^
+ *               |                          |       |
+ *              less                        k     great
+ *
+ * Invariants:
+ *
+ *              all in (left, less)   &lt; pivot1
+ *    pivot1 &lt;= all in [less, k)     &lt;= pivot2
+ *              all in (great, right) &gt; pivot2
+ *
+ * Pointer k is the first index of ?-part.
+ */
+outer:
+for (int k = less - 1; ++k &lt;= great; ) {
+    int ak = a[k];
+    if (ak &lt; pivot1) { // Move a[k] to left part
+        a[k] = a[less];
+        /*
+         * Here and below we use "a[i] = b; i++;" instead
+         * of "a[i++] = b;" due to performance issue.
+         */
+        a[less] = ak;
+        ++less;
+    } else if (ak &gt; pivot2) { // Move a[k] to right part
+        while (a[great] &gt; pivot2) {
+            if (great-- == k) {
+                break outer;
+            }
+        }
+        if (a[great] &lt; pivot1) { // a[great] &lt;= pivot2
+            a[k] = a[less];
+            a[less] = a[great];
+            ++less;
+        } else { // pivot1 &lt;= a[great] &lt;= pivot2
+            a[k] = a[great];
+        }
+        /*
+         * Here and below we use "a[i] = b; i--;" instead
+         * of "a[i--] = b;" due to performance issue.
+         */
+        a[great] = ak;
+        --great;
+    }
+}
+</code></pre></div></div>
+
+<p>交换基准，递归左边和右边</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Swap pivots into their final positions
+a[left]  = a[less  - 1]; a[less  - 1] = pivot1;
+a[right] = a[great + 1]; a[great + 1] = pivot2;
+
+// Sort left and right parts recursively, excluding known pivots
+sort(a, left, less - 2, leftmost);
+sort(a, great + 2, right, false);
+</code></pre></div></div>
+
+<p>对于中间部分 ，如果长度超过4/7，需要进行预处理，把等于pivot1的放左边，把等于pivot2的放右边，然后再参与快排。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/*
+ * If center part is too large (comprises &gt; 4/7 of the array),
+ * swap internal pivot values to ends.
+ */
+if (less &lt; e1 &amp;&amp; e5 &lt; great) {
+    /*
+     * Skip elements, which are equal to pivot values.
+     */
+    while (a[less] == pivot1) {
+        ++less;
+    }
+
+    while (a[great] == pivot2) {
+        --great;
+    }
+
+    /*
+     * Partitioning:
+     *
+     *   left part         center part                  right part
+     * +----------------------------------------------------------+
+     * | == pivot1 |  pivot1 &lt; &amp;&amp; &lt; pivot2  |    ?    | == pivot2 |
+     * +----------------------------------------------------------+
+     *              ^                        ^       ^
+     *              |                        |       |
+     *             less                      k     great
+     *
+     * Invariants:
+     *
+     *              all in (*,  less) == pivot1
+     *     pivot1 &lt; all in [less,  k)  &lt; pivot2
+     *              all in (great, *) == pivot2
+     *
+     * Pointer k is the first index of ?-part.
+     */
+    outer:
+    for (int k = less - 1; ++k &lt;= great; ) {
+        int ak = a[k];
+        if (ak == pivot1) { // Move a[k] to left part
+            a[k] = a[less];
+            a[less] = ak;
+            ++less;
+        } else if (ak == pivot2) { // Move a[k] to right part
+            while (a[great] == pivot2) {
+                if (great-- == k) {
+                    break outer;
+                }
+            }
+            if (a[great] == pivot1) { // a[great] &lt; pivot2
+                a[k] = a[less];
+                /*
+                 * Even though a[great] equals to pivot1, the
+                 * assignment a[less] = pivot1 may be incorrect,
+                 * if a[great] and pivot1 are floating-point zeros
+                 * of different signs. Therefore in float and
+                 * double sorting methods we have to use more
+                 * accurate assignment a[less] = a[great].
+                 */
+                a[less] = pivot1;
+                ++less;
+            } else { // pivot1 &lt; a[great] &lt; pivot2
+                a[k] = a[great];
+            }
+            a[great] = ak;
+            --great;
+        }
+    }
+}
+
+// Sort center part recursively
+sort(a, less, great, false);
+</code></pre></div></div>
+
+<h3 id="优化点总结">优化点总结</h3>
+
+<ul>
+  <li>小数组的优化：对于小数组来说，插入排序的效率更高，当前数组长度小于47时，使用插入排序代替快排，提升性能</li>
+  <li>特殊大数组的优化：由于计数排序特别适合待排序数组很长，类型本身可表示的值相对较少的情况，如byte、char数组 ，对于这样的大数组采用计数排序可以提升性能</li>
+  <li>双轴快排：使用两个基准，分成三段，在没有明显增加比较次数的情况下减少了递归的次数。</li>
+  <li>针对重复数据优化，避免了不必要的交换和递归</li>
+</ul>
+
+<h2 id="性能测试">性能测试</h2>
+
+<h3 id="不同数据量测试">不同数据量测试</h3>
+
+<p>构造大小为1k，5k，1w，5w，10w的数组分别对Arrays.sort()、快排递归、快排非递归进行测试。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">Arrays.sort()</th>
+      <th style="text-align: center">快排递归</th>
+      <th style="text-align: center">快排非递归</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1k</td>
+      <td style="text-align: center">1ms</td>
+      <td style="text-align: center">2ms</td>
+      <td style="text-align: center">2ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5k</td>
+      <td style="text-align: center">1ms</td>
+      <td style="text-align: center">5ms</td>
+      <td style="text-align: center">7ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1w</td>
+      <td style="text-align: center">2ms</td>
+      <td style="text-align: center">-</td>
+      <td style="text-align: center">26ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5w</td>
+      <td style="text-align: center">7ms</td>
+      <td style="text-align: center">-</td>
+      <td style="text-align: center">557ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">10w</td>
+      <td style="text-align: center">9ms</td>
+      <td style="text-align: center">-</td>
+      <td style="text-align: center">2182ms</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>其中快排递归在数据量达到1w的时候idea报错StackOverflowError，栈溢出。</p>
+
+<p>测试代码：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">100000</span><span class="o">;</span>
+<span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">len</span><span class="o">];</span>
+<span class="nc">Random</span> <span class="n">rd</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">();</span>
+<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">len</span><span class="o">;</span><span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+    <span class="n">arr</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">rd</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="mi">1000000</span><span class="o">);</span>
+<span class="o">}</span>
+<span class="kt">long</span> <span class="n">start1</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+<span class="c1">//Arrays.sort()排序</span>
+<span class="nc">Arrays</span><span class="o">.</span><span class="na">sort</span><span class="o">(</span><span class="n">arr</span><span class="o">);</span>
+<span class="kt">long</span> <span class="n">end1</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+
+<span class="kt">long</span> <span class="n">start2</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+<span class="c1">//快排递归</span>
+<span class="n">quickSort1</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+<span class="kt">long</span> <span class="n">end2</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+
+<span class="kt">long</span> <span class="n">start3</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+<span class="c1">//快排非递归</span>
+<span class="n">quickSort2</span><span class="o">(</span><span class="n">arr</span><span class="o">,</span><span class="mi">0</span><span class="o">,</span><span class="n">arr</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">);</span>
+<span class="kt">long</span> <span class="n">end3</span> <span class="o">=</span> <span class="nc">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"算法1(Arrays.sort)："</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">end1</span><span class="o">-</span><span class="n">start1</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"算法2(快排递归)："</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">end2</span><span class="o">-</span><span class="n">start2</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"算法3(快排非递归)："</span><span class="o">);</span>
+<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">end3</span><span class="o">-</span><span class="n">start3</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h3 id="顺序逆序乱序测试">顺序/逆序/乱序测试</h3>
+
+<p>数据量5k：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">Arrays.sort()</th>
+      <th style="text-align: center">快排递归</th>
+      <th style="text-align: center">快排非递归</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">顺序</td>
+      <td style="text-align: center">0ms</td>
+      <td style="text-align: center">5ms</td>
+      <td style="text-align: center">8ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">逆序</td>
+      <td style="text-align: center">0ms</td>
+      <td style="text-align: center">5ms</td>
+      <td style="text-align: center">7ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">乱序</td>
+      <td style="text-align: center">1ms</td>
+      <td style="text-align: center">5ms</td>
+      <td style="text-align: center">7ms</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>从表中看不出差别。</p>
+
+<p>数据量10w：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"> </th>
+      <th style="text-align: center">Arrays.sort()</th>
+      <th style="text-align: center">快排非递归</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">顺序</td>
+      <td style="text-align: center">1ms</td>
+      <td style="text-align: center">2135ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">逆序</td>
+      <td style="text-align: center">2ms</td>
+      <td style="text-align: center">2121ms</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">乱序</td>
+      <td style="text-align: center">10ms</td>
+      <td style="text-align: center">2178ms</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>从顺序、逆序来看也没有大的差别，但Arrays.sort()明显要优于原始的快排。</p>
+
+<h2 id="参考">参考</h2>
+
+<p>[1] 快速排序，维基百科，https://zh.m.wikipedia.org/zh/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F</p>
+
+<p>[2] 快排时间复杂度推导，http://t.zoukankan.com/javawebsoa-p-3194015.html</p>
+
+<p>[3] jdk1.8源码</p>
+
+<p>[4] Why Is Dual-Pivot Quicksort Fast（为什么双轴排序更快），https://arxiv.org/pdf/1511.01138.pdf</p>
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/blog/2022/03/10/Netty%E7%AC%94%E8%AE%B0/" data-toggle="tooltip" data-placement="top" title="Netty笔记">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/blog/2022/10/02/HashMap%E5%88%86%E6%9E%90/" data-toggle="tooltip" data-placement="top" title="HashMap分析">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+                <!-- Duoshuo Share start -->
+                <style>
+                    .ds-share{
+                        text-align: right;
+                    }
+                    
+                    @media only screen and (max-width: 700px) {
+                        .ds-share {
+
+                        }
+                    }
+                </style>
+
+                <div class="ds-share"
+                    data-thread-key="/blog/2022/05/02/快排(Arrays.sort())源码分析" data-title="快排源码分析（Arrays.sort()）"
+                    data-images="http://localhost:4000/img/blue.jpg"
+                    data-content="
+  以Java中的Arrays.sort()为例进行分析。
+
+
+目录
+
+  快排基本原理
+    
+      简介
+      递归/非递归实现
+  ... | Microdust:Azeril's blog"
+                    data-url="http://localhost:4000/blog/2022/05/02/%E5%BF%AB%E6%8E%92(Arrays.sort())%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                       <!--  <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>  
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                       --> 
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- Duoshuo Share end-->
+
+
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread" data-thread-key="/blog/2022/05/02/快排(Arrays.sort())源码分析" data-title="快排源码分析（Arrays.sort()）" data-url="http://localhost:4000/blog/2022/05/02/%E5%BF%AB%E6%8E%92(Arrays.sort())%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/"></div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ruyugujian"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//ruyugujian.disqus.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: ''
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <!-- kill the Facebook and Weibo -->
+                    <!--
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    -->
+                    
+                    <!--
+                    
+                    -->
+                    
+                    
+                    <li>
+                        <a href="mailto:1468999760@qq.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="https://github.com/L1468999760">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                  
+                    
+                    <li>
+                        <a target="_blank" href="https://blog.csdn.net/Reticent_Man">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-1x fa-inverse">C</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                </ul>
+                <p class="copyright text-muted">
+                &copy; 2023 LiJinning <!--❖ Powered by Jekyll. -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+        <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="关键词" autocomplete="off">
+
+        <div style="position: fixed; top: 16px; right: 16px;">
+            <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        </div>
+    </div>
+
+    <div style="position: fixed; right: 16px; bottom: 20px;">
+        <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="搜索"/>
+    </div>
+
+    <link rel="stylesheet" href="/search/css/cb-search.css">
+
+</footer>
+
+<!-- jQuery -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/clean-blog.min.js "></script>
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js",function(){
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+</body>
+
+</html>

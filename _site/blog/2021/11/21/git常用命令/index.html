@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="千里之行，始于足下">
+
+    <title>Git常用命令 - 如遇古剑</title>
+
+    <link rel="canonical" href="http://localhost:4000/blog/2021/11/21/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <!-- Icons -->
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/clean-blog.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+
+
+
+
+
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+               
+            </button>
+            <a class="navbar-brand" href="/">如遇古剑</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">主页</a>
+                </li>
+                
+                <li>
+                    <a href="/about/">关于我</a>
+                </li>
+                
+                <li>
+                    <a href="/archive/">文章归档</a>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/blue.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="Tags">
+                        
+                        <!-- <a class="tag" href="/Tags/#版本控制" title="版本控制">版本控制</a> -->
+                        
+                    </div>
+                    <h1>Git常用命令</h1>
+                    
+                    <span class="meta">Posted on November 21, 2021</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+
+                <blockquote>
+  <p>一个具有动画演示的学习git命令的网站：https://learngitbranching.js.org/?locale=zh_CN</p>
+</blockquote>
+
+<p>目录</p>
+<ul>
+  <li><a href="#基础篇">基础篇</a>
+    <ul>
+      <li><a href="#git-commit">Git Commit</a></li>
+      <li><a href="#git-branch">Git Branch</a></li>
+      <li><a href="#git-merge">Git Merge</a></li>
+      <li><a href="#git-rebase">Git Rebase</a></li>
+    </ul>
+  </li>
+  <li><a href="#高级篇">高级篇</a>
+    <ul>
+      <li><a href="#分离head">分离HEAD</a></li>
+      <li><a href="#相对引用">相对引用</a></li>
+      <li><a href="#撤销变更">撤销变更</a></li>
+    </ul>
+  </li>
+  <li><a href="#远程仓库">远程仓库</a>
+    <ul>
+      <li><a href="#git-fetch">Git Fetch</a></li>
+      <li><a href="#git-pull">Git Pull</a></li>
+      <li><a href="#制造远程仓库变更">制造远程仓库变更</a></li>
+      <li><a href="#git-push">Git Push</a></li>
+      <li><a href="#目录偏离">目录偏离</a></li>
+      <li><a href="#main锁定">main锁定</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="基础篇">基础篇</h2>
+
+<h3 id="git-commit">Git Commit</h3>
+
+<p><img src="https://i.loli.net/2021/11/21/QvxGoZfNeyl4Cmq.png" alt="commit1.png" /></p>
+
+<p><img src="https://i.loli.net/2021/11/21/E5uM3Xgm6GQTeHK.png" alt="commit2.png" /></p>
+
+<pre><code class="language-git">git commit
+git commit
+</code></pre>
+
+<h3 id="git-branch">Git Branch</h3>
+
+<p><img src="https://i.loli.net/2021/11/21/iT4YpEfUOkgem9A.png" alt="branch1.png" /></p>
+
+<p><img src="https://i.loli.net/2021/11/21/rP5lNTWFUa8igRE.png" alt="branch2.png" /></p>
+
+<pre><code class="language-git">git branch bugFix
+git checkout bugFix
+</code></pre>
+
+<h3 id="git-merge">Git Merge</h3>
+
+<p>一种分支合并的方法。不会移动之前的工作，创建新的合并提交。</p>
+
+<p><img src="https://i.loli.net/2021/11/21/3vc14SQjaPOXTAN.png" alt="merge1.png" /></p>
+
+<p><img src="https://i.loli.net/2021/11/21/feHSNOz2ji5Il9Y.png" alt="merge2.png" /></p>
+
+<pre><code class="language-git">git branch bugFix
+git checkout bugFix
+git commit
+git checkout main
+git commit
+git merge bugFix
+</code></pre>
+
+<h3 id="git-rebase">Git Rebase</h3>
+
+<p>一种分支合并的方法。<code class="language-plaintext highlighter-rouge">Rebase</code>是取出一系列的提交记录，“复制”它们，然后在另外一个地方逐个的放下去。</p>
+
+<p><img src="https://i.loli.net/2021/11/21/ZAMKRd5wstbL41c.png" alt="rebase1.png" /></p>
+
+<p><img src="https://i.loli.net/2021/11/21/5GcPp2gr3QeKVt9.png" alt="rebase2.png" /></p>
+
+<p><img src="https://i.loli.net/2021/11/21/3msVPMokbSTrIZE.png" alt="rebase3.png" /></p>
+
+<pre><code class="language-git">git branch bugFix
+git checkout bugFix
+git commit
+git checkout main
+git commit
+git checkout bugFix
+git rebase main
+
+git checkout main
+git rebase bugFix 
+</code></pre>
+
+<h2 id="高级篇">高级篇</h2>
+
+<h3 id="分离head">分离HEAD</h3>
+
+<p><code class="language-plaintext highlighter-rouge">head</code>总是指向当前分支上最近一次提交记录。</p>
+
+<p><img src="https://i.loli.net/2021/11/21/7kZucqxsKvd3Li1.png" alt="head1.png" /></p>
+
+<p><img src="https://i.loli.net/2021/11/21/nvT1yHX2PrusYli.png" alt="head2.png" /></p>
+
+<pre><code class="language-git">git checkout C4
+</code></pre>
+
+<h3 id="相对引用">相对引用</h3>
+
+<p><code class="language-plaintext highlighter-rouge">^</code>表示父提交，<code class="language-plaintext highlighter-rouge">~3</code>表示第<code class="language-plaintext highlighter-rouge">3</code>级父提交。</p>
+
+<p><img src="https://i.loli.net/2021/11/21/qsKevTazFY4rSnc.png" alt="相对引用1.png" /></p>
+
+<p><img src="https://i.loli.net/2021/11/21/wftD3ALZMuhmyFQ.png" alt="相对引用2.png" /></p>
+
+<pre><code class="language-git">git checkout C4^
+</code></pre>
+
+<p><img src="https://i.loli.net/2021/11/21/FBWu9QTYljgvAeC.png" alt="相对引用3.png" /></p>
+
+<p><img src="https://i.loli.net/2021/11/21/MySZCldpAz1U3HO.png" alt="相对引用4.png" /></p>
+
+<pre><code class="language-git">git checkout C6
+git branch -f main HEAD
+git checkout C1
+git branch -f bugFix HEAD^
+</code></pre>
+
+<p>-f表示强制移动</p>
+
+<h3 id="撤销变更">撤销变更</h3>
+
+<ul>
+  <li>git reset：适用于单人使用的本地分支</li>
+  <li>git revert：适用于多人使用的远程分支，可以撤销更改并分享给别人</li>
+</ul>
+
+<p><img src="https://i.loli.net/2021/11/21/P6nikTABs3xGMRJ.png" alt="撤销变更1.png" /></p>
+
+<p><img src="https://i.loli.net/2021/11/21/4TgZikbRwdQlAUp.png" alt="撤销变更2.png" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">C2'</code>引入了更改，是用来撤销<code class="language-plaintext highlighter-rouge">C2</code>这个提交的，<code class="language-plaintext highlighter-rouge">C2'</code>状态与<code class="language-plaintext highlighter-rouge">C1</code>相同。</p>
+
+<pre><code class="language-git">git reset local~1
+git checkout pushed
+git revert pushed
+</code></pre>
+
+<h2 id="远程仓库">远程仓库</h2>
+
+<h3 id="git-fetch">Git Fetch</h3>
+
+<p>将远程仓库更新的数据下载了下来，但并没有修改本地的文件。</p>
+
+<p><img src="https://i.loli.net/2021/11/21/kfYDPWvELAqhyli.png" alt="fetch1.png" /></p>
+
+<p><img src="https://i.loli.net/2021/11/21/A4q7nM3FQrLeCBU.png" alt="fetch2.png" /></p>
+
+<pre><code class="language-git">git fetch
+</code></pre>
+
+<h3 id="git-pull">Git Pull</h3>
+
+<p><code class="language-plaintext highlighter-rouge">pull = fetch + merge</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">pull --rebase = fetch + rebase</code></p>
+
+<p><img src="https://i.loli.net/2021/11/21/dsbKjuUiazxhYNI.png" alt="pull1.png" /></p>
+
+<p><img src="https://i.loli.net/2021/11/21/M25amKOG6up1LNw.png" alt="pull2.png" /></p>
+
+<pre><code class="language-git">git pull
+</code></pre>
+
+<h3 id="制造远程仓库的变更">制造远程仓库的变更</h3>
+
+<p><img src="https://i.loli.net/2021/11/21/a5gShv9MOrK42nw.png" alt="remotechange1.png" /></p>
+
+<p><img src="https://i.loli.net/2021/11/21/6otgfaUJyzWICsq.png" alt="remotechange2.png" /></p>
+
+<p>假设 <code class="language-plaintext highlighter-rouge">git fakeTeamwork</code>是在远程仓库的main分支上做一次提交。</p>
+
+<pre><code class="language-git">git clone
+git fakeTeamwork
+git fakeTeamwork
+git commit
+git fetch
+git merge o/main
+</code></pre>
+
+<h3 id="git-push">Git Push</h3>
+
+<p><img src="https://i.loli.net/2021/11/21/qAnmkeOEhfRjiwI.png" alt="push1.png" /></p>
+
+<p><img src="https://i.loli.net/2021/11/21/rtijbBIdcuRCezV.png" alt="push2.png" /></p>
+
+<pre><code class="language-git">git commit
+git commit
+git push
+</code></pre>
+
+<h3 id="目录偏离">目录偏离</h3>
+
+<p>情景大概就是远程仓库修改了，然后本地也做了修改，如何进行统一？直接<code class="language-plaintext highlighter-rouge">push</code>是不行的。</p>
+
+<p>我们用 <code class="language-plaintext highlighter-rouge">git fetch</code> 更新了本地仓库中的远程分支，然后用<code class="language-plaintext highlighter-rouge"> rebase </code>将我们的工作移动到最新的提交记录下，最后再用 <code class="language-plaintext highlighter-rouge">git push</code> 推送到远程仓库。</p>
+
+<p><img src="https://i.loli.net/2021/11/21/tmxvOd81PKIknGf.png" alt="目录偏离1.png" /></p>
+
+<p><img src="https://i.loli.net/2021/11/21/G4vwPRFhQmYWHyc.png" alt="目录偏离2.png" /></p>
+
+<pre><code class="language-git">git clone
+git fakeTeamwork
+git commit
+git pull --rebase
+git push
+</code></pre>
+
+<h3 id="main锁定">main锁定</h3>
+
+<p>在合作团队中工作时，<code class="language-plaintext highlighter-rouge">main</code>可能被锁定，需要一些<code class="language-plaintext highlighter-rouge">Pull Request</code>流程来合并修改。如果提交(<code class="language-plaintext highlighter-rouge">commit</code>)到本地<code class="language-plaintext highlighter-rouge">main</code>, 然后试图推送(<code class="language-plaintext highlighter-rouge">push</code>)修改, 将会收到这样类似的信息:</p>
+
+<p><code class="language-plaintext highlighter-rouge">! [远程服务器拒绝] main -&gt; main (TF402455: 不允许推送(push)这个分支; 你必须使用pull request来更新这个分支.)</code></p>
+
+<p>新建一个分支<code class="language-plaintext highlighter-rouge">feature</code>, 推送到远程服务器. 然后<code class="language-plaintext highlighter-rouge">reset</code>本地的<code class="language-plaintext highlighter-rouge">main</code>分支和远程服务器保持一致, 否则下次<code class="language-plaintext highlighter-rouge">pull</code>并且他人的提交和本地冲突的时候就会有问题.</p>
+
+<p><img src="https://i.loli.net/2021/11/21/pL9iaKVR63MxObF.png" alt="main锁定1.png" /></p>
+
+<p><img src="https://i.loli.net/2021/11/21/gpbVsNSRM9KTuCc.png" alt="main锁定2.png" /></p>
+
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/blog/2021/10/05/%E5%88%87%E7%89%87%E6%89%A9%E5%AE%B9/" data-toggle="tooltip" data-placement="top" title="切片扩容">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/blog/2021/12/13/redis%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/" data-toggle="tooltip" data-placement="top" title="redis缓存一致性">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+                <!-- Duoshuo Share start -->
+                <style>
+                    .ds-share{
+                        text-align: right;
+                    }
+                    
+                    @media only screen and (max-width: 700px) {
+                        .ds-share {
+
+                        }
+                    }
+                </style>
+
+                <div class="ds-share"
+                    data-thread-key="/blog/2021/11/21/git常用命令" data-title="Git常用命令"
+                    data-images="http://localhost:4000/img/blue.jpg"
+                    data-content="
+  一个具有动画演示的学习git命令的网站：https://learngitbranching.js.org/?locale=zh_CN
+
+
+目录
+
+ ... | Microdust:Azeril's blog"
+                    data-url="http://localhost:4000/blog/2021/11/21/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                       <!--  <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>  
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                       --> 
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- Duoshuo Share end-->
+
+
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread" data-thread-key="/blog/2021/11/21/git常用命令" data-title="Git常用命令" data-url="http://localhost:4000/blog/2021/11/21/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"></div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ruyugujian"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//ruyugujian.disqus.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: ''
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <!-- kill the Facebook and Weibo -->
+                    <!--
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    -->
+                    
+                    <!--
+                    
+                    -->
+                    
+                    
+                    <li>
+                        <a href="mailto:1468999760@qq.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="https://github.com/L1468999760">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                  
+                    
+                    <li>
+                        <a target="_blank" href="https://blog.csdn.net/Reticent_Man">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-1x fa-inverse">C</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                </ul>
+                <p class="copyright text-muted">
+                &copy; 2023 LiJinning <!--❖ Powered by Jekyll. -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+        <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="关键词" autocomplete="off">
+
+        <div style="position: fixed; top: 16px; right: 16px;">
+            <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        </div>
+    </div>
+
+    <div style="position: fixed; right: 16px; bottom: 20px;">
+        <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="搜索"/>
+    </div>
+
+    <link rel="stylesheet" href="/search/css/cb-search.css">
+
+</footer>
+
+<!-- jQuery -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/clean-blog.min.js "></script>
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js",function(){
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+</body>
+
+</html>

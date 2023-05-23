@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="千里之行，始于足下">
+
+    <title>leetcode - 如遇古剑</title>
+
+    <link rel="canonical" href="http://localhost:4000/blog/2021/03/15/leetcode/">
+
+    <!-- Icons -->
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/clean-blog.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+
+
+
+
+
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+               
+            </button>
+            <a class="navbar-brand" href="/">如遇古剑</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">主页</a>
+                </li>
+                
+                <li>
+                    <a href="/about/">关于我</a>
+                </li>
+                
+                <li>
+                    <a href="/archive/">文章归档</a>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/blue.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="Tags">
+                        
+                        <!-- <a class="tag" href="/Tags/#算法" title="算法">算法</a> -->
+                        
+                    </div>
+                    <h1>leetcode</h1>
+                    
+                    <span class="meta">Posted on March 15, 2021</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+
+                <p>牛客上面的leetcode题，把以前写的搬运一下。</p>
+
+<ul>
+  <li><a href="#minimum-depth-of-binary-tree">minimum-depth-of-binary-tree</a></li>
+  <li><a href="#evaluate-reverse-polish-notation">evaluate-reverse-polish-notation</a></li>
+  <li><a href="#max-points-on-a-line">max-points-on-a-line</a></li>
+  <li><a href="#sort-list">sort-list</a></li>
+  <li><a href="#insertion-sort-list">insertion-sort-list</a></li>
+  <li><a href="#binary-tree-postorder-traversal">binary-tree-postorder-traversal</a></li>
+  <li><a href="#binary-tree-preorder-traversal">binary-tree-preorder-traversal</a></li>
+  <li><a href="#binary-tree-inorder-traversal">binary-tree-inorder-traversal</a></li>
+  <li><a href="#reorder-list">reorder-list</a></li>
+  <li><a href="#linked-list-cycle-ii">linked-list-cycle-ii</a></li>
+  <li><a href="#linked-list-cycle">linked-list-cycle</a></li>
+  <li><a href="#word-break-ii">word-break-ii</a></li>
+</ul>
+
+<h2 id="minimum-depth-of-binary-tree">minimum-depth-of-binary-tree</h2>
+
+<p>求给定二叉树的最小深度。最小深度是指树的根结点到最近叶子结点的最短路径上结点的数量。</p>
+
+<p><strong>解析：</strong></p>
+
+<p>注意边界情况：左右孩子均为空–返回0，左孩子为空–返回右子树的深度+1，有孩子为空–返回左子树的深度+1.否则，返回较小的子树+1.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">run</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">run</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">run</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="n">run</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">b</span><span class="o">=</span><span class="n">run</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">&lt;</span><span class="n">b</span><span class="p">)</span> <span class="k">return</span> <span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">return</span> <span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="evaluate-reverse-polish-notation">evaluate-reverse-polish-notation</h2>
+
+<p>计算逆波兰式（后缀表达式）的值</p>
+
+<p>运算符仅包含”+”,”-“,”*“和”/”，被操作数可能是整数或其他表达式</p>
+
+<p>例如：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ["2", "1", "+", "3", "*"] -&gt; ((2 + 1) * 3) -&gt; 9↵  ["4", "13", "5", "/", "+"] -&gt; (4 + (13 / 5)) -&gt; 6
+</code></pre></div></div>
+
+<p><strong>解析：</strong></p>
+
+<p>逆波兰表达式用栈存储，由于已经给出了后缀表达式，所以只需要一个栈存数字就行。（如果给出的是普通算式，即中缀表达式，那么要建立两个栈分别存放数字和符号）</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">int</span> <span class="n">evalRPN</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">tokens</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">stack</span> <span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">num</span><span class="p">;</span>
+        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">tokens</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s">"+"</span><span class="o">||</span><span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s">"-"</span><span class="o">||</span><span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s">"*"</span><span class="o">||</span><span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s">"/"</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">num</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+                <span class="kt">int</span> <span class="n">x</span><span class="o">=</span><span class="n">num</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+                <span class="n">num</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="kt">int</span> <span class="n">y</span><span class="o">=</span><span class="n">num</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+                <span class="n">num</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="k">if</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s">"+"</span><span class="p">)</span>
+                        <span class="n">num</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">);</span>
+                <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s">"-"</span><span class="p">)</span>               
+                        <span class="n">num</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">x</span><span class="p">);</span>
+                <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s">"*"</span><span class="p">)</span> 
+                        <span class="n">num</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">);</span>
+                <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="s">"/"</span><span class="o">&amp;&amp;</span><span class="n">x</span><span class="p">)</span> 
+                         <span class="n">num</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">x</span><span class="p">);</span>
+                
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="n">num</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">atoi</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">c_str</span><span class="p">()));</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">num</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="max-points-on-a-line">max-points-on-a-line</h2>
+
+<p>对于给定的n个位于同一二维平面上的点，求最多能有多少个点位于同一直线上</p>
+
+<p><strong>解析：</strong></p>
+
+<p>三重循环进行遍历。由于不重合的两点可以确定一条直线，判断是否在同一直线上可以用斜率进行衡量，这时要特殊考虑与X轴垂直的情况（X坐标相同，所以两点重合的情况也认为是垂线）。先用一个二重循环遍历每种可能的直线，然后再嵌套一个循环看其它点是否在这条直线上。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">maxPoints</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">points</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">ans</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">sum</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">points</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="n">ans</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>  <span class="c1">//只有一个点，则一个点共线</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">points</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">points</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+				<span class="p">{</span>
+					<span class="kt">int</span> <span class="n">ok</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>  <span class="c1">//标记值，斜率是否存在</span>
+					<span class="kt">double</span> <span class="n">flag</span><span class="p">;</span>  <span class="c1">//斜率</span>
+					<span class="k">if</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">x</span><span class="o">==</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x</span><span class="p">)</span> <span class="c1">//与X轴垂直或者两点重合的情况</span>
+						<span class="p">{</span>
+							<span class="n">ok</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+						<span class="p">}</span>
+					<span class="n">sum</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+					<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ok</span><span class="p">)</span> <span class="c1">//x不等</span>
+						<span class="p">{</span>
+							<span class="n">flag</span><span class="o">=</span><span class="kt">double</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">y</span><span class="o">-</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="kt">double</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">x</span><span class="o">-</span><span class="n">points</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x</span><span class="p">);</span>
+							<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">points</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span>  <span class="c1">//遍历其它点</span>
+								<span class="p">{</span>
+									<span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="n">j</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+									<span class="k">if</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">y</span><span class="o">==</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">y</span><span class="o">&amp;&amp;</span><span class="n">points</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">x</span><span class="o">==</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">x</span><span class="p">)</span> <span class="n">sum</span><span class="o">++</span><span class="p">;</span> <span class="c1">//重合</span>
+									<span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">x</span><span class="o">==</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">x</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span> <span class="c1">//斜率不存在</span>
+									<span class="kt">double</span> <span class="n">flag1</span><span class="o">=</span><span class="kt">double</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">y</span><span class="o">-</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="kt">double</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">x</span><span class="o">-</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">x</span><span class="p">);</span>
+									<span class="k">if</span><span class="p">(</span><span class="n">fabs</span><span class="p">(</span><span class="n">flag1</span><span class="o">-</span><span class="n">flag</span><span class="p">)</span><span class="o">&lt;</span><span class="mf">0.000001</span><span class="p">)</span> <span class="n">sum</span><span class="o">++</span><span class="p">;</span> <span class="c1">//浮点数判断相等</span>
+								<span class="p">}</span>
+						<span class="p">}</span>
+					<span class="k">else</span>
+						<span class="p">{</span>
+							<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">points</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span>
+								<span class="p">{</span>
+									<span class="k">if</span><span class="p">(</span><span class="n">k</span><span class="o">==</span><span class="n">j</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+									<span class="k">if</span><span class="p">(</span><span class="n">points</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">x</span><span class="o">==</span><span class="n">points</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">x</span><span class="p">)</span> <span class="n">sum</span><span class="o">++</span><span class="p">;</span>
+								<span class="p">}</span>
+						<span class="p">}</span>
+					<span class="k">if</span><span class="p">(</span><span class="n">sum</span><span class="o">&gt;</span><span class="n">ans</span><span class="p">)</span> <span class="n">ans</span><span class="o">=</span><span class="n">sum</span><span class="p">;</span>
+				<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="sort-list">sort-list</h2>
+
+<p>在O(n log n)的时间内使用常数级空间复杂度对链表进行排序。</p>
+
+<p><strong>解析：</strong></p>
+
+<p>利用归并排序，先将链表分成等长的两部分，然后分别对每部分进行排序，最后将两部分合并。于是，子问题便是对每部分进行排序。找中间节点时用快慢指针的方法（先设置两个指针指向链表头，一个每次前进一单位，另一个每次前进两个单位，于是走的快的到达链表尾时，慢指针刚好到达中间节点）。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */</span>
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">ListNode</span><span class="o">*</span> <span class="n">mergeList</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">l1</span><span class="p">,</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">l2</span><span class="p">){</span>
+        <span class="n">ListNode</span><span class="o">*</span> <span class="n">ret</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ListNode</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="o">*</span><span class="n">ans</span> <span class="o">=</span> <span class="n">ret</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">l1</span><span class="o">!=</span><span class="nb">NULL</span><span class="o">&amp;&amp;</span><span class="n">l2</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">){</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">l1</span><span class="o">-&gt;</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">l2</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">){</span>
+                <span class="n">ret</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">l1</span><span class="p">;</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+                <span class="n">l1</span> <span class="o">=</span> <span class="n">l1</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">else</span><span class="p">{</span>
+                <span class="n">ret</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">l2</span><span class="p">;</span>
+                <span class="n">ret</span> <span class="o">=</span> <span class="n">ret</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+                <span class="n">l2</span> <span class="o">=</span> <span class="n">l2</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">l1</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">)</span> <span class="n">ret</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">l1</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">l2</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">)</span> <span class="n">ret</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">l2</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">ListNode</span><span class="o">*</span> <span class="nf">sortList</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">head</span><span class="o">==</span><span class="nb">NULL</span><span class="o">||</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
+        <span class="n">ListNode</span><span class="o">*</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">,</span><span class="o">*</span><span class="n">slow</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">fast</span><span class="o">!=</span><span class="nb">NULL</span><span class="o">&amp;&amp;</span><span class="n">fast</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">!=</span><span class="nb">NULL</span><span class="p">){</span>
+            <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">ListNode</span><span class="o">*</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">slow</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="n">slow</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nf">mergeList</span><span class="p">(</span><span class="n">sortList</span><span class="p">(</span><span class="n">head</span><span class="p">),</span><span class="n">sortList</span><span class="p">(</span><span class="n">tmp</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="insertion-sort-list">insertion-sort-list</h2>
+
+<p>使用插入排序对链表进行排序。</p>
+
+<p><strong>解析：</strong></p>
+
+<p>这里复习了一下.和-&gt;的区别，A-&gt;B用于A是指针的情况（即ListNode *A），A.B用于A是对象或结构体（即ListNode A）。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */</span>
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">ListNode</span> <span class="o">*</span><span class="n">insertionSortList</span><span class="p">(</span><span class="n">ListNode</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">head</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
+       	<span class="n">ListNode</span> <span class="o">*</span><span class="n">pre</span><span class="p">,</span><span class="o">*</span><span class="n">q</span><span class="p">,</span><span class="o">*</span><span class="n">t</span><span class="p">;</span>
+	    <span class="n">ListNode</span> <span class="n">H</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">//初始化一个节点值为0的节点</span>
+	<span class="k">while</span><span class="p">(</span><span class="n">head</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="n">pre</span><span class="o">=&amp;</span><span class="n">H</span><span class="p">;</span>
+			<span class="n">q</span><span class="o">=</span><span class="n">pre</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+			<span class="n">t</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
+            <span class="n">head</span><span class="o">=</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+			<span class="k">while</span><span class="p">(</span><span class="n">q</span><span class="o">&amp;&amp;</span><span class="n">q</span><span class="o">-&gt;</span><span class="n">val</span><span class="o">&lt;</span><span class="n">t</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">)</span>
+				<span class="p">{</span>
+					<span class="n">pre</span><span class="o">=</span><span class="n">pre</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+					<span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">t</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">q</span><span class="p">;</span>
+				<span class="n">pre</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">t</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">return</span> <span class="n">H</span><span class="p">.</span><span class="n">next</span><span class="p">;</span>  
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="binary-tree-postorder-traversal">binary-tree-postorder-traversal</h2>
+
+<p>求给定的二叉树的后序遍历。</p>
+
+<p>例如：</p>
+
+<p>给定的二叉树为{1,#,2,3},</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   1↵    ↵     2↵    /↵   3↵
+</code></pre></div></div>
+
+<p>返回[3,2,1].</p>
+
+<p>备注；用递归来解这道题太没有新意了，可以给出迭代的解法么？</p>
+
+<p><strong>解析：</strong></p>
+
+<p>最直观的递归写法</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kt">void</span> <span class="nf">postorder</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">,</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span><span class="n">vec</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="p">){</span>
+            <span class="n">postorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span><span class="n">vec</span><span class="p">);</span>
+            <span class="n">postorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span><span class="n">vec</span><span class="p">);</span>
+            <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">postorderTraversal</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="n">vec</span><span class="p">;</span>
+        <span class="n">postorder</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">vec</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">vec</span><span class="p">;</span>      
+         
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>非递归写法</p>
+
+<p>注意到先序遍历是 根-左-右，于是可以先求出 根-右-左，再用reverse倒转一下。用栈实现。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">postorderTraversal</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="n">vec</span><span class="p">;</span>
+        <span class="n">stack</span> <span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">s</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">vec</span><span class="p">;</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">TreeNode</span><span class="o">*</span> <span class="n">p</span><span class="o">=</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">reverse</span><span class="p">(</span><span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="n">vec</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+        <span class="k">return</span> <span class="n">vec</span><span class="p">;</span>      
+         
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="binary-tree-preorder-traversal">binary-tree-preorder-traversal</h2>
+
+<p>求给定的二叉树的前序遍历。</p>
+
+<p>例如：</p>
+
+<p>给定的二叉树为{1,#,2,3},</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   1↵    ↵     2↵    /↵   3↵
+</code></pre></div></div>
+
+<p>返回：[1,2,3].</p>
+
+<p>备注；用递归来解这道题太没有新意了，可以给出迭代的解法么？</p>
+
+<p><strong>解析：</strong></p>
+
+<p>先给出递归写法：</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">void</span> <span class="n">preorder</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">,</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">vec</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+            <span class="n">preorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span><span class="n">vec</span><span class="p">);</span>
+            <span class="n">preorder</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span><span class="n">vec</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">preorderTraversal</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
+        <span class="n">preorder</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">vec</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">vec</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>非递归写法</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">preorderTraversal</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
+        <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">s</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">vec</span><span class="p">;</span>
+        <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">TreeNode</span><span class="o">*</span> <span class="n">p</span><span class="o">=</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+            <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">)</span> <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">);</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">)</span> <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">vec</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="binary-tree-inorder-traversal">binary-tree-inorder-traversal</h2>
+
+<p>给出一棵二叉树，返回这棵树的中序遍历</p>
+
+<p>例如：</p>
+
+<p>给出的二叉树为{1,#,2,3},</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   1↵    ↵     2↵    /↵   3↵
+</code></pre></div></div>
+
+<p>返回[1,3,2].</p>
+
+<p>备注：递归的解法太没有新意了，你能用迭代的方法来解这道题吗？</p>
+
+<p>如果你不清楚“{1,#,2,3}”的含义的话，请继续阅读</p>
+
+<p>我们用如下方法将二叉树序列化：</p>
+
+<p>二叉树的序列化遵循层序遍历的原则，”#“代表该位置是一条路径的终结，下面不再存在结点。</p>
+
+<p>例如：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   1↵  / ↵ 2   3↵    /↵   4↵    ↵     5
+</code></pre></div></div>
+
+<p>上述的二叉树序列化的结果是：”{1,2,3,#,#,4,#,#,5}”.</p>
+
+<p><strong>解析：</strong></p>
+
+<p>栈内只存放根节点和左孩子节点。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">inorderTraversal</span><span class="p">(</span><span class="n">TreeNode</span> <span class="o">*</span><span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">root</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+        <span class="n">stack</span><span class="o">&lt;</span><span class="n">TreeNode</span><span class="o">*&gt;</span> <span class="n">s</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">s</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span><span class="o">||</span><span class="n">root</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">while</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+                <span class="n">root</span><span class="o">=</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">;</span>
+            <span class="p">}</span>
+                <span class="n">root</span><span class="o">=</span><span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span>
+                <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+                <span class="n">ans</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">val</span><span class="p">);</span>
+                <span class="n">root</span><span class="o">=</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">;</span>
+            
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="reorder-list">reorder-list</h2>
+
+<p>将给定的单链表L： L 0→L 1→…→L n-1→L n,</p>
+
+<p>重新排序为： L 0→L n →L 1→L n-1→L 2→L n-2→…</p>
+
+<p>要求使用原地算法，并且不改变节点的值</p>
+
+<p>例如：</p>
+
+<p>对于给定的单链表{1,2,3,4}，将其重新排序为{1,4,2,3}.</p>
+
+<p>Given a singly linked list L: L 0→L 1→…→L n-1→L n,</p>
+
+<p>reorder it to: L 0→L n →L 1→L n-1→L 2→L n-2→…</p>
+
+<p>You must do this in-place without altering the nodes’ values.</p>
+
+<p>For example,
+Given{1,2,3,4}, reorder it to{1,4,2,3}.</p>
+
+<p><strong>解析：</strong></p>
+
+<p>忽然发现这不就是2019年计算机统考408的第一道大题吗？？看来多刷题对于考研还是非常有用的。</p>
+
+<p>基本思路：</p>
+
+<p>先用快慢指针的思想找到中间节点，分成前后两个链表，对后半部分链表进行原地逆置（空间复杂度O（1）），最后再交叉存储。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */</span>
+<span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">void</span> <span class="n">reorderList</span><span class="p">(</span><span class="n">ListNode</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">head</span><span class="o">==</span><span class="nb">NULL</span><span class="o">||</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="p">;</span>
+        <span class="n">ListNode</span> <span class="o">*</span><span class="n">fast</span><span class="o">=</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="n">ListNode</span> <span class="o">*</span><span class="n">slow</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">fast</span><span class="o">&amp;&amp;</span><span class="n">fast</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">slow</span><span class="o">=</span><span class="n">slow</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="n">fast</span><span class="o">=</span><span class="n">fast</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">ListNode</span> <span class="o">*</span><span class="n">rhead</span><span class="o">=</span><span class="n">slow</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">,</span><span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="n">rhead</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">,</span><span class="o">*</span><span class="n">q</span><span class="p">;</span>
+        <span class="n">slow</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+        <span class="n">rhead</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="nb">NULL</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">q</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">rhead</span><span class="p">;</span>
+            <span class="n">rhead</span><span class="o">=</span><span class="n">p</span><span class="p">;</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">q</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="n">ListNode</span> <span class="o">*</span><span class="n">after</span><span class="o">=</span><span class="n">rhead</span><span class="p">;</span>
+        <span class="n">ListNode</span> <span class="o">*</span><span class="n">C</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
+        
+        <span class="k">while</span><span class="p">(</span><span class="n">C</span><span class="o">&amp;&amp;</span><span class="n">after</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">ListNode</span> <span class="o">*</span><span class="n">A</span><span class="o">=</span><span class="n">C</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="n">ListNode</span> <span class="o">*</span><span class="n">B</span><span class="o">=</span><span class="n">after</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="n">C</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">after</span><span class="p">;</span>
+            <span class="n">after</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">A</span><span class="p">;</span>
+            <span class="n">C</span><span class="o">=</span><span class="n">A</span><span class="p">;</span>
+            <span class="n">after</span><span class="o">=</span><span class="n">B</span><span class="p">;</span>
+        <span class="p">}</span>
+       
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="linked-list-cycle-ii">linked-list-cycle-ii</h2>
+
+<p>对于一个给定的链表，返回环的入口节点，如果没有环，返回null</p>
+
+<p>拓展：</p>
+
+<p>你能给出不利用额外空间的解法么？</p>
+
+<p><strong>解析：</strong></p>
+
+<p>①用快慢指针的方法找到相遇点；</p>
+
+<p>②设置两个指针，一个指向链表头，另一个指向相遇点，同时同速前进，第一次相遇的位置就是环开始的位置，证明见</p>
+
+<p><a href="https://www.nowcoder.com/questionTerminal/6e630519bf86480296d0f1c868d425ad">链表入口节点的证明</a></p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="n">ListNode</span> <span class="o">*</span><span class="n">detectCycle</span><span class="p">(</span><span class="n">ListNode</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">head</span><span class="o">==</span><span class="nb">NULL</span><span class="o">||</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span> <span class="c1">//单链表中环至少有两个节点</span>
+        <span class="n">ListNode</span> <span class="o">*</span><span class="n">slow</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
+        <span class="n">ListNode</span> <span class="o">*</span><span class="n">fast</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">fast</span><span class="o">&amp;&amp;</span><span class="n">fast</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">slow</span><span class="o">=</span><span class="n">slow</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="n">fast</span><span class="o">=</span><span class="n">fast</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">slow</span><span class="o">==</span><span class="n">fast</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>   <span class="c1">//相遇点</span>
+        <span class="p">}</span>
+        <span class="c1">//可能fast走到尽头，退出循环，但此时fast!=slow</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">fast</span><span class="o">==</span><span class="nb">NULL</span><span class="o">||</span><span class="n">fast</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span> <span class="c1">//没有环</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">fast</span><span class="o">!=</span><span class="n">head</span><span class="p">)</span> 
+        <span class="p">{</span>
+            <span class="n">head</span><span class="o">=</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="n">fast</span><span class="o">=</span><span class="n">fast</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">fast</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="linked-list-cycle">linked-list-cycle</h2>
+
+<p>判断给定的链表中是否有环</p>
+
+<p>扩展：</p>
+
+<p>你能给出不利用额外空间的解法么？</p>
+
+<p><strong>解析：</strong></p>
+
+<p>通过上一道题的思想，可以根据快慢指针是否相遇来判断是否有环。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">bool</span> <span class="n">hasCycle</span><span class="p">(</span><span class="n">ListNode</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">head</span><span class="o">==</span><span class="nb">NULL</span><span class="o">||</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="n">ListNode</span> <span class="o">*</span><span class="n">fast</span><span class="o">=</span><span class="n">head</span><span class="p">,</span><span class="o">*</span><span class="n">slow</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">fast</span><span class="o">&amp;&amp;</span><span class="n">fast</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">slow</span><span class="o">=</span><span class="n">slow</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="n">fast</span><span class="o">=</span><span class="n">fast</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+            <span class="k">if</span><span class="p">(</span><span class="n">slow</span><span class="o">==</span><span class="n">fast</span><span class="p">)</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>由于链表的节点中有定义val值，于是也可以使用哈希的思想，遍历链表，把经过的节点值标记为0，一次往后走，当再次遇到节点值为0的节点时则说明有环。</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="kt">bool</span> <span class="n">hasCycle</span><span class="p">(</span><span class="n">ListNode</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">head</span><span class="o">==</span><span class="nb">NULL</span><span class="o">||</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">==</span><span class="nb">NULL</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="n">ListNode</span> <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="o">!=</span><span class="mi">0</span><span class="o">&amp;&amp;</span><span class="n">p</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">p</span><span class="o">-&gt;</span><span class="n">val</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="k">else</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h2 id="word-break-ii">word-break-ii</h2>
+
+<p>给定一个字符串s和一组单词dict，在s中添加空格将s变成一个句子，使得句子中的每一个单词都是dict中的单词</p>
+
+<p>返回所有可能的结果</p>
+
+<p>例如：给定的字符串s =”catsanddog”,</p>
+
+<p>dict =[“cat”, “cats”, “and”, “sand”, “dog”].</p>
+
+<p>返回的结果为[“cats and dog”, “cat sand dog”].</p>
+
+<p><strong>解析：</strong></p>
+
+<p>动态规划。</p>
+
+<p>先学习了一下unordered_set和set的区别：</p>
+
+<p>①set基于红黑树实现，具有自动排序的功能；</p>
+
+<p>②unordered_set基于哈希表实现，没有排序的功能。</p>
+
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/blog/2021/03/15/Algorithm/" data-toggle="tooltip" data-placement="top" title="算法模板">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/blog/2021/05/04/git%E4%BD%BF%E7%94%A8/" data-toggle="tooltip" data-placement="top" title="Git使用">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+                <!-- Duoshuo Share start -->
+                <style>
+                    .ds-share{
+                        text-align: right;
+                    }
+                    
+                    @media only screen and (max-width: 700px) {
+                        .ds-share {
+
+                        }
+                    }
+                </style>
+
+                <div class="ds-share"
+                    data-thread-key="/blog/2021/03/15/leetcode" data-title="leetcode"
+                    data-images="http://localhost:4000/img/blue.jpg"
+                    data-content="牛客上面的leetcode题，把以前写的搬运一下。
+
+
+  minimum-depth-of-binary-tree
+  evaluate-reverse... | Microdust:Azeril's blog"
+                    data-url="http://localhost:4000/blog/2021/03/15/leetcode/">
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                       <!--  <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>  
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                       --> 
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- Duoshuo Share end-->
+
+
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread" data-thread-key="/blog/2021/03/15/leetcode" data-title="leetcode" data-url="http://localhost:4000/blog/2021/03/15/leetcode/"></div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ruyugujian"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//ruyugujian.disqus.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: ''
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <!-- kill the Facebook and Weibo -->
+                    <!--
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    -->
+                    
+                    <!--
+                    
+                    -->
+                    
+                    
+                    <li>
+                        <a href="mailto:1468999760@qq.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="https://github.com/L1468999760">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                  
+                    
+                    <li>
+                        <a target="_blank" href="https://blog.csdn.net/Reticent_Man">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-1x fa-inverse">C</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                </ul>
+                <p class="copyright text-muted">
+                &copy; 2023 LiJinning <!--❖ Powered by Jekyll. -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+        <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="关键词" autocomplete="off">
+
+        <div style="position: fixed; top: 16px; right: 16px;">
+            <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        </div>
+    </div>
+
+    <div style="position: fixed; right: 16px; bottom: 20px;">
+        <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="搜索"/>
+    </div>
+
+    <link rel="stylesheet" href="/search/css/cb-search.css">
+
+</footer>
+
+<!-- jQuery -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/clean-blog.min.js "></script>
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js",function(){
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+</body>
+
+</html>

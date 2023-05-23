@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="千里之行，始于足下">
+
+    <title>redis设计与实现 笔记 - 如遇古剑</title>
+
+    <link rel="canonical" href="http://localhost:4000/blog/2022/10/04/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
+
+    <!-- Icons -->
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/clean-blog.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+
+
+
+
+
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+               
+            </button>
+            <a class="navbar-brand" href="/">如遇古剑</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">主页</a>
+                </li>
+                
+                <li>
+                    <a href="/about/">关于我</a>
+                </li>
+                
+                <li>
+                    <a href="/archive/">文章归档</a>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/blue.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="Tags">
+                        
+                        <!-- <a class="tag" href="/Tags/#redis" title="redis">redis</a> -->
+                        
+                    </div>
+                    <h1>redis设计与实现 笔记</h1>
+                    
+                    <span class="meta">Posted on October 4, 2022</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+
+                <p>目录</p>
+
+<ul>
+  <li>
+    <p><a href="#数据结构与对象">数据结构与对象</a></p>
+
+    <ul>
+      <li><a href="#简单动态字符串sds">简单动态字符串SDS</a></li>
+      <li><a href="#哈希表">哈希表</a></li>
+      <li><a href="#跳跃表">跳跃表</a></li>
+      <li><a href="#压缩列表">压缩列表</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="数据结构与对象">数据结构与对象</h3>
+
+<h5 id="简单动态字符串sds">简单动态字符串SDS</h5>
+
+<p><img src="https://s3.bmp.ovh/imgs/2022/05/16/58415e86dc629f05.png" alt="" /></p>
+
+<p>结构：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">struct</span> <span class="n">sdshdr</span> <span class="o">{</span>
+    <span class="c1">//buf数组中已使用字节的数量</span>
+    <span class="kt">int</span> <span class="n">len</span><span class="o">;</span>
+    <span class="c1">//buf数组中未使用字节的数量</span>
+    <span class="kt">int</span> <span class="n">free</span><span class="o">;</span>
+    <span class="c1">//字节数组，用于保存字符串</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="o">[];</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>字符串以空字符’\0’结尾，原因是可以重用一部分C字符串函数库里面的函数。例如执行</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">printf</span><span class="o">(</span><span class="s">"%s"</span><span class="o">,</span><span class="n">s</span><span class="o">-&gt;</span><span class="n">buf</span><span class="o">);</span>
+</code></pre></div></div>
+
+<p>可以打印SDS保存的字符串值“Redis”，而无须为SDS编写专门的打印函数。</p>
+
+<p>C字符串的缺陷：</p>
+
+<ul>
+  <li>如果程序执行的是增长字符串的操作， 比如拼接操作（append）， 那么在执行这个操作之前， 程序需要先通过内存重分配来扩展底层数组的空间大小 —— 如果忘了这一步就会产生<strong>缓冲区溢出</strong></li>
+  <li>如果程序执行的是缩短字符串的操作， 比如截断操作（trim）， 那么在执行这个操作之后， 程序需要通过内存重分配来释放字符串不再使用的那部分空间 —— 如果忘了这一步就会产生<strong>内存泄漏</strong></li>
+</ul>
+
+<p>SDS比C字符串更适用于Redis的原因：</p>
+
+<ul>
+  <li>常数复杂度获取字符串长度
+    <ul>
+      <li>C获取字符串长度需要从头到尾进行遍历，而SDS执行STRLEN命令的复杂度仅为O(1)</li>
+    </ul>
+  </li>
+  <li>杜绝缓冲区溢出
+    <ul>
+      <li>C中进行字符串拼接时，如果没有分配足够的空间 ，可能造成缓冲区溢出，而SDS会自动扩容</li>
+    </ul>
+  </li>
+</ul>
+
+<p>空间分配与释放策略：</p>
+
+<ul>
+  <li>空间预分配
+    <ul>
+      <li>如果修改后SDS的长度小于1MB，那么程序分配和len属性同样大小的未使用空间，这时len的值将和free的值相同，如果len的值变为13字节，buf数组的长度变为13+13+1=27字节</li>
+      <li>如果修改后SDS的长度大于等于1MB，那么程序会分配1MB的未使用空间，如果len的值变为30MB，那么程序会分配1MB的未使用空间，buf数组的长度变为30MB+1MB+1byte</li>
+    </ul>
+  </li>
+  <li>
+    <p>惰性空间释放</p>
+
+    <ul>
+      <li>字符串删除时，不会立即回收空间，而是使用free属性将这些字节的数量记录起来，并等待将来使用</li>
+    </ul>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sdstrim</span><span class="o">(</span><span class="n">s</span><span class="o">,</span><span class="s">"XY"</span><span class="o">);</span> <span class="c1">//移除SDS字符串中的所有‘X'和’Y‘</span>
+</code></pre></div>    </div>
+
+    <p>执行sdstrim之前的SDS：</p>
+
+    <p><img src="https://s2.loli.net/2022/10/04/ibRAZ8r5hldQtWF.png" alt="执行sdstrim之前的SDS" /></p>
+  </li>
+</ul>
+
+<p>​       执行sdstrim之后的SDS：</p>
+
+<p><img src="https://s2.loli.net/2022/10/04/ue1VMWnwljR3b4H.png" alt="执行sdstrim之后的SDS" /></p>
+
+<p>其它优点：</p>
+
+<ul>
+  <li>
+    <p>二进制安全</p>
+
+    <ul>
+      <li>SDS使用len属性的值而不是空字符来判断字符串是否结束</li>
+      <li>C字符串除了字符串末尾，字符串里面不能包含空字符，C字符串只能保存文本数据，而不能保存图片。音频、视频这样的二进制数据</li>
+    </ul>
+
+    <p>使用空字符分割单词的特殊数据格式：</p>
+
+    <p><img src="https://s2.loli.net/2022/10/04/5LgdDHyeMZKpT2j.png" alt="使用空字符分割单词的特殊数据格式" /></p>
+  </li>
+</ul>
+
+<p>​       例如这种含有空字符的数据格式，就不能使用C字符串来保存，因为C字符串所用的函数只会识别出其中的“Redis”，而忽略之后的“Cluster“。</p>
+
+<blockquote>
+  <p>总结：</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: center">C字符串</th>
+        <th style="text-align: center">SDS</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center">获取字符串长度的复杂度为O(N)</td>
+        <td style="text-align: center">获取字符串长度的复杂度为O(1)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">API是不安全的，可能会造成缓冲区溢出</td>
+        <td style="text-align: center">API是安全的，不会造成缓冲区溢出</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">修改字符串长度N次必然需要执行N次内存重分配</td>
+        <td style="text-align: center">修改字符串长度N次最多需要执行N次内存重分配</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">只能保存文本数据</td>
+        <td style="text-align: center">可以保存文本或者二进制数据</td>
+      </tr>
+      <tr>
+        <td style="text-align: center">可以使用所有<string.h>库中的函数</string.h></td>
+        <td style="text-align: center">可以使用一部分<string.h>库中的函数</string.h></td>
+      </tr>
+    </tbody>
+  </table>
+</blockquote>
+
+<h5 id="哈希表">哈希表</h5>
+
+<p><img src="https://s3.bmp.ovh/imgs/2022/05/16/548d604a69f935f4.png" alt="" /></p>
+
+<p>结构：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">typedef</span> <span class="n">struct</span> <span class="n">dictht</span> <span class="o">{</span>
+    <span class="c1">//哈希表数组</span>
+    <span class="n">dictEntry</span> <span class="o">**</span><span class="n">table</span><span class="o">;</span>
+    <span class="c1">//哈希表大小</span>
+    <span class="n">unsigned</span> <span class="kt">long</span> <span class="n">size</span><span class="o">;</span>
+    <span class="c1">//哈希表大小掩码，用于计算索引值</span>
+    <span class="c1">//总是等于size-1</span>
+    <span class="n">unsigned</span> <span class="kt">long</span> <span class="n">sizemask</span><span class="o">;</span>
+    <span class="c1">//哈希表已有节点的数量</span>
+    <span class="n">unsigned</span> <span class="kt">long</span> <span class="n">used</span><span class="o">;</span>
+<span class="o">}</span> <span class="n">dictht</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>哈希表节点</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">typedef</span> <span class="n">struct</span> <span class="n">dictEntry</span> <span class="o">{</span>
+    <span class="c1">//键</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">key</span><span class="o">;</span>
+    <span class="c1">//值</span>
+    <span class="n">union</span> <span class="o">{</span>
+        <span class="kt">void</span> <span class="o">*</span><span class="n">val</span><span class="o">;</span>
+        <span class="n">uint64_tu64</span><span class="o">;</span>
+        <span class="n">int64_ts64</span><span class="o">;</span>
+    <span class="o">}</span> <span class="n">v</span><span class="o">;</span>
+    <span class="c1">//指向下个哈希表节点，形成链表</span>
+    <span class="n">struct</span> <span class="n">dictEntry</span> <span class="o">*</span><span class="n">next</span><span class="o">;</span>
+<span class="o">}</span> <span class="n">dictEntry</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>字典</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">typedef</span> <span class="n">struct</span> <span class="n">dict</span> <span class="o">{</span>
+    <span class="c1">// 类型特定函数</span>
+    <span class="n">dictType</span> <span class="o">*</span><span class="n">type</span><span class="o">;</span>
+    <span class="c1">// 私有数据</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">privdata</span><span class="o">;</span>
+    <span class="c1">// 哈希表</span>
+    <span class="n">dictht</span> <span class="n">ht</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+    <span class="c1">// rehash索引</span>
+    <span class="kt">int</span> <span class="n">rehashidx</span><span class="o">;</span>
+<span class="o">}</span> <span class="n">dict</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p>一般情况下，字典只使用ht[0]哈希表，ht[1]哈希表只会在对ht[0]哈希表进行rehash时使用。</p>
+
+<p>普通状态下的字典 ：</p>
+
+<p><img src="https://s2.loli.net/2022/10/04/E1f7QnYvSU8h4lk.png" alt="普通状态下的字典" /></p>
+
+<h5 id="跳跃表">跳跃表</h5>
+
+<p><img src="https://s3.bmp.ovh/imgs/2022/05/16/fc22b9b6f3dee2a7.png" alt="" /></p>
+
+<p>结构：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">typedef</span> <span class="n">struct</span> <span class="n">zskiplistNode</span> <span class="o">{</span>
+    <span class="c1">//层</span>
+    <span class="n">struct</span> <span class="n">zskiplistLevel</span> <span class="o">{</span>
+        <span class="c1">//前进指针</span>
+        <span class="n">struct</span> <span class="n">zskiplistNode</span> <span class="o">*</span><span class="n">forward</span><span class="o">;</span>
+        <span class="c1">//跨度</span>
+        <span class="n">unsigned</span> <span class="kt">int</span> <span class="n">span</span><span class="o">;</span>
+    <span class="o">}</span> <span class="n">level</span><span class="o">[];</span>
+    
+    <span class="c1">//后退指针</span>
+    <span class="n">struct</span> <span class="n">zskiplistNode</span> <span class="o">*</span><span class="n">backward</span><span class="o">;</span>
+    <span class="c1">//分值</span>
+    <span class="kt">double</span> <span class="n">score</span><span class="o">;</span>
+    <span class="c1">//成员对象</span>
+    <span class="n">robj</span> <span class="o">*</span><span class="n">obj</span><span class="o">;</span>
+<span class="o">}</span> <span class="n">zskiplistNode</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p><strong>层</strong></p>
+
+<p>每次创建一个新跳跃表节点的时候，根据幂次定律（越大的数出现的概率越小）随机生成一个介于1和32之间的值作为level数组的大小，这个大小就是层的“高度”。</p>
+
+<p><strong>前进指针</strong></p>
+
+<p>用于从表头向表尾方向访问节点。</p>
+
+<p><strong>后退指针</strong></p>
+
+<p>每次只能后退至前一个节点</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">typedef</span> <span class="n">struct</span> <span class="n">zskiplist</span> <span class="o">{</span>
+    <span class="c1">//表头节点和表尾节点</span>
+    <span class="n">structz</span> <span class="n">skiplistNode</span> <span class="o">*</span><span class="n">header</span><span class="o">,</span> <span class="o">*</span><span class="n">tail</span><span class="o">;</span>
+    <span class="c1">//表中节点的数量</span>
+    <span class="n">unsigned</span> <span class="kt">long</span> <span class="n">length</span><span class="o">;</span>
+    <span class="c1">//表中层数最大的节点的层数</span>
+    <span class="kt">int</span> <span class="n">level</span><span class="o">;</span>
+<span class="o">}</span> <span class="n">zskiplist</span><span class="o">;</span>
+</code></pre></div></div>
+
+<h5 id="压缩列表">压缩列表</h5>
+
+<p>压缩列表是列表键和哈希键的底层实现之一。</p>
+
+<p>压缩列表的结构：</p>
+
+<p><img src="https://s3.bmp.ovh/imgs/2022/05/16/53633a70182658f3.png" alt="" /></p>
+
+<ul>
+  <li>zlbytes：4字节，记录整个压缩列表占用的内存字节数</li>
+  <li>zltail：4字节，记录压缩列表表尾节点距离压缩列表的起始地址有多少字节</li>
+  <li>zllen：2字节，记录压缩列表包含的节点数量</li>
+  <li>entryX：不定长，各个节点</li>
+  <li>zlend：1字节，用于标记压缩列表的末端</li>
+</ul>
+
+<p>每个节点的结构：</p>
+
+<p><img src="https://s3.bmp.ovh/imgs/2022/05/18/aa335ecc9a7cedfd.png" alt="" /></p>
+
+<ul>
+  <li>previous_entry_length：记录压缩列表中前一个节点的长度
+    <ul>
+      <li>如果前一节点的长度小于254字节，那么previous_entry_length属性的长度为1字节</li>
+      <li>如果前一节点的长度大于等于254字节，那么previous_entry_length属性的长度为5字节，其中第一字节被设置为0xFE，后面的四个字节用于保存前一节点的长度</li>
+    </ul>
+  </li>
+  <li>encoding：记录了节点的content属性所保存数据的类型以及长度</li>
+  <li>content：保存节点的值</li>
+</ul>
+
+<h5 id="参考">参考</h5>
+
+<p>[1]redis设计与实现</p>
+
+<p>[2]redisbook.com</p>
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/blog/2022/10/02/HashMap%E5%88%86%E6%9E%90/" data-toggle="tooltip" data-placement="top" title="HashMap分析">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/blog/2023/04/17/ChatGPT/" data-toggle="tooltip" data-placement="top" title="部署ChatGPT网页服务">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+                <!-- Duoshuo Share start -->
+                <style>
+                    .ds-share{
+                        text-align: right;
+                    }
+                    
+                    @media only screen and (max-width: 700px) {
+                        .ds-share {
+
+                        }
+                    }
+                </style>
+
+                <div class="ds-share"
+                    data-thread-key="/blog/2022/10/04/redis设计与实现" data-title="redis设计与实现 笔记"
+                    data-images="http://localhost:4000/img/blue.jpg"
+                    data-content="目录
+
+
+  
+    数据结构与对象
+
+    
+      简单动态字符串SDS
+      哈希表
+      跳跃表
+      压缩列表
+   ... | Microdust:Azeril's blog"
+                    data-url="http://localhost:4000/blog/2022/10/04/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                       <!--  <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>  
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                       --> 
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- Duoshuo Share end-->
+
+
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread" data-thread-key="/blog/2022/10/04/redis设计与实现" data-title="redis设计与实现 笔记" data-url="http://localhost:4000/blog/2022/10/04/redis%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/"></div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ruyugujian"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//ruyugujian.disqus.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: ''
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <!-- kill the Facebook and Weibo -->
+                    <!--
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    -->
+                    
+                    <!--
+                    
+                    -->
+                    
+                    
+                    <li>
+                        <a href="mailto:1468999760@qq.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="https://github.com/L1468999760">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                  
+                    
+                    <li>
+                        <a target="_blank" href="https://blog.csdn.net/Reticent_Man">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-1x fa-inverse">C</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                </ul>
+                <p class="copyright text-muted">
+                &copy; 2023 LiJinning <!--❖ Powered by Jekyll. -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+        <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="关键词" autocomplete="off">
+
+        <div style="position: fixed; top: 16px; right: 16px;">
+            <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        </div>
+    </div>
+
+    <div style="position: fixed; right: 16px; bottom: 20px;">
+        <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="搜索"/>
+    </div>
+
+    <link rel="stylesheet" href="/search/css/cb-search.css">
+
+</footer>
+
+<!-- jQuery -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/clean-blog.min.js "></script>
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js",function(){
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+</body>
+
+</html>

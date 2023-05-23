@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="千里之行，始于足下">
+
+    <title>Linux内存分配与回收-伙伴算法 - 如遇古剑</title>
+
+    <link rel="canonical" href="http://localhost:4000/blog/2022/02/05/Linux%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6-%E4%BC%99%E4%BC%B4%E7%AE%97%E6%B3%95/">
+
+    <!-- Icons -->
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/clean-blog.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+
+
+
+
+
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+               
+            </button>
+            <a class="navbar-brand" href="/">如遇古剑</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">主页</a>
+                </li>
+                
+                <li>
+                    <a href="/about/">关于我</a>
+                </li>
+                
+                <li>
+                    <a href="/archive/">文章归档</a>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/blue.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="Tags">
+                        
+                        <!-- <a class="tag" href="/Tags/#Linux" title="Linux">Linux</a> -->
+                        
+                    </div>
+                    <h1>Linux内存分配与回收-伙伴算法</h1>
+                    
+                    <span class="meta">Posted on February 5, 2022</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+
+                <blockquote>
+  <p>把以前写的搬运一下。</p>
+</blockquote>
+
+<p>目录</p>
+
+<ul>
+  <li><a href="#简介">简介</a></li>
+  <li><a href="#背景">背景</a>
+    <ul>
+      <li><a href="#内存管理机制">内存管理机制</a></li>
+      <li><a href="#当前存在的问题">当前存在的问题</a></li>
+    </ul>
+  </li>
+  <li><a href="#伙伴算法">伙伴算法</a>
+    <ul>
+      <li><a href="#算法原理">算法原理</a></li>
+      <li><a href="#内存分配">内存分配</a></li>
+      <li><a href="#内存回收">内存回收</a></li>
+    </ul>
+  </li>
+  <li><a href="#优缺点分析">优缺点分析</a></li>
+  <li><a href="#参考">参考</a></li>
+</ul>
+
+<h2 id="简介">简介</h2>
+
+<p>​       在Linux系统中，内存的分配与回收速率直接影响系统的存取效率。当内核频繁请求和释放不同大小的一组连续页框时，会导致许多外部空闲碎片，造成空间的浪费。使用伙伴算法可以有效地缓解该问题。伙伴关系机制是操作系统中的一种动态存储管理算法。在进行内存分配时，该算法通过不断平分较大的空闲内存块来获得较小的空闲内存块，直到获得所需要的内存块；在进行内存回收时，该算法尽可能地合并空闲块。</p>
+
+<h2 id="背景">背景</h2>
+
+<h3 id="内存管理机制">内存管理机制</h3>
+
+<p>​       内存管理是应用程序通过硬件和软件协作访问内存的一种方法，当进程请求内存使用时，它给进程分配可用的内存；当进程释放内存时，回收相应的内存，同时负责跟踪系统中内存的使用状态。</p>
+
+<p><img src="https://img-blog.csdnimg.cn/20200415214633380.png" alt="" /></p>
+
+<p>​       在Linux系统中，首先将内存分为若干个节点，然后每个节点又可以分为1-3个区，每个区下又有若干个页。页是内存管理的基本单元。</p>
+
+<h3 id="当前存在的问题">当前存在的问题</h3>
+
+<p>​       当系统工作时，CPU最先访问的地址不是物理内存中的实地址，而是虚拟地址空间的虚地址。当请求分页时，首先在虚拟地址空间中分配一个虚拟空间，然后根据需要为此区间分配相应的物理页面并建立映射。</p>
+
+<p>​       在分配空间时，我们首先想到的便是malloc函数。由于在实际情况中，操作系统必须能够在任意时刻申请和释放任意大小的内存，该函数的实现并不容易，导致的主要问题有延时问题和碎片问题。</p>
+
+<p>​       延时问题指的是系统查找到可分配单元的时间变长，例如程序请求分配一个64KB的内存空间，系统查看64KB空间发现不全是空余的，于是查看65KB的空间，发现仍不能满足需求，直到查看80KB空间时，才满足了需求，这种方式请求次数多达17次，频繁操作时，非常耗时。</p>
+
+<p>​       若系统以较大的定长空间来分配内存，在一定程度上可以节省时间，但带来的是碎片过多问题，由于每次用较大的空间进行分配，系统中出现大量碎片，导致内存浪费。严重者会导致内存无法完成分配，虽然仍有许多碎片空间。</p>
+
+<p>​       基于此，系统需要一种能够高效分配内存，同时又能减少产生碎片的算法，伙伴算法能有效地解决该问题，如今已成为操作系统中的一种基础算法。</p>
+
+<h2 id="伙伴算法">伙伴算法</h2>
+
+<h3 id="算法原理">算法原理</h3>
+
+<p>​       伙伴算法是一种动态存储器管理算法。该算法通过不断地平分较大的空闲内存块来获得较小的空闲内存块，直到获得所需要的内存块，当内存释放时，该算法尽可能地合并空闲块。其中，在分配和合并内存块时都是以2的次幂为单位，即1,2,4,8,16,32,64,128等。所谓“伙伴”，就是指在空闲块被分裂时，由同一个大块内存分裂出来的两个小块内存就互称“伙伴”。“伙伴”应当满足以下三个条件：</p>
+
+<ul>
+  <li>
+    <p>两个块大小相同</p>
+  </li>
+  <li>
+    <p>两个块地址连续</p>
+  </li>
+  <li>
+    <p>两个块必须是同一个大块中分离出来的</p>
+  </li>
+</ul>
+
+<p>​       伙伴算法使用位图和空闲链表作为辅助工具，其中位图用于跟踪内存块的使用情况，空闲链表用来维护内存中还没有被分配的块。假设系统的全部可用空间为2^(max) ,则建立一个长度为max+1的链表，链表尾存放大小为2^(max)的块，如下图所示：</p>
+
+<p><img src="https://img-blog.csdnimg.cn/20200415215338515.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1JldGljZW50X01hbg==,size_16,color_FFFFFF,t_70" alt="" /></p>
+
+<p>​    当请求大小为size的空间时,  2^(k-1)&lt; size &lt;2^k ，且k &lt; max。于是系统在链表中寻找大小为2^k的块，发现该位置为空，于是继续向下搜寻大小为2^(k+1)的块，若还为空，则继续向下搜寻，直到找到不为空的块2^(max)。</p>
+
+<p>​   该块不为空，于是该块进行分裂，变为两个大小为2^(max-1)的块。其中一块插入到链表中2^(max-1)的位置，另一块继续分裂。重复此过程，直到分裂产生大小为2^k大小的块为止，结果如图所示：</p>
+
+<p><img src="https://img-blog.csdnimg.cn/20200415215509298.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1JldGljZW50X01hbg==,size_16,color_FFFFFF,t_70" alt="" /></p>
+
+<p>​       如图所示，最后一次分裂时，由一个大小为2^(k+1)的块分成两个大小均为2^k大小的块。将其中一块交给用户使用，另一块加入到空闲链表相应位置中。</p>
+
+<p>​	由于进行了多次分裂，链表的同一位置可能会出现多个大小相等的块，此时选用时只需要在表头选取一个即可。当进行合并操作时，只需将大小相等的块合并，然后插入到链表中相应位置即可。  </p>
+
+<p><img src="https://img-blog.csdnimg.cn/20200415215610223.png" alt="" /></p>
+
+<p>​	以下用具体实例说明伙伴算法在内存分配与回收中的应用。</p>
+
+<h3 id="内存分配">内存分配</h3>
+
+<p>​      下面通过一个例子说明内存分配的过程：</p>
+
+<p>​      现内存总容量为16KB，用户请求分配4KB大小的内存空间，且规定最小的内存分配单元是2KB。于是位图分为8个区域，用1表示已分配，用0表示未分配，则初始位图和空闲链表如图所示。从上到下依次是位图、内存块、空闲链表。</p>
+
+<p>​																<img src="https://img-blog.csdnimg.cn/20200415215748161.png" alt="" />   	
+  	 由于需要分配4KB内存，数显到链表中4KB位置进行查看，发现为空，于是继续向后查找8KB位置，发现仍为空，直到到达链表尾16KB位置不为空。16KB块分裂成两个8KB的块，其中一块插入到链表相应位置，另一块继续分裂成两个4KB的块，其中一个交付使用，另一个插入到链表中，结果如下图所示。</p>
+
+<p>​																<img src="https://img-blog.csdnimg.cn/20200415215835411.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1JldGljZW50X01hbg==,size_16,color_FFFFFF,t_70" alt="" /></p>
+
+<h3 id="内存回收">内存回收</h3>
+
+   	内存回收是内存分配的逆过程，假设以上存储要释放4KB内存，首先到链表中4KB位置查看是否有它的“伙伴”，发现该位置不为空，于是合并成一个8KB的块，继续寻找它的“伙伴”，然后合并成一个16KB的块，插入链表中。
+
+   	若在查找过程中没有发现“伙伴”，则直接插入到链表中，然后将位图中的标记清零，表示内存可用。
+
+<h2 id="优缺点分析">优缺点分析</h2>
+
+<ul>
+  <li>伙伴算法采用2的幂次方进行分配内存块，可以避免把大的内存块拆分的过小，更重要的是可以加快分配和释放速度，但如果所需要的空间不是2的整数次幂，则会产生许多内部碎片。</li>
+  <li>分配和合并采用链表和位图操作，操作方便，但是开销比较大。</li>
+  <li>一个很小的块往往会阻碍一个大块的合并，一个系统中，对内存块的分配，大小是随机的，一片内存中仅一个小的内存块没有释放，旁边两个大的内存块就不能合并。</li>
+</ul>
+
+<h2 id="参考">参考</h2>
+
+<ol>
+  <li>《Linux操作系统原理与应用》</li>
+  <li>《深入理解Linux内核》</li>
+  <li>
+    <p><a href="https://blog.csdn.net/lcl497049972/article/details/82954124">伙伴算法buddy_27Up的博客-CSDN博客_伙伴算法实现</a></p>
+  </li>
+  <li><a href="https://www.cnblogs.com/alantu2018/p/8527821.html">Linux伙伴算法 - AlanTu - 博客园</a></li>
+</ol>
+
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/blog/2021/12/13/redis%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/" data-toggle="tooltip" data-placement="top" title="redis缓存一致性">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/blog/2022/03/10/Netty%E7%AC%94%E8%AE%B0/" data-toggle="tooltip" data-placement="top" title="Netty笔记">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+                <!-- Duoshuo Share start -->
+                <style>
+                    .ds-share{
+                        text-align: right;
+                    }
+                    
+                    @media only screen and (max-width: 700px) {
+                        .ds-share {
+
+                        }
+                    }
+                </style>
+
+                <div class="ds-share"
+                    data-thread-key="/blog/2022/02/05/Linux内存分配与回收-伙伴算法" data-title="Linux内存分配与回收-伙伴算法"
+                    data-images="http://localhost:4000/img/blue.jpg"
+                    data-content="
+  把以前写的搬运一下。
+
+
+目录
+
+
+  简介
+  背景
+    
+      内存管理机制
+      当前存在的问题
+    
+  
+  伙伴算法... | Microdust:Azeril's blog"
+                    data-url="http://localhost:4000/blog/2022/02/05/Linux%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6-%E4%BC%99%E4%BC%B4%E7%AE%97%E6%B3%95/">
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                       <!--  <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>  
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                       --> 
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- Duoshuo Share end-->
+
+
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread" data-thread-key="/blog/2022/02/05/Linux内存分配与回收-伙伴算法" data-title="Linux内存分配与回收-伙伴算法" data-url="http://localhost:4000/blog/2022/02/05/Linux%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6-%E4%BC%99%E4%BC%B4%E7%AE%97%E6%B3%95/"></div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ruyugujian"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//ruyugujian.disqus.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: ''
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <!-- kill the Facebook and Weibo -->
+                    <!--
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    -->
+                    
+                    <!--
+                    
+                    -->
+                    
+                    
+                    <li>
+                        <a href="mailto:1468999760@qq.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="https://github.com/L1468999760">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                  
+                    
+                    <li>
+                        <a target="_blank" href="https://blog.csdn.net/Reticent_Man">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-1x fa-inverse">C</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                </ul>
+                <p class="copyright text-muted">
+                &copy; 2023 LiJinning <!--❖ Powered by Jekyll. -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+        <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="关键词" autocomplete="off">
+
+        <div style="position: fixed; top: 16px; right: 16px;">
+            <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        </div>
+    </div>
+
+    <div style="position: fixed; right: 16px; bottom: 20px;">
+        <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="搜索"/>
+    </div>
+
+    <link rel="stylesheet" href="/search/css/cb-search.css">
+
+</footer>
+
+<!-- jQuery -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/clean-blog.min.js "></script>
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js",function(){
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+</body>
+
+</html>

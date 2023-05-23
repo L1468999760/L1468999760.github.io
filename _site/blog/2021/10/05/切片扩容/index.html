@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="千里之行，始于足下">
+
+    <title>切片扩容 - 如遇古剑</title>
+
+    <link rel="canonical" href="http://localhost:4000/blog/2021/10/05/%E5%88%87%E7%89%87%E6%89%A9%E5%AE%B9/">
+
+    <!-- Icons -->
+  <link rel="shortcut icon" href="img/favicon.ico">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/clean-blog.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+
+
+
+
+
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+               
+            </button>
+            <a class="navbar-brand" href="/">如遇古剑</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">主页</a>
+                </li>
+                
+                <li>
+                    <a href="/about/">关于我</a>
+                </li>
+                
+                <li>
+                    <a href="/archive/">文章归档</a>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+
+    <!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/blue.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="Tags">
+                        
+                        <!-- <a class="tag" href="/Tags/#go" title="go">go</a> -->
+                        
+                    </div>
+                    <h1>切片扩容</h1>
+                    
+                    <span class="meta">Posted on October 5, 2021</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container">
+
+                <p>go的切片扩容可以分为三种情况。</p>
+
+<ol>
+  <li>
+    <p>切片每次新增个数不超过原来的1倍，且每次增加数不超过1024个，且增加后总长度小于1024个，扩容为原来的2倍。</p>
+
+    <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s1</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"The capacity of s1: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="nb">cap</span><span class="p">(</span><span class="n">s1</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="o">:=</span> <span class="m">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="m">17</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">{</span>
+    <span class="n">s1</span> <span class="o">=</span> <span class="nb">append</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"s1(%d): len: %d, cap: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">s1</span><span class="p">),</span> <span class="nb">cap</span><span class="p">(</span><span class="n">s1</span><span class="p">))</span>
+<span class="p">}</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">()</span>
+</code></pre></div>    </div>
+
+    <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">//结果：</span>
+<span class="n">The</span> <span class="n">capacity</span> <span class="n">of</span> <span class="n">s1</span><span class="o">:</span> <span class="m">0</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">1</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">1</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">1</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">2</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">2</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">2</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">3</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">3</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">4</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">4</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">4</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">4</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">5</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">5</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">8</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">6</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">6</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">8</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">7</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">7</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">8</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">8</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">8</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">8</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">9</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">9</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">16</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">10</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">10</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">16</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">11</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">11</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">16</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">12</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">12</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">16</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">13</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">13</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">16</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">14</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">14</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">16</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">15</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">15</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">16</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">16</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">16</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">16</span>
+<span class="n">s1</span><span class="p">(</span><span class="m">17</span><span class="p">)</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">17</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">32</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>切片一次新增个数超过原来1倍，但不超过1024个，且增加后总长度小于1024个，扩容增加的个数为新增个数（偶）或新增个数+1（奇）。</p>
+
+    <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s2</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"The capacity of s2: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="nb">cap</span><span class="p">(</span><span class="n">s2</span><span class="p">))</span>
+<span class="n">r1</span> <span class="o">:=</span> <span class="nb">append</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="m">5</span><span class="p">)</span><span class="o">...</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"r1: len: %d, cap: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">r1</span><span class="p">),</span> <span class="nb">cap</span><span class="p">(</span><span class="n">r1</span><span class="p">))</span>
+<span class="n">r2</span> <span class="o">:=</span> <span class="nb">append</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="m">11</span><span class="p">)</span><span class="o">...</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"r2: len: %d, cap: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">r2</span><span class="p">),</span> <span class="nb">cap</span><span class="p">(</span><span class="n">r2</span><span class="p">))</span>
+<span class="n">r3</span> <span class="o">:=</span> <span class="nb">append</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="m">21</span><span class="p">)</span><span class="o">...</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"r3: len: %d, cap: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">r3</span><span class="p">),</span> <span class="nb">cap</span><span class="p">(</span><span class="n">r3</span><span class="p">))</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"注意：像r2,r3 一次增加个数超过原容量的1倍，增加后结果比实际总长度预想的稍大一点 </span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">()</span>
+</code></pre></div>    </div>
+
+    <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">//结果：</span>
+<span class="n">The</span> <span class="n">capacity</span> <span class="n">of</span> <span class="n">s2</span><span class="o">:</span> <span class="m">10</span>
+<span class="n">r1</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">15</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">20</span>
+<span class="n">r2</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">21</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">22</span>
+<span class="n">r3</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">31</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">32</span>
+<span class="c">//注意：像r2,r3 一次增加个数超过原容量的1倍，增加后结果比实际总长度预想的稍大一点 </span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>原切片长度超过1024，一次扩容的容量是0.25倍，每次超过预定的都是0.25累乘。</p>
+
+    <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">// 1024 * 0.25 = 256</span>
+<span class="n">s3</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="m">1024</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"The capacity of s3: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="nb">cap</span><span class="p">(</span><span class="n">s3</span><span class="p">))</span>
+<span class="n">r4</span> <span class="o">:=</span> <span class="nb">append</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="m">200</span><span class="p">)</span><span class="o">...</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"r4: len: %d, cap: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">r4</span><span class="p">),</span> <span class="nb">cap</span><span class="p">(</span><span class="n">r4</span><span class="p">))</span>
+<span class="n">r5</span> <span class="o">:=</span> <span class="nb">append</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="m">256</span><span class="p">)</span><span class="o">...</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"r5: len: %d, cap: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">r5</span><span class="p">),</span> <span class="nb">cap</span><span class="p">(</span><span class="n">r5</span><span class="p">))</span>
+<span class="c">// 1280 * 0.25 = 320</span>
+<span class="n">r6</span> <span class="o">:=</span> <span class="nb">append</span><span class="p">(</span><span class="n">s3</span><span class="p">,</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="m">266</span><span class="p">)</span><span class="o">...</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"r6: len: %d, cap: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">r6</span><span class="p">),</span> <span class="nb">cap</span><span class="p">(</span><span class="n">r6</span><span class="p">))</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Printf</span><span class="p">(</span><span class="s">"注意：像r6 一次增加个数超过原容量的0.25倍，增加后结果比原容量1.25倍预想的稍大一点 </span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">()</span>
+</code></pre></div>    </div>
+
+    <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">//结果：</span>
+<span class="n">The</span> <span class="n">capacity</span> <span class="n">of</span> <span class="n">s3</span><span class="o">:</span> <span class="m">1024</span>
+<span class="n">r4</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">1224</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">1280</span>
+<span class="n">r5</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">1280</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">1280</span>
+<span class="n">r6</span><span class="o">:</span> <span class="nb">len</span><span class="o">:</span> <span class="m">1290</span><span class="p">,</span> <span class="nb">cap</span><span class="o">:</span> <span class="m">1696</span>
+<span class="c">//注意：像r6 一次增加个数超过原容量的0.25倍，增加后结果比原容量1.25倍预想的稍大一点</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/blog/2021/06/08/%E9%83%A8%E7%BD%B2Springboot%E5%BA%94%E7%94%A8%E5%88%B0CloudFoundry/" data-toggle="tooltip" data-placement="top" title="部署Springboot应用到CloudFoundry">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/blog/2021/11/21/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-toggle="tooltip" data-placement="top" title="Git常用命令">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+                
+                <!-- Duoshuo Share start -->
+                <style>
+                    .ds-share{
+                        text-align: right;
+                    }
+                    
+                    @media only screen and (max-width: 700px) {
+                        .ds-share {
+
+                        }
+                    }
+                </style>
+
+                <div class="ds-share"
+                    data-thread-key="/blog/2021/10/05/切片扩容" data-title="切片扩容"
+                    data-images="http://localhost:4000/img/blue.jpg"
+                    data-content="go的切片扩容可以分为三种情况。
+
+
+  
+    切片每次新增个数不超过原来的1倍，且每次增加数不超过1024个，且增加后总长度小于1024个，扩容为原... | Microdust:Azeril's blog"
+                    data-url="http://localhost:4000/blog/2021/10/05/%E5%88%87%E7%89%87%E6%89%A9%E5%AE%B9/">
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+
+                       <!--  <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>  
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                       --> 
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- Duoshuo Share end-->
+
+
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread" data-thread-key="/blog/2021/10/05/切片扩容" data-title="切片扩容" data-url="http://localhost:4000/blog/2021/10/05/%E5%88%87%E7%89%87%E6%89%A9%E5%AE%B9/"></div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ruyugujian"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//ruyugujian.disqus.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: ''
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <!-- kill the Facebook and Weibo -->
+                    <!--
+                    
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    -->
+                    
+                    <!--
+                    
+                    -->
+                    
+                    
+                    <li>
+                        <a href="mailto:1468999760@qq.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+
+                    
+                    <li>
+                        <a href="https://github.com/L1468999760">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                  
+                    
+                    <li>
+                        <a target="_blank" href="https://blog.csdn.net/Reticent_Man">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-stack-1x fa-inverse">C</i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                    <!--
+                    
+                    -->
+
+                </ul>
+                <p class="copyright text-muted">
+                &copy; 2023 LiJinning <!--❖ Powered by Jekyll. -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cb-search-tool" style="position: fixed; top: 0px ; bottom: 0px; left: 0px; right:  0px;
+      opacity: 0.95; background-color: #111111; z-index: 9999; display: none;">
+        <input type="text" class="form-control cb-search-content" id="cb-search-content" style="position: fixed; top: 60px" placeholder="关键词" autocomplete="off">
+
+        <div style="position: fixed; top: 16px; right: 16px;">
+            <img src="/search/img/cb-close.png"  id="cb-close-btn"/>
+        </div>
+    </div>
+
+    <div style="position: fixed; right: 16px; bottom: 20px;">
+        <img src="/search/img/cb-search.png"  id="cb-search-btn"  title="搜索"/>
+    </div>
+
+    <link rel="stylesheet" href="/search/css/cb-search.css">
+
+</footer>
+
+<!-- jQuery -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/jquery.min.js "></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/bootstrap.min.js "></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="https://cdn.jsdelivr.net/gh/l1468999760/l1468999760.github.io/js/clean-blog.min.js "></script>
+
+<script src="/search/js/bootstrap3-typeahead.min.js"></script>
+<script src="/search/js/cb-search.js"></script>
+
+<!-- Highlight.js -->
+<script>
+    async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js",function(){
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+<link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+
+
+</body>
+
+</html>

@@ -19,6 +19,8 @@ favicon: img/favicon.ico # 浏览器地址栏小图标，可自定义更改
 #douban_username:  # 你的豆瓣id
 #twitter_username: 
 github_username: L1468999760
+csdn_username: Reticent_Man
+email_username: 1468999760@qq.com
 #facebook_username: 
 #weibo_username: 
 #zhihu_username: 
@@ -70,3 +72,6 @@ google_verify:
 bing_verify:
 
 # Links to include in footer navigation
+
+plugins:
+  - jekyll-paginate
